@@ -74,8 +74,8 @@ export const AuthProvider = ({ children }) => {
     return userData;
   };
 
-  const googleLogin = async ({ email, name, photoURL }) => {
-    const res = await axios.post(`${API_URL}/auth/google-login`, { email, name, photoURL });
+  const googleLogin = async (payload) => {
+    const res = await axios.post(`${API_URL}/auth/google-login`, payload);
     const { token: jwtToken, user: userData } = res.data;
 
     if (typeof window !== 'undefined') localStorage.setItem('access_token', jwtToken);

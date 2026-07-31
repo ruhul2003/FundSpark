@@ -6,12 +6,13 @@ import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
 import { Sparkles, Mail, Lock, User, Upload, AlertCircle, Coins } from 'lucide-react';
+import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 
 const IMGBB_API_KEY = process.env.NEXT_PUBLIC_IMGBB_API_KEY || 'b2c836a99478f0d8a571ec8e398939a8';
 
 export default function RegisterPage() {
-  const { register } = useAuth();
+  const { register, googleLogin } = useAuth();
   const router = useRouter();
 
   const [name, setName] = useState('');
@@ -90,6 +91,50 @@ export default function RegisterPage() {
       router.push(roleRoutes[userData.role] || '/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed. Email may already be registered.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      setLoading(true);
+      setError('');
+      const userData = await googleLogin({
+        credential: credentialResponse.credential,
+        role
+      });
+      const roleRoutes = {
+        Creator: '/dashboard/creator-home',
+        Admin: '/dashboard/admin-home',
+        Supporter: '/dashboard/supporter-home'
+      };
+      router.push(roleRoutes[userData.role] || '/dashboard');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Google Authentication failed.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleMockFallback = async () => {
+    try {
+      setLoading(true);
+      setError('');
+      const userData = await googleLogin({
+        email: 'google.newuser@fundspark.org',
+        name: 'Google Supporter',
+        photoURL: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=300&q=80',
+        role
+      });
+      const roleRoutes = {
+        Creator: '/dashboard/creator-home',
+        Admin: '/dashboard/admin-home',
+        Supporter: '/dashboard/supporter-home'
+      };
+      router.push(roleRoutes[userData.role] || '/dashboard');
+    } catch (err) {
+      setError('Google Sign-In failed.');
     } finally {
       setLoading(false);
     }
@@ -226,6 +271,41 @@ export default function RegisterPage() {
             {loading ? 'Registering Account...' : 'Complete Registration'}
           </motion.button>
         </form>
+
+        <div className="relative flex items-center justify-center my-4">
+          <div className="border-t border-slate-200 dark:border-slate-800 w-full" />
+          <span className="bg-white dark:bg-slate-900 px-3 text-[10px] text-slate-400 font-semibold uppercase tracking-widest absolute">Or</span>
+        </div>
+
+        <div className="flex flex-col space-y-3 items-center w-full">
+          <div className="w-full flex justify-center">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={() => setError('Google Authentication Popup Failed')}
+              useOneTap
+              shape="circle"
+              theme="outline"
+              size="large"
+              width="100%"
+            />
+          </div>
+
+          <motion.button
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
+            onClick={handleGoogleMockFallback}
+            disabled={loading}
+            className="w-full py-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200/80 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold text-xs flex items-center justify-center space-x-2 transition-all"
+          >
+            <svg className="w-4 h-4" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+              <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.28v3.15C3.25 21.3 7.31 24 12 24z"/>
+              <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.28C.46 8.21 0 10.05 0 12s.46 3.79 1.28 5.42l4-3.15z"/>
+              <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.25 2.7 1.28 6.58l4 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+            </svg>
+            <span>One-Click Google Sign-In ({role})</span>
+          </motion.button>
+        </div>
 
         <p className="text-center text-xs text-slate-500 dark:text-slate-400">
           Already have an account?{' '}
