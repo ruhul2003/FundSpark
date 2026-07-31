@@ -66,32 +66,32 @@ const HeroSlider = () => {
               <div className="absolute inset-0 z-10 bg-gradient-to-r from-white/85 via-white/60 to-indigo-50/50 dark:from-slate-950 dark:via-slate-950/85 dark:to-indigo-950/60 pointer-events-none" />
 
               {/* Text Content Layer */}
-              <div className="relative z-20 text-center max-w-4xl px-6 py-12 flex flex-col items-center justify-center">
-                <span className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white/90 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 text-xs sm:text-sm font-bold border border-indigo-200/80 dark:border-indigo-500/40 mb-6 shadow-md">
-                  <Sparkles className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+              <div className="relative z-20 text-center max-w-5xl px-6 py-12 flex flex-col items-center justify-center">
+                <span className="inline-flex items-center space-x-2 px-5 py-2 rounded-full bg-white/95 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 text-sm sm:text-base font-extrabold border border-indigo-200/80 dark:border-indigo-500/40 mb-6 sm:mb-8 shadow-md">
+                  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 dark:text-indigo-400" />
                   <span>{slide.badge}</span>
                 </span>
 
-                <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight mb-6">
+                <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.08] mb-6 sm:mb-8">
                   {slide.title}
                 </h1>
 
-                <p className="text-slate-700 dark:text-slate-300 text-base sm:text-xl mb-10 max-w-2xl mx-auto leading-relaxed font-semibold">
+                <p className="text-slate-700 dark:text-slate-200 text-lg sm:text-2xl md:text-3xl mb-10 sm:mb-12 max-w-4xl mx-auto leading-relaxed font-semibold">
                   {slide.subtitle}
                 </p>
 
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-5 w-full sm:w-auto">
                   <Link
                     href="/explore"
-                    className="w-full sm:w-auto px-9 py-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm sm:text-base shadow-xl shadow-indigo-600/30 flex items-center justify-center space-x-2.5 transition-all transform hover:-translate-y-0.5"
+                    className="w-full sm:w-auto px-10 py-4.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-base sm:text-lg shadow-xl shadow-indigo-600/35 flex items-center justify-center space-x-3 transition-all transform hover:-translate-y-0.5"
                   >
                     <span>{slide.cta}</span>
-                    <ArrowRight className="w-5 h-5" />
+                    <ArrowRight className="w-6 h-6" />
                   </Link>
 
                   <Link
                     href="/register"
-                    className="w-full sm:w-auto px-9 py-4 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-sm sm:text-base border border-slate-300 dark:border-slate-700 shadow-md transition-all"
+                    className="w-full sm:w-auto px-10 py-4.5 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100 font-bold text-base sm:text-lg border border-slate-300 dark:border-slate-700 shadow-md transition-all"
                   >
                     Register Account
                   </Link>
