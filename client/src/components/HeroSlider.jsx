@@ -6,6 +6,11 @@ import { Autoplay, EffectFade, Pagination, Navigation } from 'swiper/modules';
 import Link from 'next/link';
 import { ArrowRight, Sparkles } from 'lucide-react';
 
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import 'swiper/css/effect-fade';
+
 const slides = [
   {
     title: 'Fuel Innovations That Change the Future',

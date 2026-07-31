@@ -5,6 +5,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { Quote, Star, UserCheck } from 'lucide-react';
 
+import 'swiper/css';
+import 'swiper/css/pagination';
+
 const testimonials = [
   {
     name: 'Sarah Jenkins',
