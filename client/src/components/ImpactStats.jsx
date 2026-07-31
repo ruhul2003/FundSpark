@@ -10,9 +10,9 @@ const stats = [
 
 const ImpactStats = () => {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-white dark:bg-slate-900 transition-colors duration-300">
       <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="glass-panel rounded-3xl p-8 sm:p-12 border border-slate-200 bg-gradient-to-r from-white via-indigo-50/40 to-slate-50 shadow-md">
+        <div className="glass-panel rounded-3xl p-8 sm:p-12 border border-slate-200 dark:border-slate-800 bg-gradient-to-r from-white via-indigo-50/40 to-slate-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 shadow-md">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 divide-y sm:divide-y-0 sm:divide-x divide-slate-200">
             {stats.map((item, idx) => {
               const IconComp = item.icon;

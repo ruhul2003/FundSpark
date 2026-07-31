@@ -32,22 +32,22 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-slate-200/80 shadow-sm">
+    <nav className="sticky top-0 z-40 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl border-b border-slate-200/80 dark:border-slate-800 shadow-sm transition-colors duration-300">
       <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-sky-400 p-0.5 shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform">
-              <div className="w-full h-full bg-white rounded-[10px] flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-indigo-600" />
+              <div className="w-full h-full bg-white dark:bg-slate-900 rounded-[10px] flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
               </div>
             </div>
             <div className="flex flex-col">
-              <span className="font-extrabold text-xl tracking-tight text-slate-900 flex items-center">
-                Fund<span className="text-indigo-600">Spark</span>
+              <span className="font-extrabold text-xl tracking-tight text-slate-900 dark:text-white flex items-center">
+                Fund<span className="text-indigo-600 dark:text-indigo-400">Spark</span>
               </span>
-              <span className="text-[10px] text-slate-500 tracking-wider uppercase font-semibold">Crowdfunding</span>
+              <span className="text-[10px] text-slate-500 dark:text-slate-400 tracking-wider uppercase font-semibold">Crowdfunding</span>
             </div>
           </Link>
 
@@ -56,7 +56,7 @@ const Navbar = () => {
             <Link
               href="/explore"
               className={`flex items-center space-x-2 text-sm font-medium transition-colors ${
-                pathname === '/explore' ? 'text-indigo-600 font-semibold' : 'text-slate-600 hover:text-slate-900'
+                pathname === '/explore' ? 'text-indigo-600 dark:text-indigo-400 font-semibold' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               <Compass className="w-4 h-4" />
@@ -68,9 +68,9 @@ const Navbar = () => {
               href="https://github.com"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center space-x-2 text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:text-indigo-600 hover:border-slate-300 transition-all"
+              className="flex items-center space-x-2 text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all"
             >
-              <Code className="w-3.5 h-3.5 text-indigo-600" />
+              <Code className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
               <span>Join as Developer</span>
             </a>
 

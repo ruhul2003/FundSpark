@@ -26,22 +26,19 @@ const TopCampaigns = () => {
   }, []);
 
   return (
-    <section className="py-16 bg-slate-50">
+    <section className="py-16 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
       <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div>
-            <div className="flex items-center space-x-2 text-indigo-600 font-semibold text-xs uppercase tracking-wider mb-2">
-              <Flame className="w-4 h-4 text-amber-500" />
-              <span>Highest Funded</span>
-            </div>
-            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
-              Top Funded <span className="gradient-text">Campaigns</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Featured Projects</span>
+            <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1">
+              Top Trending <span className="gradient-text">Campaigns</span>
             </h2>
           </div>
           <Link
             href="/explore"
-            className="mt-4 md:mt-0 inline-flex items-center space-x-2 text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition-colors"
+            className="mt-4 md:mt-0 flex items-center space-x-2 text-sm font-semibold px-4 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm transition-all"
           >
             <span>View All Campaigns</span>
             <ArrowRight className="w-4 h-4" />

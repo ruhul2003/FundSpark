@@ -38,16 +38,19 @@ const testimonials = [
 
 const TestimonialSlider = () => {
   return (
-    <section className="py-20 bg-white border-y border-slate-200">
+    <section className="py-20 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800 transition-colors duration-300">
       <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-semibold border border-indigo-200 mb-3">
+          <span className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-semibold border border-indigo-200 dark:border-indigo-500/30 mb-3">
             <UserCheck className="w-3.5 h-3.5" />
-            <span>Community Stories</span>
+            <span>Verified Backer Stories</span>
           </span>
-          <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
-            Loved by Backers & <span className="gradient-text">Creators</span>
+          <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            Trusted by Creators & <span className="gradient-text">Supporters</span>
           </h2>
+          <p className="text-slate-600 dark:text-slate-400 text-sm mt-3">
+            Real experiences from real innovators funding bold projects on FundSpark.
+          </p>
         </div>
 
         <Swiper

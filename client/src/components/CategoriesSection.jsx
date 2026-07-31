@@ -15,14 +15,14 @@ const categories = [
 
 const CategoriesSection = () => {
   return (
-    <section className="py-16 bg-white border-t border-slate-200">
+    <section className="py-16 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
       <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Explore by <span className="gradient-text">Category</span>
           </h2>
-          <p className="text-slate-600 text-sm mt-2">
-            Find and support groundbreaking projects across diverse domains.
+          <p className="text-slate-600 dark:text-slate-400 text-sm mt-2">
+            Discover innovative crowdfunding projects tailored to your passion.
           </p>
         </div>
 

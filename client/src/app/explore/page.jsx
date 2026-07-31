@@ -49,14 +49,14 @@ function ExploreContent() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 transition-colors duration-300">
       <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+          <h1 className="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
             Explore Approved <span className="gradient-text">Campaigns</span>
           </h1>
-          <p className="text-slate-600 text-sm">
-            Discover active crowdfunding initiatives, support passionate creators, and pledge your platform credits.
+          <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
+            Discover verified tech, environmental, and community projects. Support creators with your available credits.
           </p>
         </div>
 

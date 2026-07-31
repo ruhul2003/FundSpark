@@ -32,7 +32,7 @@ const slides = [
 
 const HeroSlider = () => {
   return (
-    <div className="relative overflow-hidden bg-slate-50 pt-4 pb-12">
+    <div className="relative overflow-hidden bg-slate-50 dark:bg-slate-950 pt-4 pb-12 transition-colors duration-300">
       <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
         <Swiper
           modules={[Autoplay, EffectFade, Pagination, Navigation]}
@@ -41,30 +41,30 @@ const HeroSlider = () => {
           pagination={{ clickable: true }}
           navigation
           loop
-          className="rounded-3xl border border-slate-200/80 shadow-lg overflow-hidden bg-white"
+          className="rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-lg overflow-hidden bg-white dark:bg-slate-900"
         >
           {slides.map((slide, index) => (
             <SwiperSlide key={index}>
               <div className="relative min-h-[480px] sm:min-h-[540px] flex items-center justify-center overflow-hidden">
                 {/* Background Image with soft opacity */}
                 <div
-                  className="absolute inset-0 bg-cover bg-center opacity-25 filter contrast-125"
+                  className="absolute inset-0 bg-cover bg-center opacity-25 dark:opacity-35 filter contrast-125"
                   style={{ backgroundImage: `url(${slide.image})` }}
                 />
-                {/* Clean Light White Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-indigo-50/70" />
+                {/* Dynamic Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-indigo-50/70 dark:from-slate-950 dark:via-slate-950/85 dark:to-indigo-950/50" />
 
                 <div className="relative z-10 text-center max-w-3xl px-6 py-12">
-                  <span className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-indigo-50 text-indigo-700 text-xs font-semibold border border-indigo-200/80 mb-6 shadow-sm">
-                    <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
+                  <span className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-semibold border border-indigo-200/80 dark:border-indigo-500/30 mb-6 shadow-sm">
+                    <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                     <span>{slide.badge}</span>
                   </span>
 
-                  <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
+                  <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight mb-6">
                     {slide.title}
                   </h1>
 
-                  <p className="text-slate-600 text-sm sm:text-lg mb-8 max-w-2xl mx-auto leading-relaxed font-medium">
+                  <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-lg mb-8 max-w-2xl mx-auto leading-relaxed font-medium">
                     {slide.subtitle}
                   </p>
 
@@ -79,7 +79,7 @@ const HeroSlider = () => {
 
                     <Link
                       href="/register"
-                      className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-semibold text-sm border border-slate-300 shadow-sm transition-all"
+                      className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-sm border border-slate-300 dark:border-slate-700 shadow-sm transition-all"
                     >
                       Register Account
                     </Link>

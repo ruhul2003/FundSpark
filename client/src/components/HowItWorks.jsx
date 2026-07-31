@@ -34,14 +34,17 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section className="py-20 bg-slate-50 border-t border-slate-200">
+    <section className="py-20 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
       <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">Simple 4-Step Process</span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-2">
-            How <span className="gradient-text">FundSpark Works</span>
+          <span className="text-xs font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Simple 4-Step Process</span>
+          <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1">
+            How <span className="gradient-text">FundSpark</span> Works
           </h2>
+          <p className="text-slate-600 dark:text-slate-400 text-sm mt-3">
+            Seamlessly participate in visionary project funding with full transparency and verified credits.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
