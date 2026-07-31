@@ -1,4 +1,7 @@
+'use client';
+
 import React from 'react';
+import { motion } from 'framer-motion';
 import { UserPlus, PlusCircle, Coins, DollarSign } from 'lucide-react';
 
 const steps = [
@@ -37,7 +40,13 @@ const HowItWorks = () => {
     <section className="py-20 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
       <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center max-w-2xl mx-auto mb-16"
+        >
           <span className="text-xs font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Simple 4-Step Process</span>
           <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1">
             How <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-sky-500 dark:from-indigo-300 dark:via-indigo-400 dark:to-sky-400 bg-clip-text text-transparent">FundSpark</span> Works
@@ -45,15 +54,20 @@ const HowItWorks = () => {
           <p className="text-slate-600 dark:text-slate-400 text-sm mt-3">
             Seamlessly participate in visionary project funding with full transparency and verified credits.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((item, i) => {
             const IconComp = item.icon;
             return (
-              <div
+              <motion.div
                 key={i}
-                className="bg-white dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-sm hover:border-indigo-500/40 dark:hover:border-indigo-500/50 rounded-2xl p-8 relative flex flex-col justify-between transition-all hover:scale-105"
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                whileHover={{ scale: 1.03, y: -4 }}
+                className="bg-white dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-sm hover:border-indigo-500/40 dark:hover:border-indigo-500/50 rounded-2xl p-8 relative flex flex-col justify-between transition-all"
               >
                 <div>
                   <span className="text-4xl font-black text-slate-200 dark:text-slate-800 absolute top-6 right-6">
@@ -65,7 +79,7 @@ const HowItWorks = () => {
                   <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3">{item.title}</h3>
                   <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed">{item.desc}</p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

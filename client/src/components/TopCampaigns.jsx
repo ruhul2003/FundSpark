@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
+import { motion } from 'framer-motion';
 import { Flame, Coins, ArrowRight, Clock, Target } from 'lucide-react';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
@@ -29,7 +30,13 @@ const TopCampaigns = () => {
     <section className="py-16 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
       <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col md:flex-row md:items-end justify-between mb-12"
+        >
           <div>
             <span className="text-xs font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Featured Projects</span>
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1">
@@ -43,7 +50,7 @@ const TopCampaigns = () => {
             <span>View All Campaigns</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
-        </div>
+        </motion.div>
 
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -57,16 +64,21 @@ const TopCampaigns = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {campaigns.map((campaign) => {
+            {campaigns.map((campaign, idx) => {
               const progressPercentage = Math.min(
                 100,
                 Math.round(((campaign.amountRaised || 0) / campaign.fundingGoal) * 100)
               );
 
               return (
-                <div
+                <motion.div
                   key={campaign._id}
-                  className="bg-white dark:bg-slate-900/60 backdrop-blur-md rounded-2xl overflow-hidden flex flex-col transition-all transform hover:-translate-y-1 hover:shadow-lg border border-slate-200 dark:border-slate-800 shadow-sm"
+                  initial={{ opacity: 0, y: 25 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: idx * 0.1 }}
+                  whileHover={{ scale: 1.02, y: -4 }}
+                  className="bg-white dark:bg-slate-900/60 backdrop-blur-md rounded-2xl overflow-hidden flex flex-col justify-between border border-slate-200 dark:border-slate-800 shadow-sm transition-all hover:shadow-xl hover:border-indigo-500/50"
                 >
                   <div className="relative h-48 overflow-hidden">
                     <img
@@ -123,7 +135,7 @@ const TopCampaigns = () => {
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
