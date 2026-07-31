@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
@@ -24,6 +24,11 @@ export default function RegisterPage() {
   const [uploadingImage, setUploadingImage] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
@@ -278,17 +283,19 @@ export default function RegisterPage() {
         </div>
 
         <div className="flex flex-col space-y-3 items-center w-full">
-          <div className="w-full flex justify-center">
-            <GoogleLogin
-              onSuccess={handleGoogleSuccess}
-              onError={() => setError('Google Authentication Popup Failed')}
-              useOneTap
-              shape="circle"
-              theme="outline"
-              size="large"
-              width="100%"
-            />
-          </div>
+          {mounted && (
+            <div className="w-full flex justify-center">
+              <GoogleLogin
+                onSuccess={handleGoogleSuccess}
+                onError={() => setError('Google Authentication Popup Failed')}
+                useOneTap
+                shape="circle"
+                theme="outline"
+                size="large"
+                width="100%"
+              />
+            </div>
+          )}
 
           <motion.button
             whileHover={{ scale: 1.01 }}
