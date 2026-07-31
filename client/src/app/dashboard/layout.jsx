@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '../../context/AuthContext';
 import NotificationDropdown from '../../components/NotificationDropdown';
+import ThemeToggle from '../../components/ThemeToggle';
 import ProtectedRoute from '../../components/ProtectedRoute';
 import {
   Sparkles,
@@ -106,6 +107,8 @@ export default function DashboardLayout({ children }) {
               alt={user?.name}
               className="w-9 h-9 rounded-full object-cover ring-2 ring-indigo-500/40"
             />
+
+            <ThemeToggle />
 
             <NotificationDropdown />
           </div>

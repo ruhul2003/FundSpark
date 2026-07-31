@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
 import NotificationDropdown from './NotificationDropdown';
+import ThemeToggle from './ThemeToggle';
 import { Sparkles, Coins, Code, LayoutDashboard, LogOut, Menu, X, Compass } from 'lucide-react';
 
 const Navbar = () => {
@@ -73,10 +74,13 @@ const Navbar = () => {
               <span>Join as Developer</span>
             </a>
 
+            {/* Theme Toggle Button */}
+            <ThemeToggle />
+
             {user ? (
               <div className="flex items-center space-x-4">
                 {/* Available Credits */}
-                <div className="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-indigo-50 border border-indigo-200/80 text-indigo-700 text-xs font-semibold">
+                <div className="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200/80 dark:border-indigo-500/30 text-indigo-700 dark:text-indigo-200 text-xs font-semibold">
                   <Coins className="w-4 h-4 text-amber-500 animate-bounce" />
                   <span>{user.credits ?? 0} Credits</span>
                 </div>
@@ -94,7 +98,7 @@ const Navbar = () => {
                 <NotificationDropdown />
 
                 {/* User Profile & Logout */}
-                <div className="flex items-center space-x-3 pl-2 border-l border-slate-200">
+                <div className="flex items-center space-x-3 pl-2 border-l border-slate-200 dark:border-slate-800">
                   <img
                     src={user.photoURL || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=300&q=80'}
                     alt={user.name}
@@ -103,7 +107,7 @@ const Navbar = () => {
                   <button
                     onClick={handleLogout}
                     title="Logout"
-                    className="p-2 rounded-xl bg-slate-100 text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition-colors"
+                    className="p-2 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-500 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors"
                   >
                     <LogOut className="w-4 h-4" />
                   </button>
@@ -113,7 +117,7 @@ const Navbar = () => {
               <div className="flex items-center space-x-3">
                 <Link
                   href="/login"
-                  className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
+                  className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
                 >
                   Login
                 </Link>
@@ -129,10 +133,11 @@ const Navbar = () => {
 
           {/* Mobile Toggle */}
           <div className="md:hidden flex items-center space-x-3">
+            <ThemeToggle />
             {user && <NotificationDropdown />}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg bg-slate-100 text-slate-700 hover:text-slate-900 border border-slate-200"
+              className="p-2 rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-800"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
