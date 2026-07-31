@@ -137,26 +137,26 @@ export default function CampaignDetailsPage() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 transition-colors duration-300">
       <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="glass-panel rounded-3xl overflow-hidden mb-12 grid grid-cols-1 lg:grid-cols-12 gap-0 border border-slate-200 bg-white shadow-sm">
+        <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl rounded-3xl overflow-hidden mb-12 grid grid-cols-1 lg:grid-cols-12 gap-0 border border-slate-200 dark:border-slate-800 shadow-sm">
           <div className="lg:col-span-7 relative h-72 lg:h-auto overflow-hidden">
             <img
               src={campaign.imageUrl}
               alt={campaign.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-indigo-700 border border-slate-200 shadow-sm">
+            <div className="absolute top-4 left-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-indigo-700 dark:text-indigo-300 border border-slate-200 dark:border-slate-700 shadow-sm">
               {campaign.category}
             </div>
           </div>
 
           <div className="lg:col-span-5 p-8 flex flex-col justify-between space-y-6">
             <div>
-              <div className="flex items-center justify-between text-xs text-slate-500 mb-2">
+              <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 mb-2">
                 <span className="flex items-center space-x-1">
-                  <UserCheck className="w-3.5 h-3.5 text-indigo-600" />
+                  <UserCheck className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                   <span>By {campaign.creatorName}</span>
                 </span>
                 <span className="flex items-center space-x-1">
@@ -164,40 +164,40 @@ export default function CampaignDetailsPage() {
                   <span>Ends {new Date(campaign.deadline).toLocaleDateString()}</span>
                 </span>
               </div>
-              <h1 className="text-2xl font-extrabold text-slate-900 leading-tight mb-4">{campaign.title}</h1>
+              <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white leading-tight mb-4">{campaign.title}</h1>
               
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-indigo-700 font-bold flex items-center space-x-1">
+                  <span className="text-indigo-700 dark:text-indigo-400 font-bold flex items-center space-x-1">
                     <Coins className="w-4 h-4 text-amber-500" />
                     <span>{campaign.amountRaised || 0} Credits Raised</span>
                   </span>
-                  <span className="text-slate-500 font-medium">{progressPercentage}%</span>
+                  <span className="text-slate-500 dark:text-slate-400 font-medium">{progressPercentage}%</span>
                 </div>
-                <div className="w-full h-3 bg-slate-200 rounded-full overflow-hidden">
+                <div className="w-full h-3 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                   <div
                     className="h-full bg-gradient-to-r from-indigo-600 to-sky-500 rounded-full"
                     style={{ width: `${progressPercentage}%` }}
                   />
                 </div>
-                <div className="flex justify-between text-xs text-slate-500 pt-1">
+                <div className="flex justify-between text-xs text-slate-500 dark:text-slate-400 pt-1">
                   <span>Goal: {campaign.fundingGoal} Credits</span>
                   <span>Min Pledge: {campaign.minContribution} Credits</span>
                 </div>
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-start space-x-3">
-              <Gift className="w-5 h-5 text-indigo-600 mt-0.5 flex-shrink-0" />
+            <div className="p-4 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30 flex items-start space-x-3">
+              <Gift className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 flex-shrink-0" />
               <div>
-                <h4 className="text-xs font-bold text-indigo-900 uppercase tracking-wider">Backer Reward</h4>
-                <p className="text-xs text-slate-600 mt-1">{campaign.rewardInfo}</p>
+                <h4 className="text-xs font-bold text-indigo-900 dark:text-indigo-200 uppercase tracking-wider">Backer Reward</h4>
+                <p className="text-xs text-slate-600 dark:text-slate-300 mt-1">{campaign.rewardInfo}</p>
               </div>
             </div>
 
             <button
               onClick={() => setShowReportModal(true)}
-              className="text-xs text-rose-600 hover:text-rose-700 flex items-center space-x-1 transition-colors self-start font-medium"
+              className="text-xs text-rose-600 dark:text-rose-400 hover:text-rose-700 flex items-center space-x-1 transition-colors self-start font-medium"
             >
               <ShieldAlert className="w-3.5 h-3.5" />
               <span>Report Suspicious Campaign</span>
@@ -207,18 +207,18 @@ export default function CampaignDetailsPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           <div className="lg:col-span-7 space-y-8">
-            <div className="glass-panel p-8 rounded-3xl border border-slate-200 bg-white shadow-sm space-y-4">
-              <h2 className="text-xl font-bold text-slate-900 tracking-tight border-b border-slate-200 pb-4">
+            <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight border-b border-slate-200 dark:border-slate-800 pb-4">
                 Campaign Story & Vision
               </h2>
-              <p className="text-slate-700 text-sm leading-relaxed whitespace-pre-line">
+              <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed whitespace-pre-line">
                 {campaign.story}
               </p>
             </div>
           </div>
 
           <div className="lg:col-span-5">
-            <div className="glass-panel p-8 rounded-3xl border border-slate-200 bg-white shadow-sm sticky top-28 space-y-6">
+            <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm sticky top-28 space-y-6">
               <h3 className="text-xl font-bold text-slate-900">Support This Project</h3>
               <p className="text-xs text-slate-500">
                 Pledge your available platform credits to back this campaign.

@@ -53,14 +53,14 @@ function ExploreContent() {
       <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h1 className="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
-            Explore Approved <span className="gradient-text">Campaigns</span>
+            Explore Approved <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-sky-500 dark:from-indigo-300 dark:via-indigo-400 dark:to-sky-400 bg-clip-text text-transparent">Campaigns</span>
           </h1>
           <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
             Discover verified tech, environmental, and community projects. Support creators with your available credits.
           </p>
         </div>
 
-        <div className="glass-panel p-6 rounded-2xl mb-12 space-y-6 bg-white border border-slate-200 shadow-sm">
+        <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border border-slate-200 dark:border-slate-800 p-6 rounded-2xl mb-12 space-y-6 shadow-sm">
           <form onSubmit={handleSearchSubmit} className="flex flex-col md:flex-row gap-4">
             <div className="relative flex-1">
               <Search className="w-5 h-5 text-slate-400 absolute left-4 top-3.5" />
@@ -123,8 +123,8 @@ function ExploreContent() {
             ))}
           </div>
         ) : campaigns.length === 0 ? (
-          <div className="glass-panel p-16 text-center rounded-2xl bg-white border border-slate-200 shadow-sm">
-            <p className="text-slate-500 font-medium">No campaigns match your selected criteria.</p>
+          <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border border-slate-200 dark:border-slate-800 p-16 text-center rounded-2xl shadow-sm">
+            <p className="text-slate-500 dark:text-slate-400 font-medium">No campaigns match your selected criteria.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -137,7 +137,7 @@ function ExploreContent() {
               return (
                 <div
                   key={campaign._id}
-                  className="glass-card bg-white rounded-2xl overflow-hidden flex flex-col justify-between transition-all hover:-translate-y-1 border border-slate-200 shadow-sm hover:shadow-md"
+                  className="bg-white dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-sm hover:border-indigo-500/40 dark:hover:border-indigo-500/50 rounded-2xl overflow-hidden flex flex-col justify-between transition-all hover:-translate-y-1 hover:shadow-md"
                 >
                   <div className="relative h-48 overflow-hidden">
                     <img

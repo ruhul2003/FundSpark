@@ -19,7 +19,7 @@ const CategoriesSection = () => {
       <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Explore by <span className="gradient-text">Category</span>
+            Explore by <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-sky-500 dark:from-indigo-300 dark:via-indigo-400 dark:to-sky-400 bg-clip-text text-transparent">Category</span>
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-sm mt-2">
             Discover innovative crowdfunding projects tailored to your passion.
@@ -33,13 +33,13 @@ const CategoriesSection = () => {
               <Link
                 key={idx}
                 href={`/explore?category=${cat.name}`}
-                className="glass-card p-6 rounded-2xl flex flex-col items-center text-center transition-all hover:-translate-y-1 hover:border-indigo-500/50 hover:shadow-lg"
+                className="bg-white dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 p-6 rounded-2xl flex flex-col items-center text-center transition-all hover:-translate-y-1 hover:border-indigo-500/50 hover:shadow-lg shadow-sm"
               >
-                <div className={`w-14 h-14 rounded-2xl ${cat.bg} flex items-center justify-center mb-4`}>
+                <div className={`w-14 h-14 rounded-2xl ${cat.bg} dark:bg-slate-800 flex items-center justify-center mb-4`}>
                   <IconComponent className={`w-7 h-7 ${cat.color}`} />
                 </div>
-                <h3 className="font-bold text-slate-900 text-sm mb-1">{cat.name}</h3>
-                <span className="text-[11px] text-slate-500 font-medium">{cat.count}</span>
+                <h3 className="font-bold text-slate-900 dark:text-white text-sm mb-1">{cat.name}</h3>
+                <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">{cat.count}</span>
               </Link>
             );
           })}

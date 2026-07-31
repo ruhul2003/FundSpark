@@ -46,7 +46,7 @@ const TestimonialSlider = () => {
             <span>Verified Backer Stories</span>
           </span>
           <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Trusted by Creators & <span className="gradient-text">Supporters</span>
+            Trusted by Creators & <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-sky-500 dark:from-indigo-300 dark:via-indigo-400 dark:to-sky-400 bg-clip-text text-transparent">Supporters</span>
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-sm mt-3">
             Real experiences from real innovators funding bold projects on FundSpark.
@@ -67,8 +67,8 @@ const TestimonialSlider = () => {
         >
           {testimonials.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="glass-card rounded-2xl p-8 flex flex-col justify-between h-full relative border border-slate-200 shadow-sm">
-                <Quote className="w-10 h-10 text-indigo-200 absolute top-6 right-6" />
+              <div className="bg-white dark:bg-slate-900/60 backdrop-blur-md rounded-2xl p-8 flex flex-col justify-between h-full relative border border-slate-200 dark:border-slate-800 shadow-sm">
+                <Quote className="w-10 h-10 text-indigo-200 dark:text-indigo-900/40 absolute top-6 right-6" />
 
                 <div className="space-y-4 mb-6">
                   <div className="flex items-center space-x-1 text-amber-500">
@@ -76,20 +76,20 @@ const TestimonialSlider = () => {
                       <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                     ))}
                   </div>
-                  <p className="text-slate-600 text-sm leading-relaxed italic">
+                  <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed italic">
                     "{item.quote}"
                   </p>
                 </div>
 
-                <div className="flex items-center space-x-4 pt-4 border-t border-slate-100">
+                <div className="flex items-center space-x-4 pt-4 border-t border-slate-100 dark:border-slate-800">
                   <img
                     src={item.photo}
                     alt={item.name}
                     className="w-12 h-12 rounded-full object-cover ring-2 ring-indigo-500/40"
                   />
                   <div>
-                    <h4 className="text-sm font-bold text-slate-900">{item.name}</h4>
-                    <p className="text-xs text-indigo-600 font-medium">{item.role}</p>
+                    <h4 className="text-sm font-bold text-slate-900 dark:text-white">{item.name}</h4>
+                    <p className="text-xs text-indigo-600 dark:text-indigo-400 font-medium">{item.role}</p>
                   </div>
                 </div>
               </div>
