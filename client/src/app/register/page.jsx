@@ -95,72 +95,72 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-[90vh] bg-slate-950 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full glass-panel p-8 rounded-3xl border border-slate-800 space-y-6 shadow-2xl">
+    <div className="min-h-[90vh] bg-slate-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full glass-panel p-8 rounded-3xl border border-slate-200 space-y-6 shadow-xl bg-white">
         <div className="text-center space-y-2">
           <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-sky-400 p-0.5 mx-auto mb-3">
-            <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
-              <Sparkles className="w-6 h-6 text-indigo-400" />
+            <div className="w-full h-full bg-white rounded-[14px] flex items-center justify-center">
+              <Sparkles className="w-6 h-6 text-indigo-600" />
             </div>
           </div>
-          <h2 className="text-2xl font-extrabold text-white tracking-tight">Create Account</h2>
-          <p className="text-xs text-slate-400">Join FundSpark and start empowering global initiatives</p>
+          <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">Create Account</h2>
+          <p className="text-xs text-slate-500">Join FundSpark and start empowering global initiatives</p>
         </div>
 
-        <div className="p-4 rounded-2xl bg-indigo-950/40 border border-indigo-500/30 flex items-start space-x-3">
-          <Coins className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
+        <div className="p-4 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-start space-x-3">
+          <Coins className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
           <div className="text-xs">
-            <span className="font-bold text-indigo-200 block">Registration Credit Bonus:</span>
-            <p className="text-slate-300 mt-0.5">
+            <span className="font-bold text-indigo-900 block">Registration Credit Bonus:</span>
+            <p className="text-slate-600 mt-0.5">
               {role === 'Supporter' ? 'Supporters receive 50 default credits upon registration!' : 'Creators receive 20 default credits upon registration!'}
             </p>
           </div>
         </div>
 
         {error && (
-          <div className="p-4 rounded-xl bg-rose-950/40 border border-rose-500/30 text-rose-300 text-xs flex items-center space-x-2">
-            <AlertCircle className="w-4 h-4 flex-shrink-0" />
+          <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center space-x-2">
+            <AlertCircle className="w-4 h-4 flex-shrink-0 text-rose-600" />
             <span>{error}</span>
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5">Full Name</label>
+            <label className="block text-xs font-semibold text-slate-700 mb-1.5">Full Name</label>
             <div className="relative">
-              <User className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
+              <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
               <input
                 type="text"
                 required
                 placeholder="Alex Johnson"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full bg-slate-900 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:bg-white"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5">Email Address</label>
+            <label className="block text-xs font-semibold text-slate-700 mb-1.5">Email Address</label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
+              <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
               <input
                 type="email"
                 required
                 placeholder="you@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-slate-900 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:bg-white"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5">Select Account Role</label>
+            <label className="block text-xs font-semibold text-slate-700 mb-1.5">Select Account Role</label>
             <select
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-100 focus:outline-none focus:border-indigo-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:bg-white"
             >
               <option value="Supporter">Supporter (Browse campaigns & pledge credits)</option>
               <option value="Creator">Creator (Launch campaigns & withdraw funds)</option>
@@ -168,17 +168,17 @@ export default function RegisterPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5">Profile Picture</label>
+            <label className="block text-xs font-semibold text-slate-700 mb-1.5">Profile Picture</label>
             <div className="flex items-center space-x-3">
               <input
                 type="text"
                 placeholder="Image URL or upload below"
                 value={photoURL}
                 onChange={(e) => setPhotoURL(e.target.value)}
-                className="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+                className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:bg-white"
               />
-              <label className="px-3 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold cursor-pointer flex items-center space-x-1.5 border border-slate-700">
-                <Upload className="w-3.5 h-3.5 text-indigo-400" />
+              <label className="px-3 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold cursor-pointer flex items-center space-x-1.5 border border-slate-200">
+                <Upload className="w-3.5 h-3.5 text-indigo-600" />
                 <span>{uploadingImage ? 'Uploading...' : 'imgBB'}</span>
                 <input
                   type="file"
@@ -192,16 +192,16 @@ export default function RegisterPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5">Password</label>
+            <label className="block text-xs font-semibold text-slate-700 mb-1.5">Password</label>
             <div className="relative">
-              <Lock className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
+              <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
               <input
                 type="password"
                 required
                 placeholder="At least 6 characters"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-slate-900 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:bg-white"
               />
             </div>
           </div>
@@ -209,15 +209,15 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={loading || uploadingImage}
-            className="w-full py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-bold text-sm shadow-xl shadow-indigo-600/30 transition-all disabled:opacity-50"
+            className="w-full py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-bold text-sm shadow-lg shadow-indigo-600/20 transition-all disabled:opacity-50"
           >
             {loading ? 'Registering Account...' : 'Complete Registration'}
           </button>
         </form>
 
-        <p className="text-center text-xs text-slate-400">
+        <p className="text-center text-xs text-slate-500">
           Already have an account?{' '}
-          <Link href="/login" className="text-indigo-400 hover:underline font-semibold">
+          <Link href="/login" className="text-indigo-600 hover:underline font-semibold">
             Log in
           </Link>
         </p>

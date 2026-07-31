@@ -34,12 +34,12 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section className="py-20 bg-slate-950">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20 bg-slate-50 border-t border-slate-200">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-indigo-400">Simple 4-Step Process</span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-2">
+          <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">Simple 4-Step Process</span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-2">
             How <span className="gradient-text">FundSpark Works</span>
           </h2>
         </div>
@@ -53,14 +53,14 @@ const HowItWorks = () => {
                 className="glass-card rounded-2xl p-8 relative flex flex-col justify-between transition-all hover:scale-105"
               >
                 <div>
-                  <span className="text-4xl font-black text-slate-800 absolute top-6 right-6">
+                  <span className="text-4xl font-black text-slate-200 absolute top-6 right-6">
                     {item.step}
                   </span>
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-tr ${item.color} flex items-center justify-center text-white mb-6 shadow-lg`}>
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-tr ${item.color} flex items-center justify-center text-white mb-6 shadow-lg shadow-indigo-500/10`}>
                     <IconComp className="w-6 h-6" />
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-3">{item.title}</h3>
-                  <p className="text-slate-400 text-xs leading-relaxed">{item.desc}</p>
+                  <h3 className="text-lg font-bold text-slate-900 mb-3">{item.title}</h3>
+                  <p className="text-slate-600 text-xs leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             );

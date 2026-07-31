@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema(
     credits: { type: Number, default: 0 },
     raisedCredits: { type: Number, default: 0 } // For Creator role
   },
-  { timestamps: true }
+  { timestamps: true, collection: 'Users' }
 );
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema, 'Users');

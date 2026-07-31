@@ -38,14 +38,14 @@ const testimonials = [
 
 const TestimonialSlider = () => {
   return (
-    <section className="py-20 bg-slate-950/80 border-y border-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20 bg-white border-y border-slate-200">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-semibold border border-indigo-500/30 mb-3">
+          <span className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-semibold border border-indigo-200 mb-3">
             <UserCheck className="w-3.5 h-3.5" />
             <span>Community Stories</span>
           </span>
-          <h2 className="text-3xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
             Loved by Backers & <span className="gradient-text">Creators</span>
           </h2>
         </div>
@@ -64,29 +64,29 @@ const TestimonialSlider = () => {
         >
           {testimonials.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="glass-card rounded-2xl p-8 flex flex-col justify-between h-full relative">
-                <Quote className="w-10 h-10 text-indigo-500/20 absolute top-6 right-6" />
+              <div className="glass-card rounded-2xl p-8 flex flex-col justify-between h-full relative border border-slate-200 shadow-sm">
+                <Quote className="w-10 h-10 text-indigo-200 absolute top-6 right-6" />
 
                 <div className="space-y-4 mb-6">
-                  <div className="flex items-center space-x-1 text-amber-400">
+                  <div className="flex items-center space-x-1 text-amber-500">
                     {[...Array(item.rating)].map((_, i) => (
                       <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                     ))}
                   </div>
-                  <p className="text-slate-300 text-sm leading-relaxed italic">
+                  <p className="text-slate-600 text-sm leading-relaxed italic">
                     "{item.quote}"
                   </p>
                 </div>
 
-                <div className="flex items-center space-x-4 pt-4 border-t border-slate-800">
+                <div className="flex items-center space-x-4 pt-4 border-t border-slate-100">
                   <img
                     src={item.photo}
                     alt={item.name}
                     className="w-12 h-12 rounded-full object-cover ring-2 ring-indigo-500/40"
                   />
                   <div>
-                    <h4 className="text-sm font-bold text-white">{item.name}</h4>
-                    <p className="text-xs text-indigo-400 font-medium">{item.role}</p>
+                    <h4 className="text-sm font-bold text-slate-900">{item.name}</h4>
+                    <p className="text-xs text-indigo-600 font-medium">{item.role}</p>
                   </div>
                 </div>
               </div>
