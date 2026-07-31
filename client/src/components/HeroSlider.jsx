@@ -4,7 +4,9 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Pagination, Navigation } from 'swiper/modules';
 import Link from 'next/link';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowRight, Sparkles, LayoutDashboard, PlusCircle, ShieldCheck } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -36,6 +38,15 @@ const slides = [
 ];
 
 const HeroSlider = () => {
+  const { user } = useAuth();
+
+  const getDashboardRoute = () => {
+    if (!user) return '/dashboard';
+    if (user.role === 'Creator') return '/dashboard/creator-home';
+    if (user.role === 'Admin') return '/dashboard/admin-home';
+    return '/dashboard/supporter-home';
+  };
+
   return (
     <div className="relative w-full overflow-hidden bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
       <Swiper
@@ -81,20 +92,51 @@ const HeroSlider = () => {
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-                  <Link
-                    href="/explore"
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm sm:text-base shadow-lg shadow-indigo-600/30 flex items-center justify-center space-x-2 transition-all transform hover:-translate-y-0.5"
-                  >
-                    <span>{slide.cta}</span>
-                    <ArrowRight className="w-5 h-5" />
-                  </Link>
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                    <Link
+                      href="/explore"
+                      className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm sm:text-base shadow-lg shadow-indigo-600/30 flex items-center justify-center space-x-2 transition-all"
+                    >
+                      <span>Explore Campaigns</span>
+                      <ArrowRight className="w-5 h-5" />
+                    </Link>
+                  </motion.div>
 
-                  <Link
-                    href="/register"
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100 font-semibold text-sm sm:text-base border border-slate-300 dark:border-slate-700 shadow-sm transition-all"
-                  >
-                    Register Account
-                  </Link>
+                  {user ? (
+                    <>
+                      <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                        <Link
+                          href={getDashboardRoute()}
+                          className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100 font-semibold text-sm sm:text-base border border-slate-300 dark:border-slate-700 shadow-sm transition-all flex items-center justify-center space-x-2"
+                        >
+                          <LayoutDashboard className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                          <span>My Dashboard</span>
+                        </Link>
+                      </motion.div>
+
+                      {user.role === 'Creator' && (
+                        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                          <Link
+                            href="/dashboard/add-campaign"
+                            className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm sm:text-base shadow-lg shadow-emerald-600/20 flex items-center justify-center space-x-2 transition-all"
+                          >
+                            <PlusCircle className="w-5 h-5" />
+                            <span>Create Campaign</span>
+                          </Link>
+                        </motion.div>
+                      )}
+                    </>
+                  ) : (
+                    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                      <Link
+                        href="/register"
+                        className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100 font-semibold text-sm sm:text-base border border-slate-300 dark:border-slate-700 shadow-sm transition-all flex items-center justify-center space-x-2"
+                      >
+                        <span>Register Account</span>
+                        <ArrowRight className="w-4 h-4 text-indigo-600" />
+                      </Link>
+                    </motion.div>
+                  )}
                 </div>
               </div>
             </div>
