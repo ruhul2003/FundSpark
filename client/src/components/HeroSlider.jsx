@@ -58,12 +58,12 @@ const HeroSlider = () => {
 
               {/* Background Image Layer */}
               <div
-                className="absolute inset-0 z-0 bg-cover bg-center opacity-70 dark:opacity-40 filter contrast-105 pointer-events-none transform scale-105 transition-transform duration-1000"
+                className="absolute inset-0 z-0 bg-cover bg-center opacity-35 dark:opacity-40 filter contrast-105 pointer-events-none transform scale-105 transition-transform duration-1000"
                 style={{ backgroundImage: `url(${slide.lightImage})` }}
               />
 
               {/* Dynamic Overlay Layer (Light vs Dark) */}
-              <div className="absolute inset-0 z-10 bg-gradient-to-r from-white/80 via-white/50 to-indigo-50/40 dark:from-slate-950 dark:via-slate-950/85 dark:to-indigo-950/60 pointer-events-none" />
+              <div className="absolute inset-0 z-10 bg-gradient-to-r from-white/85 via-white/60 to-indigo-50/50 dark:from-slate-950 dark:via-slate-950/85 dark:to-indigo-950/60 pointer-events-none" />
 
               {/* Text Content Layer */}
               <div className="relative z-20 text-center max-w-4xl px-6 py-12 flex flex-col items-center justify-center">
