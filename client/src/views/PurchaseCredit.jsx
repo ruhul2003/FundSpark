@@ -8,88 +8,149 @@ import {
   Coins,
   Check,
   CreditCard,
-  ShieldCheck,
-  Zap,
+  User,
+  Star,
   Sparkles,
+  Crown,
   X,
   Lock,
   CheckCircle2,
   AlertCircle,
-  HelpCircle,
-  ArrowRight
+  ShieldCheck,
+  Zap,
+  HelpCircle
 } from 'lucide-react';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
-const packages = [
+const supporterPackages = [
   {
+    id: 'starter',
     credits: 100,
     price: 10,
     title: 'Starter',
-    subTitle: '100 Credits',
-    rate: '$0.10 / credit',
-    badge: 'Starter',
+    icon: User,
+    description: 'Essential features for getting started and backing your first innovative campaigns.',
     isPopular: false,
+    btnColor: 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-600/20',
     features: [
       '100 Platform Credits',
-      'Instant wallet allocation',
-      'Use on any campaign',
-      'Escrow protection'
+      'Instant credit wallet allocation',
+      'Use on any active campaign',
+      'Protected Stripe escrow guarantee'
     ]
   },
   {
+    id: 'pro',
     credits: 300,
     price: 25,
-    title: 'Backer Choice',
-    subTitle: '300 Credits',
-    rate: '$0.083 / credit',
-    badge: 'Most Popular',
+    title: 'Pro Backer',
+    icon: Star,
+    description: 'Our most popular option for active supporters looking to back multiple project creators.',
     isPopular: true,
+    badgeText: 'MOST POPULAR',
+    btnColor: 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30',
     features: [
       '300 Platform Credits',
-      'Instant wallet allocation',
-      'Use on any campaign',
-      'Save 16% per credit',
-      'Escrow protection'
+      'Instant credit wallet allocation',
+      'Save 16% per platform credit',
+      'Priority backing status',
+      'Protected Stripe escrow guarantee'
     ]
   },
   {
+    id: 'premium',
     credits: 800,
     price: 60,
-    title: 'Pro Backer',
-    subTitle: '800 Credits',
-    rate: '$0.075 / credit',
-    badge: 'Pro Tier',
+    title: 'Premium',
+    icon: Sparkles,
+    description: 'Uncapped potential and priority tools tailored for high-impact community champions.',
     isPopular: false,
+    btnColor: 'bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-white border border-slate-800 dark:border-slate-700',
     features: [
       '800 Platform Credits',
-      'Instant wallet allocation',
-      'Use on any campaign',
-      'Save 25% per credit',
-      'Priority campaign backing'
+      'Instant credit wallet allocation',
+      'Save 25% per platform credit',
+      'Priority 24/7 customer support',
+      'Protected Stripe escrow guarantee'
     ]
   },
   {
+    id: 'ultimate',
     credits: 1500,
     price: 110,
-    title: 'Visionary',
-    subTitle: '1500 Credits',
-    rate: '$0.073 / credit',
-    badge: 'Best Value',
+    title: 'Ultimate',
+    icon: Crown,
+    description: 'Maximum impact package with maximum credit savings for top visionary backers.',
     isPopular: false,
+    btnColor: 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white shadow-md shadow-purple-600/20',
     features: [
       '1500 Platform Credits',
+      'Instant credit wallet allocation',
+      'Save 27% per platform credit',
+      'VIP badge & priority processing',
+      'Protected Stripe escrow guarantee'
+    ]
+  }
+];
+
+const creatorPackages = [
+  {
+    id: 'creator_basic',
+    credits: 200,
+    price: 20,
+    title: 'Creator Launch',
+    icon: User,
+    description: 'Bonus credits for new project creators to launch and promote their campaign.',
+    isPopular: false,
+    btnColor: 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-600/20',
+    features: [
+      '200 Creator Credits',
+      'Campaign highlight tools',
       'Instant wallet allocation',
-      'Use on any campaign',
-      'Save 27% per credit',
-      'Ultimate creator support'
+      'Verified creator badge'
+    ]
+  },
+  {
+    id: 'creator_pro',
+    credits: 600,
+    price: 50,
+    title: 'Creator Growth',
+    icon: Star,
+    description: 'Accelerate your campaign visibility with boosted placement and promotional credits.',
+    isPopular: true,
+    badgeText: 'RECOMMENDED',
+    btnColor: 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30',
+    features: [
+      '600 Creator Credits',
+      'Featured placement on Explore page',
+      'Save 17% per credit',
+      'Analytics & backer insights',
+      'Verified creator badge'
+    ]
+  },
+  {
+    id: 'creator_scale',
+    credits: 1200,
+    price: 95,
+    title: 'Creator Scale',
+    icon: Crown,
+    description: 'Maximum campaign reach package designed for major fundraising goals.',
+    isPopular: false,
+    btnColor: 'bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-white border border-slate-800 dark:border-slate-700',
+    features: [
+      '1200 Creator Credits',
+      'Top-banner placement on Home page',
+      'Save 21% per credit',
+      'Direct backer messaging tools',
+      'Priority approval support'
     ]
   }
 ];
 
 const faqs = [
   {
-    q: 'What are platform credits?',
+    q: 'How do platform credits work?',
     a: 'Credits are FundSpark’s platform currency. You can purchase credits using Stripe and pledge them to back innovation campaigns.'
   },
   {
@@ -106,6 +167,7 @@ export default function PurchaseCreditView() {
   const { user, refreshUserData } = useAuth();
   const router = useRouter();
 
+  const [roleTab, setRoleTab] = useState('supporters'); // 'supporters' | 'creators'
   const [selectedPkg, setSelectedPkg] = useState(null);
   const [showStripeModal, setShowStripeModal] = useState(false);
   const [purchasing, setPurchasing] = useState(false);
@@ -117,6 +179,8 @@ export default function PurchaseCreditView() {
   const [cardNumber, setCardNumber] = useState('4242 •••• •••• 4242');
   const [expDate, setExpDate] = useState('12/28');
   const [cvc, setCvc] = useState('123');
+
+  const activePackages = roleTab === 'supporters' ? supporterPackages : creatorPackages;
 
   const openCheckout = (pkg) => {
     if (!user) {
@@ -162,20 +226,47 @@ export default function PurchaseCreditView() {
   return (
     <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 space-y-16 transition-colors duration-300">
       
-      {/* Hero Header */}
+      {/* Header Section */}
       <div className="text-center max-w-3xl mx-auto space-y-4">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 text-xs font-semibold shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
-          <span>Transparent & Escrow-Protected Pricing</span>
-        </div>
+        <span className="text-[11px] font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 block">
+          Transparent Pricing
+        </span>
 
         <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
-          Flexible Credit Packages for <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-sky-400 bg-clip-text text-transparent">Every Backer</span>
+          Flexible plans tailored to your goals
         </h1>
 
         <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
-          Purchase platform credits securely via Stripe. Support groundbreaking tech, environmental, and community projects with instant credit allocation.
+          Whether you are an ambitious supporter backing groundbreaking campaigns or a creator scaling your vision, we have got you covered.
         </p>
+
+        {/* Role Switcher Pill */}
+        <div className="pt-4 flex justify-center">
+          <div className="inline-flex items-center p-1.5 rounded-2xl bg-slate-200/80 dark:bg-slate-900 border border-slate-300/80 dark:border-slate-800 shadow-inner gap-1">
+            <button
+              onClick={() => setRoleTab('supporters')}
+              className={`flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-bold transition-all ${
+                roleTab === 'supporters'
+                  ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+              }`}
+            >
+              <User className="w-3.5 h-3.5" />
+              <span>For Supporters</span>
+            </button>
+            <button
+              onClick={() => setRoleTab('creators')}
+              className={`flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-bold transition-all ${
+                roleTab === 'creators'
+                  ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+              }`}
+            >
+              <Crown className="w-3.5 h-3.5" />
+              <span>For Creators</span>
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Success Alert Banner */}
@@ -191,71 +282,72 @@ export default function PurchaseCreditView() {
         </div>
       )}
 
-      {/* Credit Packages Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-12 items-stretch py-4">
-        {packages.map((pkg) => (
-          <div
-            key={pkg.credits}
-            className={`relative rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 my-2 ${
-              pkg.isPopular
-                ? 'bg-gradient-to-b from-indigo-50/90 via-white to-white dark:from-indigo-950/40 dark:via-slate-900 dark:to-slate-900 border-2 border-indigo-600 dark:border-indigo-500 shadow-2xl shadow-indigo-600/15 lg:-translate-y-2 z-10'
-                : 'bg-white dark:bg-slate-900/80 border border-slate-200/90 dark:border-slate-800 shadow-sm hover:border-indigo-500/40 dark:hover:border-indigo-500/40 hover:shadow-lg'
-            }`}
-          >
-            {pkg.isPopular && (
-              <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-indigo-600 to-sky-500 text-white text-[11px] uppercase font-bold tracking-wider px-4 py-1 rounded-full shadow-md">
-                {pkg.badge}
-              </span>
-            )}
-
-            <div className="space-y-6">
-              <div>
-                <div className="flex justify-between items-baseline mb-1">
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white">{pkg.title}</h3>
-                  <span className="text-[11px] font-semibold text-slate-400 dark:text-slate-500">{pkg.rate}</span>
-                </div>
-                
-                <div className="flex items-baseline gap-1 text-slate-900 dark:text-white my-3">
-                  <span className="text-4xl font-black tracking-tight">${pkg.price}</span>
-                  <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">/ USD</span>
-                </div>
-
-                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 dark:bg-amber-950/50 border border-amber-200/80 dark:border-amber-800/60 text-amber-700 dark:text-amber-300 text-xs font-extrabold w-full justify-center">
-                  <Coins className="w-4 h-4 text-amber-500" />
-                  <span>{pkg.credits} Platform Credits</span>
-                </div>
-              </div>
-
-              <div className="border-t border-slate-100 dark:border-slate-800 pt-5 space-y-3">
-                <span className="text-[11px] uppercase font-bold tracking-wider text-slate-400 dark:text-slate-500 block">Package Features</span>
-                <ul className="space-y-2.5 text-xs text-slate-600 dark:text-slate-300">
-                  {pkg.features.map((feat, i) => (
-                    <li key={i} className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0" />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <button
-              onClick={() => openCheckout(pkg)}
-              className={`w-full mt-8 py-3.5 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 transition-all ${
+      {/* Pricing Cards Grid */}
+      <div className={`grid grid-cols-1 md:grid-cols-2 ${activePackages.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-8 items-stretch py-4`}>
+        {activePackages.map((pkg) => {
+          const IconComp = pkg.icon;
+          return (
+            <div
+              key={pkg.id}
+              className={`relative rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 my-2 ${
                 pkg.isPopular
-                  ? 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/25'
-                  : 'bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-white border border-slate-800 dark:border-slate-700'
+                  ? 'bg-white dark:bg-slate-900/90 border-2 border-indigo-600 dark:border-indigo-500 shadow-2xl shadow-indigo-600/15 lg:-translate-y-2 z-10'
+                  : 'bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-indigo-500/40 dark:hover:border-indigo-500/40 hover:shadow-lg'
               }`}
             >
-              <CreditCard className="w-4 h-4" />
-              <span>Purchase Package (${pkg.price})</span>
-            </button>
-          </div>
-        ))}
+              {pkg.isPopular && (
+                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-indigo-600 text-white text-[10px] uppercase font-extrabold tracking-wider px-4 py-1 rounded-full shadow-md">
+                  {pkg.badgeText || 'MOST POPULAR'}
+                </span>
+              )}
+
+              <div className="space-y-6">
+                {/* Header row */}
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">{pkg.title}</h3>
+                  <div className="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300">
+                    <IconComp className="w-4 h-4" />
+                  </div>
+                </div>
+
+                {/* Subtitle description */}
+                <p className="text-xs text-slate-500 dark:text-slate-400 min-h-[2.5rem] leading-relaxed">
+                  {pkg.description}
+                </p>
+
+                {/* Price Row */}
+                <div className="flex items-baseline gap-1 text-slate-900 dark:text-white border-t border-b border-slate-100 dark:border-slate-800/80 py-4">
+                  <span className="text-4xl font-black tracking-tight">${pkg.price}</span>
+                  <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">/{pkg.credits} credits</span>
+                </div>
+
+                {/* Checklist */}
+                <div className="space-y-3 pt-1">
+                  <ul className="space-y-2.5 text-xs text-slate-700 dark:text-slate-300">
+                    {pkg.features.map((feat, i) => (
+                      <li key={i} className="flex items-center gap-2.5">
+                        <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0" />
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Full-width bottom action button */}
+              <button
+                onClick={() => openCheckout(pkg)}
+                className={`w-full mt-8 py-3.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all ${pkg.btnColor}`}
+              >
+                <span>Purchase Pack (${pkg.price})</span>
+              </button>
+            </div>
+          );
+        })}
       </div>
 
       {/* Trust & Guarantee Section */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-slate-200 dark:border-slate-800">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 border-t border-slate-200 dark:border-slate-800">
         <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 flex items-start gap-4 shadow-sm">
           <div className="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800/60 shrink-0">
             <ShieldCheck className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
