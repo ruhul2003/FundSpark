@@ -12,13 +12,11 @@ import {
   Star,
   Sparkles,
   Crown,
+  Briefcase,
   X,
   Lock,
   CheckCircle2,
-  AlertCircle,
-  ShieldCheck,
-  Zap,
-  HelpCircle
+  AlertCircle
 } from 'lucide-react';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
@@ -30,13 +28,14 @@ const supporterPackages = [
     price: 10,
     title: 'Starter',
     icon: User,
-    description: 'Essential features for getting started and organizing your campaign backing.',
+    period: '/100 credits',
+    description: 'Essential features for getting started and backing your initial campaigns.',
     isPopular: false,
     btnText: 'Get Starter Pack',
-    btnClass: 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-600/20',
+    btnClass: 'bg-[#00b074] hover:bg-[#009663] text-white shadow-lg shadow-emerald-900/20',
     features: [
       '100 Platform Credits',
-      'Instant credit wallet allocation',
+      'Instant wallet allocation',
       'Use on any active campaign',
       'Protected Stripe escrow guarantee'
     ]
@@ -47,14 +46,15 @@ const supporterPackages = [
     price: 25,
     title: 'Pro Backer',
     icon: Star,
+    period: '/300 credits',
     description: 'Our most popular option for serious active candidates looking to rapidly back projects.',
     isPopular: true,
     badgeText: 'MOST POPULAR',
     btnText: 'Upgrade to Pro',
-    btnClass: 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30',
+    btnClass: 'bg-[#2563eb] hover:bg-[#1d4ed8] text-white shadow-lg shadow-blue-600/30',
     features: [
       '300 Platform Credits',
-      'Instant credit wallet allocation',
+      'Instant wallet allocation',
       'Save 16% per platform credit',
       'Priority backing status',
       'Protected Stripe escrow guarantee'
@@ -66,33 +66,16 @@ const supporterPackages = [
     price: 60,
     title: 'Premium',
     icon: Sparkles,
+    period: '/800 credits',
     description: 'Uncapped potential and priority tools tailored for high-impact community champions.',
     isPopular: false,
     btnText: 'Go Premium',
-    btnClass: 'bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700',
+    btnClass: 'bg-[#1e2638] dark:bg-[#1e2638] hover:bg-[#28334a] text-slate-200 border border-[#2d384e]',
     features: [
       '800 Platform Credits',
-      'Instant credit wallet allocation',
+      'Instant wallet allocation',
       'Save 25% per platform credit',
-      '24/7 Priority support queue',
-      'Protected Stripe escrow guarantee'
-    ]
-  },
-  {
-    id: 'ultimate',
-    credits: 1500,
-    price: 110,
-    title: 'Ultimate',
-    icon: Crown,
-    description: 'Maximum impact package with bonus credit savings for top visionary backers.',
-    isPopular: false,
-    btnText: 'Get Ultimate Pack',
-    btnClass: 'bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700',
-    features: [
-      '1500 Platform Credits',
-      'Instant credit wallet allocation',
-      'Save 27% per platform credit',
-      'VIP badge & priority processing',
+      'Priority 24/7 customer support',
       'Protected Stripe escrow guarantee'
     ]
   }
@@ -105,10 +88,11 @@ const creatorPackages = [
     price: 20,
     title: 'Creator Launch',
     icon: User,
-    description: 'Bonus credits for new project creators to launch and promote their campaign.',
+    period: '/200 credits',
+    description: 'Essential campaign creation tools and initial promotional credit allocation.',
     isPopular: false,
-    btnText: 'Get Creator Launch',
-    btnClass: 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-600/20',
+    btnText: 'Launch Campaign Pack',
+    btnClass: 'bg-[#00b074] hover:bg-[#009663] text-white shadow-lg shadow-emerald-900/20',
     features: [
       '200 Creator Credits',
       'Campaign highlight tools',
@@ -120,13 +104,14 @@ const creatorPackages = [
     id: 'creator_pro',
     credits: 600,
     price: 50,
-    title: 'Creator Growth',
+    title: 'Creator Pro',
     icon: Star,
+    period: '/600 credits',
     description: 'Accelerate your campaign visibility with boosted placement and promotional credits.',
     isPopular: true,
-    badgeText: 'RECOMMENDED',
-    btnText: 'Boost My Campaign',
-    btnClass: 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30',
+    badgeText: 'MOST POPULAR',
+    btnText: 'Upgrade Creator Pro',
+    btnClass: 'bg-[#2563eb] hover:bg-[#1d4ed8] text-white shadow-lg shadow-blue-600/30',
     features: [
       '600 Creator Credits',
       'Featured placement on Explore page',
@@ -141,10 +126,11 @@ const creatorPackages = [
     price: 95,
     title: 'Creator Scale',
     icon: Crown,
+    period: '/1200 credits',
     description: 'Maximum campaign reach package designed for major fundraising goals.',
     isPopular: false,
-    btnText: 'Get Creator Scale',
-    btnClass: 'bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700',
+    btnText: 'Go Scale',
+    btnClass: 'bg-[#1e2638] dark:bg-[#1e2638] hover:bg-[#28334a] text-slate-200 border border-[#2d384e]',
     features: [
       '1200 Creator Credits',
       'Top-banner placement on Home page',
@@ -152,21 +138,6 @@ const creatorPackages = [
       'Direct backer messaging tools',
       'Priority approval support'
     ]
-  }
-];
-
-const faqs = [
-  {
-    q: 'How do platform credits work?',
-    a: 'Credits are FundSpark’s platform currency. You can purchase credits using Stripe and pledge them to back innovation campaigns.'
-  },
-  {
-    q: 'How does Stripe payment escrow work?',
-    a: 'When you pledge credits to a campaign, your credits are held in pending escrow until the creator reviews and approves your contribution.'
-  },
-  {
-    q: 'Do platform credits expire?',
-    a: 'No! Credits added to your account wallet never expire and remain available in your account balance at all times.'
   }
 ];
 
@@ -231,11 +202,11 @@ export default function PurchaseCreditView() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8 space-y-16 transition-colors duration-300">
+    <div className="max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8 space-y-12 transition-colors duration-300">
       
       {/* Header Section */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
-        <span className="text-[11px] font-bold uppercase tracking-widest text-indigo-500 dark:text-indigo-400 block">
+        <span className="text-[11px] font-bold uppercase tracking-widest text-[#3b82f6] dark:text-[#3b82f6] block">
           TRANSPARENT PRICING
         </span>
 
@@ -249,12 +220,12 @@ export default function PurchaseCreditView() {
 
         {/* Role Switcher Pill */}
         <div className="pt-4 flex justify-center">
-          <div className="inline-flex items-center p-1 rounded-2xl bg-slate-200 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 shadow-inner gap-1">
+          <div className="inline-flex items-center p-1 rounded-2xl bg-slate-200 dark:bg-[#161b26] border border-slate-300 dark:border-[#232a3b] gap-1">
             <button
               onClick={() => setRoleTab('supporters')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+              className={`flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-bold transition-all ${
                 roleTab === 'supporters'
-                  ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm'
+                  ? 'bg-white dark:bg-[#232a3b] text-slate-900 dark:text-white shadow-sm'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
@@ -263,13 +234,13 @@ export default function PurchaseCreditView() {
             </button>
             <button
               onClick={() => setRoleTab('creators')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+              className={`flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-bold transition-all ${
                 roleTab === 'creators'
-                  ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm'
+                  ? 'bg-white dark:bg-[#232a3b] text-slate-900 dark:text-white shadow-sm'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
-              <Crown className="w-3.5 h-3.5" />
+              <Briefcase className="w-3.5 h-3.5" />
               <span>For Creators</span>
             </button>
           </div>
@@ -289,48 +260,48 @@ export default function PurchaseCreditView() {
         </div>
       )}
 
-      {/* Pricing Cards Grid */}
-      <div className={`grid grid-cols-1 md:grid-cols-2 ${activePackages.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-6 lg:gap-8 items-stretch`}>
+      {/* Pricing Cards Grid - Exact 3 Card Columns matching image */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch pt-2">
         {activePackages.map((pkg) => {
           const IconComp = pkg.icon;
           return (
             <div
               key={pkg.id}
-              className={`relative rounded-3xl p-7 flex flex-col justify-between transition-all duration-300 ${
+              className={`relative rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 ${
                 pkg.isPopular
-                  ? 'bg-white dark:bg-[#111625] border-2 border-indigo-500 shadow-xl shadow-indigo-500/20 lg:-translate-y-2 z-10'
-                  : 'bg-white dark:bg-[#111625] border border-slate-200 dark:border-slate-800/80 shadow-sm hover:border-indigo-500/40 dark:hover:border-indigo-500/40'
+                  ? 'bg-white dark:bg-[#121723] border-2 border-[#2563eb] shadow-2xl shadow-blue-500/10'
+                  : 'bg-white dark:bg-[#121723] border border-slate-200 dark:border-[#1e2638] shadow-sm hover:border-[#2563eb]/40'
               }`}
             >
               {pkg.isPopular && (
-                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-indigo-600 text-white text-[10px] uppercase font-extrabold tracking-wider px-3.5 py-1 rounded-full shadow-md">
+                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#2563eb] text-white text-[10px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-md border border-blue-400/30">
                   {pkg.badgeText || 'MOST POPULAR'}
                 </span>
               )}
 
-              <div className="space-y-5">
-                {/* Header Row */}
+              <div className="space-y-6">
+                {/* Header Row: Title & Avatar Icon */}
                 <div className="flex items-center justify-between">
                   <h3 className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">{pkg.title}</h3>
-                  <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-[#1a2130] border border-slate-200 dark:border-[#283248] flex items-center justify-center text-slate-600 dark:text-slate-300 shrink-0">
                     <IconComp className="w-4 h-4" />
                   </div>
                 </div>
 
-                {/* Subtitle Description */}
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed min-h-[2.75rem]">
+                {/* Subtitle description */}
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed min-h-[2.5rem]">
                   {pkg.description}
                 </p>
 
                 {/* Price Display */}
-                <div className="flex items-baseline gap-1 text-slate-900 dark:text-white pt-2">
+                <div className="flex items-baseline gap-1 text-slate-900 dark:text-white pt-1">
                   <span className="text-4xl font-black tracking-tight">${pkg.price}</span>
-                  <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">/{pkg.credits} credits</span>
+                  <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">{pkg.period}</span>
                 </div>
 
                 {/* Checklist */}
-                <div className="pt-3 border-t border-slate-100 dark:border-slate-800/80 space-y-2.5">
-                  <ul className="space-y-2.5 text-xs text-slate-700 dark:text-slate-300">
+                <div className="pt-2 space-y-3">
+                  <ul className="space-y-3 text-xs text-slate-700 dark:text-slate-300">
                     {pkg.features.map((feat, i) => (
                       <li key={i} className="flex items-center gap-2.5">
                         <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0" />
@@ -344,71 +315,13 @@ export default function PurchaseCreditView() {
               {/* Full-width Bottom Action Button */}
               <button
                 onClick={() => openCheckout(pkg)}
-                className={`w-full mt-8 py-3.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all ${pkg.btnClass}`}
+                className={`w-full mt-10 py-3.5 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 transition-all ${pkg.btnClass}`}
               >
                 <span>{pkg.btnText}</span>
               </button>
             </div>
           );
         })}
-      </div>
-
-      {/* Trust & Guarantee Section */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-slate-200 dark:border-slate-800">
-        <div className="p-6 rounded-2xl bg-white dark:bg-[#111625] border border-slate-200 dark:border-slate-800 flex items-start gap-4 shadow-sm">
-          <div className="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800/60 shrink-0">
-            <ShieldCheck className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
-          </div>
-          <div className="space-y-1">
-            <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">Stripe Escrow</h4>
-            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-              Credits remain protected until approved by campaign creators.
-            </p>
-          </div>
-        </div>
-
-        <div className="p-6 rounded-2xl bg-white dark:bg-[#111625] border border-slate-200 dark:border-slate-800 flex items-start gap-4 shadow-sm">
-          <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/60 shrink-0">
-            <Zap className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
-          </div>
-          <div className="space-y-1">
-            <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">Instant Delivery</h4>
-            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-              Credits are instantly added to your wallet balance after checkout.
-            </p>
-          </div>
-        </div>
-
-        <div className="p-6 rounded-2xl bg-white dark:bg-[#111625] border border-slate-200 dark:border-slate-800 flex items-start gap-4 shadow-sm">
-          <div className="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800/60 shrink-0">
-            <Lock className="w-6 h-6 text-amber-600 dark:text-amber-400" />
-          </div>
-          <div className="space-y-1">
-            <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">256-Bit Encryption</h4>
-            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-              Secured by official Stripe API end-to-end payment gateway.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* FAQ Section */}
-      <div className="max-w-3xl mx-auto space-y-6 pt-2">
-        <div className="text-center space-y-2">
-          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center justify-center gap-2">
-            <HelpCircle className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-            <span>Frequently Asked Questions</span>
-          </h2>
-        </div>
-
-        <div className="space-y-4">
-          {faqs.map((faq, idx) => (
-            <div key={idx} className="p-5 rounded-2xl bg-white dark:bg-[#111625] border border-slate-200 dark:border-slate-800 space-y-1.5 shadow-sm">
-              <h4 className="text-sm font-bold text-slate-900 dark:text-white">{faq.q}</h4>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{faq.a}</p>
-            </div>
-          ))}
-        </div>
       </div>
 
       {/* Stripe Payment Modal */}
@@ -528,11 +441,6 @@ export default function PurchaseCreditView() {
                   <span>{purchasing ? 'Processing Stripe Payment...' : `Pay $${selectedPkg.price}.00 & Add ${selectedPkg.credits} Credits`}</span>
                 </button>
               </div>
-
-              <p className="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-                <span>Encrypted via official Stripe Payment Gateway</span>
-              </p>
             </form>
           </div>
         </div>
