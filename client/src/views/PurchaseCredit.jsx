@@ -294,8 +294,8 @@ export default function PurchaseCreditView() {
           </div>
         </div>
 
-        {/* Pricing Cards Container - Flex Row */}
-        <div className="flex flex-col md:flex-row items-stretch justify-center md:justify-around gap-6 lg:gap-8 max-w-5xl mx-auto pt-4">
+        {/* Pricing Cards Container - Flex Row with Top Margin */}
+        <div className="flex flex-col md:flex-row items-stretch justify-center md:justify-around gap-6 lg:gap-8 max-w-5xl mx-auto mt-10 sm:mt-14 pt-6 sm:pt-8">
           {activePlans.map((plan, idx) => (
             <div
               key={idx}
