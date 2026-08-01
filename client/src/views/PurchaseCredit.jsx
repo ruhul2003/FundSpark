@@ -192,13 +192,13 @@ export default function PurchaseCreditView() {
       )}
 
       {/* Credit Packages Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-12 items-stretch py-4">
         {packages.map((pkg) => (
           <div
             key={pkg.credits}
-            className={`relative rounded-3xl p-7 flex flex-col justify-between transition-all duration-300 ${
+            className={`relative rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 my-2 ${
               pkg.isPopular
-                ? 'bg-gradient-to-b from-indigo-50/90 via-white to-white dark:from-indigo-950/40 dark:via-slate-900 dark:to-slate-900 border-2 border-indigo-600 dark:border-indigo-500 shadow-2xl shadow-indigo-600/15 scale-105 z-10'
+                ? 'bg-gradient-to-b from-indigo-50/90 via-white to-white dark:from-indigo-950/40 dark:via-slate-900 dark:to-slate-900 border-2 border-indigo-600 dark:border-indigo-500 shadow-2xl shadow-indigo-600/15 lg:-translate-y-2 z-10'
                 : 'bg-white dark:bg-slate-900/80 border border-slate-200/90 dark:border-slate-800 shadow-sm hover:border-indigo-500/40 dark:hover:border-indigo-500/40 hover:shadow-lg'
             }`}
           >
