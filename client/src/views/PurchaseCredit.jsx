@@ -7,13 +7,10 @@ import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import {
   Check,
-  HelpCircle,
-  ChevronDown,
   User,
   Briefcase,
   Rocket,
   Star,
-  Sparkles,
   CreditCard,
   X,
   Lock,
@@ -28,8 +25,7 @@ export default function PurchaseCreditView() {
   const { user, refreshUserData } = useAuth();
   const router = useRouter();
 
-  const [billingTarget, setBillingTarget] = useState('seeker');
-  const [openFaq, setOpenFaq] = useState(null);
+  const [category, setCategory] = useState('seeker'); // 'seeker' | 'recruiter'
 
   const [selectedPkg, setSelectedPkg] = useState(null);
   const [showStripeModal, setShowStripeModal] = useState(false);
@@ -43,10 +39,6 @@ export default function PurchaseCreditView() {
   const [expDate, setExpDate] = useState('12/28');
   const [cvc, setCvc] = useState('123');
 
-  const toggleFaq = (index) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
-
   const seekerPlans = [
     {
       name: 'Free',
@@ -55,7 +47,8 @@ export default function PurchaseCreditView() {
       period: '/forever',
       credits: 50,
       description: 'Essential features for getting started and organizing your initial search tracking.',
-      icon: <User className="w-4 h-4 text-slate-300" />,
+      icon: <User className="w-5 h-5 text-zinc-300" />,
+      iconBadge: 'bg-zinc-900 text-zinc-300 p-2 rounded-lg',
       features: [
         'Browse & save up to 10 jobs',
         'Apply to up to 3 jobs per month',
@@ -64,7 +57,7 @@ export default function PurchaseCreditView() {
       ],
       cta: 'Get Started Free',
       popular: false,
-      btnClass: 'bg-[#00b074] hover:bg-[#009663] text-white shadow-lg shadow-emerald-900/20'
+      btnClass: 'bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-3 rounded-xl w-full transition-all'
     },
     {
       name: 'Pro',
@@ -73,7 +66,8 @@ export default function PurchaseCreditView() {
       period: '/month',
       credits: 300,
       description: 'Our most popular option for serious active candidates looking to rapidly accelerate landing a role.',
-      icon: <Star className="w-4 h-4 text-blue-400" />,
+      icon: <Star className="w-5 h-5 text-blue-400" />,
+      iconBadge: 'bg-blue-950/50 text-blue-400 p-2 rounded-lg border border-blue-800/40',
       features: [
         'Apply to up to 30 jobs per month',
         'Unlimited saved jobs',
@@ -83,7 +77,7 @@ export default function PurchaseCreditView() {
       cta: 'Upgrade to Pro',
       popular: true,
       badgeText: 'MOST POPULAR',
-      btnClass: 'bg-[#2563eb] hover:bg-[#1d4ed8] text-white shadow-lg shadow-blue-600/30'
+      btnClass: 'bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 rounded-xl w-full shadow-lg shadow-blue-600/30 transition-all'
     },
     {
       name: 'Premium',
@@ -92,7 +86,8 @@ export default function PurchaseCreditView() {
       period: '/month',
       credits: 800,
       description: 'Uncapped potential and priority visibility tools tailored for elite competitive talent placement.',
-      icon: <Sparkles className="w-4 h-4 text-purple-400" />,
+      icon: <Star className="w-5 h-5 text-purple-400" />,
+      iconBadge: 'bg-purple-950/30 text-purple-400 p-2 rounded-lg border border-purple-800/30',
       features: [
         'Everything in Pro + Unlimited applications',
         'Profile boost directly to recruiter feeds',
@@ -101,7 +96,7 @@ export default function PurchaseCreditView() {
       ],
       cta: 'Go Premium',
       popular: false,
-      btnClass: 'bg-[#222834] hover:bg-[#2c3444] text-slate-200 border border-[#2e3748]'
+      btnClass: 'bg-zinc-800/80 hover:bg-zinc-700/80 text-white border border-zinc-700 font-medium py-3 rounded-xl w-full transition-all'
     }
   ];
 
@@ -113,7 +108,8 @@ export default function PurchaseCreditView() {
       period: '/forever',
       credits: 100,
       description: 'Ideal baseline solution matching startups launching their initial hiring infrastructure pipeline.',
-      icon: <Briefcase className="w-4 h-4 text-slate-300" />,
+      icon: <Briefcase className="w-5 h-5 text-zinc-300" />,
+      iconBadge: 'bg-zinc-900 text-zinc-300 p-2 rounded-lg',
       features: [
         'Up to 3 active job posts simultaneously',
         'Basic applicant management pipeline',
@@ -122,7 +118,7 @@ export default function PurchaseCreditView() {
       ],
       cta: 'Start Free Posting',
       popular: false,
-      btnClass: 'bg-[#00b074] hover:bg-[#009663] text-white shadow-lg shadow-emerald-900/20'
+      btnClass: 'bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-3 rounded-xl w-full transition-all'
     },
     {
       name: 'Growth',
@@ -131,7 +127,8 @@ export default function PurchaseCreditView() {
       period: '/month',
       credits: 600,
       description: 'Expanded allocation built for expanding companies with active multi-departmental team tracks.',
-      icon: <Rocket className="w-4 h-4 text-blue-400" />,
+      icon: <Rocket className="w-5 h-5 text-blue-400" />,
+      iconBadge: 'bg-blue-950/50 text-blue-400 p-2 rounded-lg border border-blue-800/40',
       features: [
         'Up to 10 active job posts simultaneously',
         'Full automated applicant tracking workflow',
@@ -141,7 +138,7 @@ export default function PurchaseCreditView() {
       cta: 'Scale Your Hiring',
       popular: true,
       badgeText: 'MOST POPULAR',
-      btnClass: 'bg-[#2563eb] hover:bg-[#1d4ed8] text-white shadow-lg shadow-blue-600/30'
+      btnClass: 'bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 rounded-xl w-full shadow-lg shadow-blue-600/30 transition-all'
     },
     {
       name: 'Enterprise',
@@ -150,39 +147,21 @@ export default function PurchaseCreditView() {
       period: '/month',
       credits: 1500,
       description: 'High performance structural operations for organizations with continuous large-scale talent acquisition.',
-      icon: <Star className="w-4 h-4 text-purple-400" />,
+      icon: <Star className="w-5 h-5 text-purple-400" />,
+      iconBadge: 'bg-purple-950/30 text-purple-400 p-2 rounded-lg border border-purple-800/30',
       features: [
         'Up to 50 active job posts simultaneously',
         'Advanced interactive analytics visual dashboard',
         'Premium featured job listing styling boosts',
         'Dedicated account manager + priority support'
       ],
-      cta: 'Contact Corporate Tier',
+      cta: 'Contact Sales',
       popular: false,
-      btnClass: 'bg-[#222834] hover:bg-[#2c3444] text-slate-200 border border-[#2e3748]'
+      btnClass: 'bg-zinc-800/80 hover:bg-zinc-700/80 text-white border border-zinc-700 font-medium py-3 rounded-xl w-full transition-all'
     }
   ];
 
-  const faqs = [
-    {
-      question: 'Can I cancel my subscription at any time?',
-      answer: 'Yes, absolutely. All our premium tiers operate on flexible, non-binding month-to-month subscription structures. You can easily modify, downgrade, or cancel your renewal configurations through your profile billing dashboard settings at any time with no penalties.'
-    },
-    {
-      question: 'How do refunds work if I change my mind?',
-      answer: 'We maintain a 14-day satisfaction policy. If you determine the premium features aren’t a proper fit for your current search or hiring sequence within your initial two weeks of service, reach out to support for a complete refund.'
-    },
-    {
-      question: 'What payment methods do you accept?',
-      answer: 'We support all major international credit/debit networks including Visa, Mastercard, American Express, and Discover. Enterprise-grade recruiters also have options to establish monthly or annual invoicing arrangements via bank wire transfers.'
-    },
-    {
-      question: 'What happens if I decide to switch plans mid-month?',
-      answer: 'If you upgrade your plan tier mid-cycle, the transition occurs immediately, and your remaining days on the old tier are applied as a pro-rated credit toward your updated invoice. Downgrades take effect starting with your subsequent billing date.'
-    }
-  ];
-
-  const activePlans = billingTarget === 'seeker' ? seekerPlans : recruiterPlans;
+  const activePlans = category === 'seeker' ? seekerPlans : recruiterPlans;
 
   const openCheckout = (plan) => {
     if (!user) {
@@ -228,25 +207,25 @@ export default function PurchaseCreditView() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-[#07090e] text-white py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
-      <div className="max-w-5xl mx-auto">
+    <div className="w-full min-h-screen bg-[#09090B] text-white py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+      <div className="max-w-6xl mx-auto">
 
-        {/* Header Title Typography */}
-        <div className="text-center max-w-3xl mx-auto mb-10">
-          <span className="text-[11px] font-bold uppercase tracking-widest text-[#3b82f6] block">
+        {/* 1. Header Section */}
+        <div className="text-center max-w-2xl mx-auto">
+          <span className="text-blue-500 font-semibold tracking-wider text-xs uppercase block">
             TRANSPARENT PRICING
           </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white mt-2 tracking-tight">
+          <h1 className="text-3xl md:text-4xl font-bold text-white mt-2 mb-4 tracking-tight">
             Flexible plans tailored to your goals
           </h1>
-          <p className="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed max-w-2xl mx-auto">
+          <p className="text-zinc-400 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
             Whether you are an ambitious job seeker hunting for your next milestone or an expanding operation tracking down pristine talent, we have got you covered.
           </p>
         </div>
 
         {/* Success Alert Banner */}
         {successMsg && (
-          <div className="max-w-3xl mx-auto mb-8 p-4 rounded-2xl bg-emerald-950/80 border border-emerald-700 text-emerald-200 text-xs sm:text-sm font-semibold flex items-center justify-between shadow-md animate-in fade-in">
+          <div className="max-w-3xl mx-auto mt-6 p-4 rounded-2xl bg-emerald-950/80 border border-emerald-800 text-emerald-200 text-xs sm:text-sm font-semibold flex items-center justify-between shadow-md">
             <div className="flex items-center gap-3">
               <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
               <span>{successMsg}</span>
@@ -257,88 +236,90 @@ export default function PurchaseCreditView() {
           </div>
         )}
 
-        {/* Switch Segment Control Toggle Grid Wrapper */}
-        <div className="flex justify-center mb-14">
-          <div className="p-1 bg-[#131722] border border-[#1e2638] rounded-2xl flex items-center gap-1 shadow-md">
-            <button
-              onClick={() => setBillingTarget('seeker')}
-              className={`flex items-center gap-2 px-5 py-2.5 text-xs font-bold rounded-xl transition-all duration-200 cursor-pointer ${
-                billingTarget === 'seeker'
-                  ? 'bg-[#1e2638] text-white shadow-md border border-[#2d384e]'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <User className="w-3.5 h-3.5" />
-              <span>For Job Seekers</span>
-            </button>
-            <button
-              onClick={() => setBillingTarget('recruiter')}
-              className={`flex items-center gap-2 px-5 py-2.5 text-xs font-bold rounded-xl transition-all duration-200 cursor-pointer ${
-                billingTarget === 'recruiter'
-                  ? 'bg-[#1e2638] text-white shadow-md border border-[#2d384e]'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <Briefcase className="w-3.5 h-3.5" />
-              <span>For Recruiters</span>
-            </button>
-          </div>
+        {/* 2. Category Toggle Switch */}
+        <div className="bg-zinc-900 border border-zinc-800 p-1 rounded-xl flex max-w-xs mx-auto my-8">
+          <button
+            onClick={() => setCategory('seeker')}
+            className={`w-1/2 rounded-lg flex items-center justify-center gap-2 px-4 py-2 text-xs font-medium transition-all ${
+              category === 'seeker'
+                ? 'bg-zinc-800 text-white shadow-sm'
+                : 'text-zinc-400 hover:text-zinc-200'
+            }`}
+          >
+            <User className="w-4 h-4" />
+            <span>For Job Seekers</span>
+          </button>
+
+          <button
+            onClick={() => setCategory('recruiter')}
+            className={`w-1/2 rounded-lg flex items-center justify-center gap-2 px-4 py-2 text-xs font-medium transition-all ${
+              category === 'recruiter'
+                ? 'bg-zinc-800 text-white shadow-sm'
+                : 'text-zinc-400 hover:text-zinc-200'
+            }`}
+          >
+            <Briefcase className="w-4 h-4" />
+            <span>For Recruiters</span>
+          </button>
         </div>
 
-        {/* 3-Tier Pricing Cards Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch mb-20">
+        {/* 3. Pricing Cards Container Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mt-6">
           {activePlans.map((plan, idx) => (
             <div
               key={idx}
-              className={`relative bg-[#131722] border rounded-3xl p-7 flex flex-col justify-between transition-all duration-300 ${
+              className={`bg-zinc-950/80 border rounded-2xl p-6 flex flex-col justify-between relative transition-all duration-300 ${
                 plan.popular
-                  ? 'border-2 border-[#2563eb] shadow-2xl shadow-blue-600/20'
-                  : 'border-[#1e2638] hover:border-[#2d384e]'
+                  ? 'border-2 border-blue-600 shadow-[0_0_25px_rgba(37,99,235,0.2)]'
+                  : 'border-zinc-800/80 hover:border-zinc-700'
               }`}
             >
-              {/* Popular Highlight Pill */}
+              {/* Featured Badge */}
               {plan.popular && (
-                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3.5 py-1 text-[10px] font-extrabold text-white bg-[#2563eb] rounded-full uppercase tracking-wider shadow-md border border-blue-400/30">
+                <span className="bg-blue-600 text-white text-[10px] font-bold tracking-wide uppercase px-3 py-1 rounded-full absolute -top-3 left-1/2 -translate-x-1/2 shadow-md">
                   {plan.badgeText || 'MOST POPULAR'}
                 </span>
               )}
 
-              {/* Plan Header */}
               <div>
-                <div className="flex items-center justify-between gap-2 mb-3">
+                {/* Top Header */}
+                <div className="flex items-center justify-between mb-3">
                   <h3 className="text-xl font-bold text-white tracking-tight">{plan.name}</h3>
-                  <div className="w-8 h-8 rounded-full bg-[#1c2230] border border-[#283248] flex items-center justify-center text-slate-300 shrink-0">
+                  <div className={plan.iconBadge}>
                     {plan.icon}
                   </div>
                 </div>
 
-                <p className="text-xs text-slate-400 leading-relaxed min-h-[40px]">
+                {/* Description */}
+                <p className="text-xs text-zinc-400 min-h-[3rem] leading-relaxed">
                   {plan.description}
                 </p>
 
                 {/* Price Indicator */}
-                <div className="my-5 flex items-baseline gap-1">
-                  <span className="text-4xl font-black text-white tracking-tight">{plan.price}</span>
-                  <span className="text-xs text-slate-400 font-medium">{plan.period}</span>
+                <div className="my-6 flex items-baseline">
+                  <span className="text-4xl font-bold text-white tracking-tight">{plan.price}</span>
+                  <span className="text-xs text-zinc-500 font-normal ml-1">{plan.period}</span>
                 </div>
 
-                {/* Features Checklist */}
-                <ul className="space-y-3 pt-2 border-t border-[#1e2638]">
+                <hr className="border-zinc-800/80 mb-6" />
+
+                {/* Feature Checklist */}
+                <ul className="space-y-3 my-6">
                   {plan.features.map((feature, fIdx) => (
-                    <li key={fIdx} className="flex items-start gap-2.5 text-xs text-slate-200">
-                      <Check className="w-4 h-4 text-[#00c885] shrink-0 mt-0.5" />
-                      <span className="leading-normal">{feature}</span>
+                    <li key={fIdx} className="flex items-center gap-2.5 text-xs text-zinc-300 font-normal">
+                      <Check className="w-4 h-4 text-emerald-500 shrink-0" />
+                      <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Plan Action CTA Callout Button */}
+              {/* CTA Button */}
               <div className="mt-8">
                 {plan.price === '$0' ? (
                   <Link
                     href="/explore"
-                    className={`block w-full text-center text-xs font-bold py-3.5 rounded-2xl transition-all cursor-pointer ${plan.btnClass}`}
+                    className={`block text-center ${plan.btnClass}`}
                   >
                     {plan.cta}
                   </Link>
@@ -346,7 +327,7 @@ export default function PurchaseCreditView() {
                   <button
                     type="button"
                     onClick={() => openCheckout(plan)}
-                    className={`w-full text-center text-xs font-bold py-3.5 rounded-2xl transition-all cursor-pointer ${plan.btnClass}`}
+                    className={plan.btnClass}
                   >
                     {plan.cta}
                   </button>
@@ -356,72 +337,27 @@ export default function PurchaseCreditView() {
           ))}
         </div>
 
-        {/* FAQ Accordion Section Layout Wrapper */}
-        <div className="max-w-3xl mx-auto border-t border-[#1e2638] pt-16">
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[#131722] border border-[#1e2638] text-slate-400 mb-3 shadow-sm">
-              <HelpCircle className="w-5 h-5" />
-            </div>
-            <h2 className="text-xl sm:text-2xl font-bold text-white">Frequently Asked Questions</h2>
-            <p className="text-xs text-slate-400 mt-1">Have concerns regarding billing pipelines? Find instant clarity below.</p>
-          </div>
-
-          <div className="space-y-3">
-            {faqs.map((faq, idx) => {
-              const isOpen = openFaq === idx;
-              return (
-                <div
-                  key={idx}
-                  className="bg-[#131722] border border-[#1e2638] rounded-2xl overflow-hidden transition-colors duration-200 shadow-sm"
-                >
-                  <button
-                    onClick={() => toggleFaq(idx)}
-                    className="w-full flex items-center justify-between text-left p-4.5 gap-4 text-slate-200 hover:text-white transition cursor-pointer"
-                  >
-                    <span className="text-sm font-semibold">{faq.question}</span>
-                    <ChevronDown
-                      className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-200 ${
-                        isOpen ? 'rotate-180 text-blue-400' : ''
-                      }`}
-                    />
-                  </button>
-
-                  <div
-                    className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                      isOpen ? 'max-h-40 border-t border-[#1e2638]' : 'max-h-0'
-                    }`}
-                  >
-                    <div className="p-4 text-xs text-slate-400 leading-relaxed bg-[#0c0f17]">
-                      {faq.answer}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
       </div>
 
       {/* Stripe Payment Modal */}
       {showStripeModal && selectedPkg && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in">
-          <div className="max-w-md w-full p-6 sm:p-7 rounded-3xl border border-slate-800 bg-[#131722] shadow-2xl space-y-5 text-white">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
+          <div className="max-w-md w-full p-6 sm:p-7 rounded-3xl border border-zinc-800 bg-zinc-950 shadow-2xl space-y-5 text-white">
             
             {/* Modal Header */}
-            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
               <div className="flex items-center gap-2.5">
                 <div className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-md">
                   <CreditCard className="w-5 h-5" />
                 </div>
                 <div>
                   <h3 className="text-base font-bold text-white">Stripe Payment Gateway</h3>
-                  <p className="text-xs text-slate-400">Checkout for {selectedPkg.name} Plan ({selectedPkg.price})</p>
+                  <p className="text-xs text-zinc-400">Checkout for {selectedPkg.name} Plan ({selectedPkg.price})</p>
                 </div>
               </div>
               <button
                 onClick={() => setShowStripeModal(false)}
-                className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800"
+                className="p-1.5 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-800"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -436,13 +372,13 @@ export default function PurchaseCreditView() {
             )}
 
             {/* Order Summary */}
-            <div className="p-4 rounded-2xl bg-[#0c0f17] border border-slate-800 flex items-center justify-between text-xs">
+            <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-between text-xs">
               <div>
-                <span className="text-slate-400 block text-[11px]">Selected Package</span>
+                <span className="text-zinc-400 block text-[11px]">Selected Package</span>
                 <span className="font-bold text-white text-sm">{selectedPkg.name} Plan</span>
               </div>
               <div className="text-right">
-                <span className="text-slate-400 block text-[11px]">Total Charge</span>
+                <span className="text-zinc-400 block text-[11px]">Total Charge</span>
                 <span className="font-black text-blue-400 text-base">{selectedPkg.price}.00 USD</span>
               </div>
             </div>
@@ -450,7 +386,7 @@ export default function PurchaseCreditView() {
             {/* Stripe Card Form */}
             <form onSubmit={handleStripePay} className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-medium text-zinc-300 mb-1">
                   Cardholder Name
                 </label>
                 <input
@@ -459,12 +395,12 @@ export default function PurchaseCreditView() {
                   value={cardHolder}
                   onChange={(e) => setCardHolder(e.target.value)}
                   placeholder="Full Name"
-                  className="w-full bg-[#0c0f17] border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                  className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-blue-500 transition-colors"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-medium text-zinc-300 mb-1">
                   Card Number (Stripe Test Card: 4242 4242 4242 4242)
                 </label>
                 <div className="relative">
@@ -474,15 +410,15 @@ export default function PurchaseCreditView() {
                     value={cardNumber}
                     onChange={(e) => setCardNumber(e.target.value)}
                     placeholder="4242 4242 4242 4242"
-                    className="w-full bg-[#0c0f17] border border-slate-800 rounded-xl pl-3.5 pr-10 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors font-mono"
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl pl-3.5 pr-10 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-blue-500 transition-colors font-mono"
                   />
-                  <Lock className="w-4 h-4 text-slate-500 absolute right-3 top-3" />
+                  <Lock className="w-4 h-4 text-zinc-500 absolute right-3 top-3" />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-slate-300 mb-1">
+                  <label className="block text-xs font-medium text-zinc-300 mb-1">
                     Expires (MM/YY)
                   </label>
                   <input
@@ -491,11 +427,11 @@ export default function PurchaseCreditView() {
                     value={expDate}
                     onChange={(e) => setExpDate(e.target.value)}
                     placeholder="12/28"
-                    className="w-full bg-[#0c0f17] border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors font-mono text-center"
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-blue-500 transition-colors font-mono text-center"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-slate-300 mb-1">
+                  <label className="block text-xs font-medium text-zinc-300 mb-1">
                     CVC / CVV
                   </label>
                   <input
@@ -505,7 +441,7 @@ export default function PurchaseCreditView() {
                     value={cvc}
                     onChange={(e) => setCvc(e.target.value)}
                     placeholder="123"
-                    className="w-full bg-[#0c0f17] border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors font-mono text-center"
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-blue-500 transition-colors font-mono text-center"
                   />
                 </div>
               </div>
@@ -521,7 +457,7 @@ export default function PurchaseCreditView() {
                 </button>
               </div>
 
-              <p className="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1">
+              <p className="text-[10px] text-zinc-400 text-center flex items-center justify-center gap-1">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Encrypted via official Stripe Payment Gateway</span>
               </p>
