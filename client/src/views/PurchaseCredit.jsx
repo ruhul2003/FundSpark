@@ -202,7 +202,7 @@ export default function PurchaseCreditView() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8 space-y-12 transition-colors duration-300">
+    <div className="max-w-5xl mx-auto py-10 px-4 sm:px-6 lg:px-8 space-y-12 transition-colors duration-300">
       
       {/* Header Section */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
