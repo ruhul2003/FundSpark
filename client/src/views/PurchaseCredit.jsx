@@ -263,14 +263,14 @@ export default function PurchaseCreditView() {
           </button>
         </div>
 
-        {/* 3. Pricing Cards Container Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mt-6">
+        {/* 3. Pricing Cards Container - Single Row with justify-around */}
+        <div className="flex flex-col md:flex-row items-stretch justify-around gap-6 lg:gap-8 max-w-5xl mx-auto my-8">
           {activePlans.map((plan, idx) => (
             <div
               key={idx}
-              className={`bg-zinc-950/80 border rounded-2xl p-6 flex flex-col justify-between relative transition-all duration-300 ${
+              className={`bg-zinc-950/90 border rounded-2xl p-6 sm:p-7 flex flex-col justify-between relative transition-all duration-300 w-full max-w-sm md:max-w-[340px] flex-1 ${
                 plan.popular
-                  ? 'border-2 border-blue-600 shadow-[0_0_25px_rgba(37,99,235,0.2)]'
+                  ? 'border-2 border-blue-600 shadow-[0_0_20px_rgba(37,99,235,0.18)]'
                   : 'border-zinc-800/80 hover:border-zinc-700'
               }`}
             >
@@ -291,20 +291,20 @@ export default function PurchaseCreditView() {
                 </div>
 
                 {/* Description */}
-                <p className="text-xs text-zinc-400 min-h-[3rem] leading-relaxed">
+                <p className="text-xs text-zinc-400 min-h-[2.75rem] leading-relaxed">
                   {plan.description}
                 </p>
 
                 {/* Price Indicator */}
-                <div className="my-6 flex items-baseline">
+                <div className="my-5 flex items-baseline">
                   <span className="text-4xl font-bold text-white tracking-tight">{plan.price}</span>
                   <span className="text-xs text-zinc-500 font-normal ml-1">{plan.period}</span>
                 </div>
 
-                <hr className="border-zinc-800/80 mb-6" />
+                <hr className="border-zinc-800/80 mb-5" />
 
                 {/* Feature Checklist */}
-                <ul className="space-y-3 my-6">
+                <ul className="space-y-3 my-5">
                   {plan.features.map((feature, fIdx) => (
                     <li key={fIdx} className="flex items-center gap-2.5 text-xs text-zinc-300 font-normal">
                       <Check className="w-4 h-4 text-emerald-500 shrink-0" />
@@ -315,7 +315,7 @@ export default function PurchaseCreditView() {
               </div>
 
               {/* CTA Button */}
-              <div className="mt-8">
+              <div className="mt-6">
                 {plan.price === '$0' ? (
                   <Link
                     href="/explore"
