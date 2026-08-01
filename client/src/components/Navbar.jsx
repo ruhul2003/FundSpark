@@ -6,7 +6,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
 import NotificationDropdown from './NotificationDropdown';
 import ThemeToggle from './ThemeToggle';
-import { Sparkles, Coins, Code, LayoutDashboard, LogOut, Menu, X, Compass } from 'lucide-react';
+import { Sparkles, Coins, Code, LayoutDashboard, LogOut, Menu, X, Compass, CreditCard } from 'lucide-react';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
