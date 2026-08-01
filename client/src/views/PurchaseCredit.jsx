@@ -368,6 +368,92 @@ export default function PurchaseCreditView() {
           ))}
         </div>
 
+        {/* 4. Trust & Security Badges */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto pt-14 border-t border-[#1e2638]">
+          <div style={{ backgroundColor: '#131722', borderColor: '#1e2638' }} className="p-6 rounded-2xl bg-[#131722] border border-[#1e2638] flex items-start gap-4 shadow-md">
+            <div className="p-3 rounded-xl bg-blue-950/60 border border-blue-800/50 shrink-0">
+              <ShieldCheck className="w-5 h-5 text-blue-400" />
+            </div>
+            <div>
+              <h4 style={{ color: '#ffffff' }} className="text-xs font-bold text-white uppercase tracking-wider">Stripe Escrow</h4>
+              <p style={{ color: '#9ca3af' }} className="text-xs text-zinc-400 mt-1 leading-relaxed">
+                Credits remain safely protected in escrow until campaign approval.
+              </p>
+            </div>
+          </div>
+
+          <div style={{ backgroundColor: '#131722', borderColor: '#1e2638' }} className="p-6 rounded-2xl bg-[#131722] border border-[#1e2638] flex items-start gap-4 shadow-md">
+            <div className="p-3 rounded-xl bg-emerald-950/60 border border-emerald-800/50 shrink-0">
+              <Zap className="w-5 h-5 text-emerald-400" />
+            </div>
+            <div>
+              <h4 style={{ color: '#ffffff' }} className="text-xs font-bold text-white uppercase tracking-wider">Instant Delivery</h4>
+              <p style={{ color: '#9ca3af' }} className="text-xs text-zinc-400 mt-1 leading-relaxed">
+                Credits are instantly added to your wallet balance after checkout.
+              </p>
+            </div>
+          </div>
+
+          <div style={{ backgroundColor: '#131722', borderColor: '#1e2638' }} className="p-6 rounded-2xl bg-[#131722] border border-[#1e2638] flex items-start gap-4 shadow-md">
+            <div className="p-3 rounded-xl bg-purple-950/60 border border-purple-800/50 shrink-0">
+              <Globe className="w-5 h-5 text-purple-400" />
+            </div>
+            <div>
+              <h4 style={{ color: '#ffffff' }} className="text-xs font-bold text-white uppercase tracking-wider">Global Backing</h4>
+              <p style={{ color: '#9ca3af' }} className="text-xs text-zinc-400 mt-1 leading-relaxed">
+                Accepted globally across 130+ currencies via Stripe Gateway.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 5. FAQ Accordion Section */}
+        <div className="max-w-3xl mx-auto border-t border-[#1e2638] pt-14 pb-8">
+          <div className="text-center mb-8">
+            <div style={{ backgroundColor: '#131722', borderColor: '#1e2638' }} className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[#131722] border border-[#1e2638] text-zinc-400 mb-3 shadow-sm">
+              <HelpCircle className="w-5 h-5" />
+            </div>
+            <h2 style={{ color: '#ffffff' }} className="text-xl sm:text-2xl font-bold text-white">Frequently Asked Questions</h2>
+            <p style={{ color: '#9ca3af' }} className="text-xs text-zinc-400 mt-1">Have concerns regarding billing pipelines? Find instant clarity below.</p>
+          </div>
+
+          <div className="space-y-3">
+            {faqs.map((faq, idx) => {
+              const isOpen = openFaq === idx;
+              return (
+                <div
+                  key={idx}
+                  style={{ backgroundColor: '#131722', borderColor: '#1e2638' }}
+                  className="bg-[#131722] border border-[#1e2638] rounded-2xl overflow-hidden transition-colors duration-200 shadow-sm"
+                >
+                  <button
+                    type="button"
+                    onClick={() => toggleFaq(idx)}
+                    className="w-full flex items-center justify-between text-left p-4.5 gap-4 text-zinc-200 hover:text-white transition cursor-pointer"
+                  >
+                    <span className="text-sm font-semibold">{faq.question}</span>
+                    <ChevronDown
+                      className={`w-4 h-4 text-zinc-400 shrink-0 transition-transform duration-200 ${
+                        isOpen ? 'rotate-180 text-blue-400' : ''
+                      }`}
+                    />
+                  </button>
+
+                  <div
+                    className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                      isOpen ? 'max-h-40 border-t border-[#1e2638]' : 'max-h-0'
+                    }`}
+                  >
+                    <div style={{ backgroundColor: '#0b0d14' }} className="p-4 sm:p-5 text-xs text-zinc-400 leading-relaxed bg-[#0b0d14]">
+                      {faq.answer}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
       </div>
 
       {/* Stripe Payment Modal */}
