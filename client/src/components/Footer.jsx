@@ -14,15 +14,15 @@ const Footer = () => {
           <div className="space-y-4 md:col-span-1">
             <Link href="/" className="flex items-center space-x-3">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-sky-400 p-0.5">
-                <div className="w-full h-full bg-white rounded-[10px] flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-indigo-600" />
+                <div className="w-full h-full bg-white dark:bg-slate-900 rounded-[10px] flex items-center justify-center">
+                  <Sparkles className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
                 </div>
               </div>
-              <span className="font-extrabold text-xl tracking-tight text-slate-900">
-                Fund<span className="text-indigo-600">Spark</span>
+              <span className="font-extrabold text-xl tracking-tight text-slate-900 dark:text-white">
+                Fund<span className="text-indigo-600 dark:text-indigo-400">Spark</span>
               </span>
             </Link>
-            <p className="text-slate-600 text-xs leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
               Empowering global innovators, creators, and supporters through transparent credit-based crowdfunding.
             </p>
             <div className="flex items-center space-x-3 pt-2">
@@ -30,7 +30,7 @@ const Footer = () => {
                 href="https://github.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 hover:text-indigo-600 hover:border-indigo-500 transition-colors"
+                className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors"
               >
                 <Github className="w-4 h-4" />
               </a>
@@ -38,7 +38,7 @@ const Footer = () => {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 hover:text-indigo-600 hover:border-indigo-500 transition-colors"
+                className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
@@ -46,7 +46,7 @@ const Footer = () => {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 hover:text-indigo-600 hover:border-indigo-500 transition-colors"
+                className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors"
               >
                 <Facebook className="w-4 h-4" />
               </a>
@@ -55,35 +55,35 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900">Platform</h4>
-            <ul className="space-y-2 text-xs text-slate-600">
-              <li><Link href="/explore" className="hover:text-indigo-600 transition-colors">Explore Campaigns</Link></li>
-              <li><Link href="/register" className="hover:text-indigo-600 transition-colors">Start a Campaign</Link></li>
-              <li><Link href="/explore?category=Technology" className="hover:text-indigo-600 transition-colors">Tech & Innovation</Link></li>
-              <li><Link href="/explore?category=Environment" className="hover:text-indigo-600 transition-colors">Eco & Environment</Link></li>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">Platform</h4>
+            <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+              <li><Link href="/explore" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Explore Campaigns</Link></li>
+              <li><Link href="/register" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Start a Campaign</Link></li>
+              <li><Link href="/explore?category=Technology" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Tech & Innovation</Link></li>
+              <li><Link href="/explore?category=Environment" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Eco & Environment</Link></li>
             </ul>
           </div>
 
           {/* User Roles */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900">Roles</h4>
-            <ul className="space-y-2 text-xs text-slate-600">
-              <li><span className="text-slate-600">Supporter (50 Bonus Credits)</span></li>
-              <li><span className="text-slate-600">Creator (20 Bonus Credits)</span></li>
-              <li><span className="text-slate-600">Admin Platform Moderation</span></li>
-              <li><span className="text-slate-600">Stripe Payment Gateway</span></li>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">Roles</h4>
+            <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+              <li><span className="text-slate-600 dark:text-slate-400">Supporter (50 Bonus Credits)</span></li>
+              <li><span className="text-slate-600 dark:text-slate-400">Creator (20 Bonus Credits)</span></li>
+              <li><span className="text-slate-600 dark:text-slate-400">Admin Platform Moderation</span></li>
+              <li><span className="text-slate-600 dark:text-slate-400">Stripe Payment Gateway</span></li>
             </ul>
           </div>
 
           {/* Security */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900">Platform Security</h4>
-            <div className="space-y-2 text-xs text-slate-600">
-              <div className="flex items-center space-x-2 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
-                <ShieldCheck className="w-4 h-4 text-emerald-600" />
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">Platform Security</h4>
+            <div className="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+              <div className="flex items-center space-x-2 bg-slate-50 dark:bg-slate-900 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
+                <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 <span>Verified Escrow & Refunds</span>
               </div>
-              <div className="flex items-center space-x-2 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+              <div className="flex items-center space-x-2 bg-slate-50 dark:bg-slate-900 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
                 <Zap className="w-4 h-4 text-amber-500" />
                 <span>Instant Credit Allocation</span>
               </div>
@@ -91,7 +91,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-slate-200 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500">
+        <div className="border-t border-slate-200 dark:border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 dark:text-slate-400">
           <p>© 2026 FundSpark Crowdfunding Platform. All rights reserved.</p>
           <div className="flex items-center space-x-1 mt-4 md:mt-0">
             <span>Crafted with</span>
