@@ -266,30 +266,32 @@ export default function PurchaseCreditView() {
         )}
 
         {/* 2. Category Toggle Switch */}
-        <div className="bg-slate-200/90 dark:bg-zinc-900 border border-slate-300 dark:border-zinc-800 p-1.5 rounded-2xl flex max-w-xs mx-auto my-10 shadow-inner">
-          <button
-            onClick={() => setCategory('seeker')}
-            className={`w-1/2 rounded-xl flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold transition-all cursor-pointer ${
-              category === 'seeker'
-                ? 'bg-white dark:bg-zinc-800 text-slate-900 dark:text-white shadow-sm border border-slate-200/80 dark:border-zinc-700/60'
-                : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white font-medium'
-            }`}
-          >
-            <User className="w-4 h-4" />
-            <span>For Job Seekers</span>
-          </button>
+        <div className="flex justify-center w-full my-12 sm:my-16">
+          <div className="bg-slate-200/90 dark:bg-zinc-900 border border-slate-300 dark:border-zinc-800 p-1.5 rounded-2xl flex items-center justify-center w-full max-w-xs mx-auto shadow-inner">
+            <button
+              onClick={() => setCategory('seeker')}
+              className={`w-1/2 rounded-xl flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold transition-all cursor-pointer ${
+                category === 'seeker'
+                  ? 'bg-white dark:bg-zinc-800 text-slate-900 dark:text-white shadow-sm border border-slate-200/80 dark:border-zinc-700/60'
+                  : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white font-medium'
+              }`}
+            >
+              <User className="w-4 h-4" />
+              <span>For Job Seekers</span>
+            </button>
 
-          <button
-            onClick={() => setCategory('recruiter')}
-            className={`w-1/2 rounded-xl flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold transition-all cursor-pointer ${
-              category === 'recruiter'
-                ? 'bg-white dark:bg-zinc-800 text-slate-900 dark:text-white shadow-sm border border-slate-200/80 dark:border-zinc-700/60'
-                : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white font-medium'
-            }`}
-          >
-            <Briefcase className="w-4 h-4" />
-            <span>For Recruiters</span>
-          </button>
+            <button
+              onClick={() => setCategory('recruiter')}
+              className={`w-1/2 rounded-xl flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold transition-all cursor-pointer ${
+                category === 'recruiter'
+                  ? 'bg-white dark:bg-zinc-800 text-slate-900 dark:text-white shadow-sm border border-slate-200/80 dark:border-zinc-700/60'
+                  : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white font-medium'
+              }`}
+            >
+              <Briefcase className="w-4 h-4" />
+              <span>For Recruiters</span>
+            </button>
+          </div>
         </div>
 
         {/* 3. Pricing Cards Container - Single Row with justify-around & centered items */}
