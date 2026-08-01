@@ -294,8 +294,8 @@ export default function PurchaseCreditView() {
           </div>
         </div>
 
-        {/* Pricing Cards Container */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto items-stretch pt-4">
+        {/* Pricing Cards Container - Flex Row */}
+        <div className="flex flex-col md:flex-row items-stretch justify-center md:justify-around gap-6 lg:gap-8 max-w-5xl mx-auto pt-4">
           {activePlans.map((plan, idx) => (
             <div
               key={idx}
@@ -303,7 +303,7 @@ export default function PurchaseCreditView() {
                 backgroundColor: '#131722',
                 borderColor: plan.popular ? '#2563eb' : '#1e2638'
               }}
-              className={`bg-[#131722] border rounded-2xl p-6 sm:p-7 flex flex-col justify-between relative transition-all ${
+              className={`bg-[#131722] border rounded-2xl p-6 sm:p-7 flex flex-col justify-between relative transition-all w-full max-w-sm md:max-w-[340px] flex-1 ${
                 plan.popular
                   ? 'border-2 border-[#2563eb] shadow-[0_0_30px_rgba(37,99,235,0.25)]'
                   : 'border-[#1e2638] hover:border-zinc-700'
