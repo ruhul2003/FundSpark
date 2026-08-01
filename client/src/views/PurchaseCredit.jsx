@@ -226,7 +226,10 @@ export default function PurchaseCreditView() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-[#07090e] dark:bg-[#07090e] text-white py-16 px-4 sm:px-6 lg:px-8 font-sans">
+    <div
+      style={{ backgroundColor: '#07090e', color: '#ffffff' }}
+      className="w-full min-h-screen bg-[#07090e] text-white py-16 px-4 sm:px-6 lg:px-8 font-sans"
+    >
       <div className="max-w-6xl mx-auto space-y-10">
 
         {/* Header Section */}
@@ -234,10 +237,10 @@ export default function PurchaseCreditView() {
           <span className="text-[#2563eb] font-semibold tracking-wider text-xs uppercase block">
             TRANSPARENT PRICING
           </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h1 style={{ color: '#ffffff' }} className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
             Flexible plans tailored to your goals
           </h1>
-          <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+          <p style={{ color: '#9ca3af' }} className="text-zinc-400 text-sm sm:text-base leading-relaxed">
             Whether you are an ambitious job seeker hunting for your next milestone or an expanding operation tracking down pristine talent, we have got you covered.
           </p>
         </div>
@@ -257,10 +260,14 @@ export default function PurchaseCreditView() {
 
         {/* Category Toggle Switch */}
         <div className="flex justify-center w-full my-6">
-          <div className="bg-[#131722] border border-[#1e2638] p-1.5 rounded-2xl flex items-center justify-center w-full max-w-xs mx-auto">
+          <div
+            style={{ backgroundColor: '#131722', borderColor: '#1e2638' }}
+            className="bg-[#131722] border border-[#1e2638] p-1.5 rounded-2xl flex items-center justify-center w-full max-w-xs mx-auto"
+          >
             <button
               type="button"
               onClick={() => setCategory('seeker')}
+              style={category === 'seeker' ? { backgroundColor: '#222834', color: '#ffffff' } : { color: '#9ca3af' }}
               className={`w-1/2 rounded-xl flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold transition-all cursor-pointer ${
                 category === 'seeker'
                   ? 'bg-[#222834] text-white shadow-sm'
@@ -274,6 +281,7 @@ export default function PurchaseCreditView() {
             <button
               type="button"
               onClick={() => setCategory('recruiter')}
+              style={category === 'recruiter' ? { backgroundColor: '#222834', color: '#ffffff' } : { color: '#9ca3af' }}
               className={`w-1/2 rounded-xl flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold transition-all cursor-pointer ${
                 category === 'recruiter'
                   ? 'bg-[#222834] text-white shadow-sm'
@@ -291,6 +299,10 @@ export default function PurchaseCreditView() {
           {activePlans.map((plan, idx) => (
             <div
               key={idx}
+              style={{
+                backgroundColor: '#131722',
+                borderColor: plan.popular ? '#2563eb' : '#1e2638'
+              }}
               className={`bg-[#131722] border rounded-2xl p-6 sm:p-7 flex flex-col justify-between relative transition-all ${
                 plan.popular
                   ? 'border-2 border-[#2563eb] shadow-[0_0_30px_rgba(37,99,235,0.25)]'
@@ -299,7 +311,10 @@ export default function PurchaseCreditView() {
             >
               {/* Featured Badge */}
               {plan.popular && (
-                <span className="bg-[#2563eb] text-white text-[10px] font-extrabold tracking-wide uppercase px-3 py-0.5 rounded-full absolute -top-3 left-1/2 -translate-x-1/2 shadow-md">
+                <span
+                  style={{ backgroundColor: '#2563eb', color: '#ffffff' }}
+                  className="bg-[#2563eb] text-white text-[10px] font-extrabold tracking-wide uppercase px-3 py-0.5 rounded-full absolute -top-3 left-1/2 -translate-x-1/2 shadow-md"
+                >
                   {plan.badgeText || 'MOST POPULAR'}
                 </span>
               )}
@@ -307,29 +322,29 @@ export default function PurchaseCreditView() {
               <div>
                 {/* Card Title & Icon */}
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xl font-bold text-white tracking-tight">{plan.name}</h3>
+                  <h3 style={{ color: '#ffffff' }} className="text-xl font-bold text-white tracking-tight">{plan.name}</h3>
                   <div className={plan.iconBadge}>
                     {plan.icon}
                   </div>
                 </div>
 
                 {/* Subtitle / Description */}
-                <p className="text-xs text-zinc-400 min-h-[2.5rem] leading-relaxed">
+                <p style={{ color: '#9ca3af' }} className="text-xs text-zinc-400 min-h-[2.5rem] leading-relaxed">
                   {plan.description}
                 </p>
 
                 {/* Price Display */}
                 <div className="my-5 flex items-baseline">
-                  <span className="text-4xl font-extrabold text-white tracking-tight">{plan.price}</span>
-                  <span className="text-xs text-zinc-500 font-normal ml-1">{plan.period}</span>
+                  <span style={{ color: '#ffffff' }} className="text-4xl font-extrabold text-white tracking-tight">{plan.price}</span>
+                  <span style={{ color: '#6b7280' }} className="text-xs text-zinc-500 font-normal ml-1">{plan.period}</span>
                 </div>
 
-                <hr className="border-[#1e2638] mb-5" />
+                <hr style={{ borderColor: '#1e2638' }} className="border-[#1e2638] mb-5" />
 
                 {/* Checklist */}
                 <ul className="space-y-3.5 my-5">
                   {plan.features.map((feature, fIdx) => (
-                    <li key={fIdx} className="flex items-center gap-2.5 text-xs text-zinc-300">
+                    <li key={fIdx} style={{ color: '#d1d5db' }} className="flex items-center gap-2.5 text-xs text-zinc-300">
                       <Check className="w-4 h-4 text-[#00c885] shrink-0" />
                       <span>{feature}</span>
                     </li>
