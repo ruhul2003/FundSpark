@@ -56,7 +56,7 @@ export default function PurchaseCreditView() {
       credits: 50,
       description: 'Essential features for getting started and organizing your initial search tracking.',
       icon: <User className="w-4 h-4 text-zinc-300" />,
-      iconBadge: 'bg-zinc-900 border border-zinc-800 p-2 rounded-xl',
+      iconBadge: 'bg-[#1c2230] text-zinc-300 p-2.5 rounded-xl border border-[#2a3346]',
       features: [
         'Browse & save up to 10 jobs',
         'Apply to up to 3 jobs per month',
@@ -65,7 +65,7 @@ export default function PurchaseCreditView() {
       ],
       cta: 'Get Started Free',
       popular: false,
-      btnClass: 'bg-[#00a86b] hover:bg-[#00915c] text-white font-medium py-3 px-4 rounded-xl w-full transition-all text-center text-sm block'
+      btnClass: 'bg-[#00b074] hover:bg-[#009b66] text-white font-semibold py-3 px-4 rounded-xl w-full text-center text-sm block transition-all shadow-md shadow-emerald-600/20 cursor-pointer'
     },
     {
       name: 'Pro',
@@ -74,8 +74,8 @@ export default function PurchaseCreditView() {
       period: '/month',
       credits: 300,
       description: 'Our most popular option for serious active candidates looking to rapidly accelerate landing a role.',
-      icon: <Star className="w-4 h-4 text-blue-400" />,
-      iconBadge: 'bg-blue-950/40 border border-blue-800/40 p-2 rounded-xl',
+      icon: <Star className="w-4 h-4 text-blue-400 fill-blue-400" />,
+      iconBadge: 'bg-[#1c2230] text-blue-400 p-2.5 rounded-xl border border-blue-800/40',
       features: [
         'Apply to up to 30 jobs per month',
         'Unlimited saved jobs',
@@ -85,7 +85,7 @@ export default function PurchaseCreditView() {
       cta: 'Upgrade to Pro',
       popular: true,
       badgeText: 'MOST POPULAR',
-      btnClass: 'bg-[#1a62ff] hover:bg-[#1552d6] text-white font-medium py-3 px-4 rounded-xl w-full shadow-lg shadow-blue-600/30 transition-all text-center text-sm block'
+      btnClass: 'bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold py-3 px-4 rounded-xl w-full text-center text-sm block shadow-lg shadow-blue-600/30 transition-all cursor-pointer'
     },
     {
       name: 'Premium',
@@ -95,7 +95,7 @@ export default function PurchaseCreditView() {
       credits: 800,
       description: 'Uncapped potential and priority visibility tools tailored for elite competitive talent placement.',
       icon: <Star className="w-4 h-4 text-purple-400" />,
-      iconBadge: 'bg-purple-950/30 border border-purple-800/30 p-2 rounded-xl',
+      iconBadge: 'bg-[#1c2230] text-purple-400 p-2.5 rounded-xl border border-purple-800/30',
       features: [
         'Everything in Pro + Unlimited applications',
         'Profile boost directly to recruiter feeds',
@@ -104,7 +104,7 @@ export default function PurchaseCreditView() {
       ],
       cta: 'Go Premium',
       popular: false,
-      btnClass: 'bg-[#212228] hover:bg-[#2b2d35] text-white border border-zinc-700/80 font-medium py-3 px-4 rounded-xl w-full transition-all text-center text-sm block'
+      btnClass: 'bg-[#222838] hover:bg-[#2c344a] text-white border border-[#2e374e] font-semibold py-3 px-4 rounded-xl w-full text-center text-sm block transition-all cursor-pointer'
     }
   ];
 
@@ -117,7 +117,7 @@ export default function PurchaseCreditView() {
       credits: 100,
       description: 'Ideal baseline solution matching startups launching their initial hiring infrastructure pipeline.',
       icon: <Briefcase className="w-4 h-4 text-zinc-300" />,
-      iconBadge: 'bg-zinc-900 border border-zinc-800 p-2 rounded-xl',
+      iconBadge: 'bg-[#1c2230] text-zinc-300 p-2.5 rounded-xl border border-[#2a3346]',
       features: [
         'Up to 3 active job posts simultaneously',
         'Basic applicant management pipeline',
@@ -126,7 +126,7 @@ export default function PurchaseCreditView() {
       ],
       cta: 'Start Free Posting',
       popular: false,
-      btnClass: 'bg-[#00a86b] hover:bg-[#00915c] text-white font-medium py-3 px-4 rounded-xl w-full transition-all text-center text-sm block'
+      btnClass: 'bg-[#00b074] hover:bg-[#009b66] text-white font-semibold py-3 px-4 rounded-xl w-full text-center text-sm block transition-all shadow-md shadow-emerald-600/20 cursor-pointer'
     },
     {
       name: 'Growth',
@@ -135,8 +135,8 @@ export default function PurchaseCreditView() {
       period: '/month',
       credits: 600,
       description: 'Expanded allocation built for expanding companies with active multi-departmental team tracks.',
-      icon: <Star className="w-4 h-4 text-blue-400" />,
-      iconBadge: 'bg-blue-950/40 border border-blue-800/40 p-2 rounded-xl',
+      icon: <Star className="w-4 h-4 text-blue-400 fill-blue-400" />,
+      iconBadge: 'bg-[#1c2230] text-blue-400 p-2.5 rounded-xl border border-blue-800/40',
       features: [
         'Up to 10 active job posts simultaneously',
         'Full automated applicant tracking workflow',
@@ -146,7 +146,7 @@ export default function PurchaseCreditView() {
       cta: 'Scale Your Hiring',
       popular: true,
       badgeText: 'MOST POPULAR',
-      btnClass: 'bg-[#1a62ff] hover:bg-[#1552d6] text-white font-medium py-3 px-4 rounded-xl w-full shadow-lg shadow-blue-600/30 transition-all text-center text-sm block'
+      btnClass: 'bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold py-3 px-4 rounded-xl w-full text-center text-sm block shadow-lg shadow-blue-600/30 transition-all cursor-pointer'
     },
     {
       name: 'Enterprise',
@@ -156,7 +156,7 @@ export default function PurchaseCreditView() {
       credits: 1500,
       description: 'High performance structural operations for organizations with continuous large-scale talent acquisition.',
       icon: <Star className="w-4 h-4 text-purple-400" />,
-      iconBadge: 'bg-purple-950/30 border border-purple-800/30 p-2 rounded-xl',
+      iconBadge: 'bg-[#1c2230] text-purple-400 p-2.5 rounded-xl border border-purple-800/30',
       features: [
         'Up to 50 active job posts simultaneously',
         'Advanced interactive analytics visual dashboard',
@@ -165,18 +165,22 @@ export default function PurchaseCreditView() {
       ],
       cta: 'Contact Sales',
       popular: false,
-      btnClass: 'bg-[#212228] hover:bg-[#2b2d35] text-white border border-zinc-700/80 font-medium py-3 px-4 rounded-xl w-full transition-all text-center text-sm block'
+      btnClass: 'bg-[#222838] hover:bg-[#2c344a] text-white border border-[#2e374e] font-semibold py-3 px-4 rounded-xl w-full text-center text-sm block transition-all cursor-pointer'
     }
   ];
 
   const faqs = [
     {
       question: 'Can I cancel my subscription at any time?',
-      answer: 'Yes, absolutely. All our premium tiers operate on flexible, non-binding month-to-month subscription structures. You can easily modify or cancel anytime.'
+      answer: 'Yes, absolutely. All our premium tiers operate on flexible, non-binding month-to-month subscription structures. You can easily modify, downgrade, or cancel your renewal configurations through your profile billing dashboard settings at any time with no penalties.'
     },
     {
       question: 'How do refunds work if I change my mind?',
-      answer: 'We maintain a 14-day satisfaction policy. Reach out to support within your initial two weeks for a full refund if you determine it is not a fit.'
+      answer: 'We maintain a 14-day satisfaction policy. If you determine the premium features aren’t a proper fit for your current search or hiring sequence within your initial two weeks of service, reach out to support for a complete refund.'
+    },
+    {
+      question: 'What payment methods do you accept?',
+      answer: 'We support all major international credit/debit networks including Visa, Mastercard, American Express, and Discover. Enterprise-grade recruiters also have options to establish monthly or annual invoicing arrangements via bank wire transfers.'
     }
   ];
 
@@ -227,20 +231,20 @@ export default function PurchaseCreditView() {
 
   return (
     <div
-      style={{ backgroundColor: '#07090e', color: '#ffffff' }}
-      className="w-full min-h-screen bg-[#07090e] text-white py-16 px-4 sm:px-6 lg:px-8 font-sans"
+      style={{ backgroundColor: '#090a0f', color: '#ffffff' }}
+      className="w-full min-h-screen bg-[#090a0f] text-white pt-16 pb-20 px-4 sm:px-6 lg:px-8 font-sans"
     >
-      <div className="max-w-6xl mx-auto space-y-10">
+      <div className="max-w-6xl mx-auto space-y-12">
 
-        {/* Header Section */}
+        {/* 1. Header Section */}
         <div className="text-center max-w-2xl mx-auto space-y-3">
-          <span className="text-[#2563eb] font-semibold tracking-wider text-xs uppercase block">
+          <span className="text-[#2563eb] font-bold tracking-widest text-[11px] uppercase block mb-1">
             TRANSPARENT PRICING
           </span>
           <h1 style={{ color: '#ffffff' }} className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
             Flexible plans tailored to your goals
           </h1>
-          <p style={{ color: '#9ca3af' }} className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+          <p style={{ color: '#9ca3af' }} className="text-[#9ca3af] text-sm sm:text-base leading-relaxed">
             Whether you are an ambitious job seeker hunting for your next milestone or an expanding operation tracking down pristine talent, we have got you covered.
           </p>
         </div>
@@ -258,20 +262,20 @@ export default function PurchaseCreditView() {
           </div>
         )}
 
-        {/* Category Toggle Switch */}
-        <div className="flex justify-center w-full my-6">
+        {/* 2. Category Toggle Switch */}
+        <div className="flex justify-center w-full my-8">
           <div
-            style={{ backgroundColor: '#131722', borderColor: '#1e2638' }}
-            className="bg-[#131722] border border-[#1e2638] p-1.5 rounded-2xl flex items-center justify-center w-full max-w-xs mx-auto"
+            style={{ backgroundColor: '#131620', borderColor: '#1e2536' }}
+            className="bg-[#131620] border border-[#1e2536] p-1.5 rounded-2xl flex items-center justify-center w-full max-w-xs mx-auto shadow-inner"
           >
             <button
               type="button"
               onClick={() => setCategory('seeker')}
-              style={category === 'seeker' ? { backgroundColor: '#222834', color: '#ffffff' } : { color: '#9ca3af' }}
-              className={`w-1/2 rounded-xl flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold transition-all cursor-pointer ${
+              style={category === 'seeker' ? { backgroundColor: '#222838', color: '#ffffff' } : { color: '#9ca3af' }}
+              className={`w-1/2 rounded-xl flex items-center justify-center gap-2 px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer ${
                 category === 'seeker'
-                  ? 'bg-[#222834] text-white shadow-sm'
-                  : 'text-zinc-400 hover:text-zinc-200'
+                  ? 'bg-[#222838] text-white shadow-sm'
+                  : 'text-[#9ca3af] hover:text-white'
               }`}
             >
               <User className="w-3.5 h-3.5" />
@@ -281,11 +285,11 @@ export default function PurchaseCreditView() {
             <button
               type="button"
               onClick={() => setCategory('recruiter')}
-              style={category === 'recruiter' ? { backgroundColor: '#222834', color: '#ffffff' } : { color: '#9ca3af' }}
-              className={`w-1/2 rounded-xl flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold transition-all cursor-pointer ${
+              style={category === 'recruiter' ? { backgroundColor: '#222838', color: '#ffffff' } : { color: '#9ca3af' }}
+              className={`w-1/2 rounded-xl flex items-center justify-center gap-2 px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer ${
                 category === 'recruiter'
-                  ? 'bg-[#222834] text-white shadow-sm'
-                  : 'text-zinc-400 hover:text-zinc-200'
+                  ? 'bg-[#222838] text-white shadow-sm'
+                  : 'text-[#9ca3af] hover:text-white'
               }`}
             >
               <Briefcase className="w-3.5 h-3.5" />
@@ -294,33 +298,33 @@ export default function PurchaseCreditView() {
           </div>
         </div>
 
-        {/* Pricing Cards Container - Flex Row with Top Margin */}
-        <div className="flex flex-col md:flex-row items-stretch justify-center md:justify-around gap-6 lg:gap-8 max-w-5xl mx-auto mt-10 sm:mt-14 pt-6 sm:pt-8">
+        {/* 3. 3-Card Grid Container - Side-by-side Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto items-stretch mt-8 mb-12">
           {activePlans.map((plan, idx) => (
             <div
               key={idx}
               style={{
-                backgroundColor: '#131722',
-                borderColor: plan.popular ? '#2563eb' : '#1e2638'
+                backgroundColor: '#131620',
+                borderColor: plan.popular ? '#2563eb' : '#1e2536'
               }}
-              className={`bg-[#131722] border rounded-2xl p-6 sm:p-7 flex flex-col justify-between relative transition-all w-full max-w-sm md:max-w-[340px] flex-1 ${
+              className={`bg-[#131620] border rounded-2xl p-6 sm:p-7 flex flex-col justify-between relative transition-all ${
                 plan.popular
                   ? 'border-2 border-[#2563eb] shadow-[0_0_30px_rgba(37,99,235,0.25)]'
-                  : 'border-[#1e2638] hover:border-zinc-700'
+                  : 'border-[#1e2536] hover:border-zinc-700'
               }`}
             >
               {/* Featured Badge */}
               {plan.popular && (
                 <span
                   style={{ backgroundColor: '#2563eb', color: '#ffffff' }}
-                  className="bg-[#2563eb] text-white text-[10px] font-extrabold tracking-wide uppercase px-3 py-0.5 rounded-full absolute -top-3 left-1/2 -translate-x-1/2 shadow-md"
+                  className="bg-[#2563eb] text-white text-[10px] font-extrabold tracking-wide uppercase px-3.5 py-1 rounded-full absolute -top-3.5 left-1/2 -translate-x-1/2 shadow-md"
                 >
                   {plan.badgeText || 'MOST POPULAR'}
                 </span>
               )}
 
               <div>
-                {/* Card Title & Icon */}
+                {/* Top Header */}
                 <div className="flex items-center justify-between mb-3">
                   <h3 style={{ color: '#ffffff' }} className="text-xl font-bold text-white tracking-tight">{plan.name}</h3>
                   <div className={plan.iconBadge}>
@@ -329,22 +333,22 @@ export default function PurchaseCreditView() {
                 </div>
 
                 {/* Subtitle / Description */}
-                <p style={{ color: '#9ca3af' }} className="text-xs text-zinc-400 min-h-[2.5rem] leading-relaxed">
+                <p style={{ color: '#9ca3af' }} className="text-xs text-[#9ca3af] min-h-[2.5rem] leading-relaxed">
                   {plan.description}
                 </p>
 
                 {/* Price Display */}
                 <div className="my-5 flex items-baseline">
                   <span style={{ color: '#ffffff' }} className="text-4xl font-extrabold text-white tracking-tight">{plan.price}</span>
-                  <span style={{ color: '#6b7280' }} className="text-xs text-zinc-500 font-normal ml-1">{plan.period}</span>
+                  <span style={{ color: '#6b7280' }} className="text-xs text-[#6b7280] font-normal ml-1">{plan.period}</span>
                 </div>
 
-                <hr style={{ borderColor: '#1e2638' }} className="border-[#1e2638] mb-5" />
+                <hr style={{ borderColor: '#1e2536' }} className="border-[#1e2536] mb-5" />
 
-                {/* Checklist */}
+                {/* Feature Checklist */}
                 <ul className="space-y-3.5 my-5">
                   {plan.features.map((feature, fIdx) => (
-                    <li key={fIdx} style={{ color: '#d1d5db' }} className="flex items-center gap-2.5 text-xs text-zinc-300">
+                    <li key={fIdx} style={{ color: '#d1d5db' }} className="flex items-center gap-2.5 text-xs text-[#d1d5db]">
                       <Check className="w-4 h-4 text-[#00c885] shrink-0" />
                       <span>{feature}</span>
                     </li>
@@ -368,10 +372,10 @@ export default function PurchaseCreditView() {
           ))}
         </div>
 
-        {/* 4. Trust & Security Badges */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto pt-14 border-t border-[#1e2638]">
-          <div style={{ backgroundColor: '#131722', borderColor: '#1e2638' }} className="p-6 rounded-2xl bg-[#131722] border border-[#1e2638] flex items-start gap-4 shadow-md">
-            <div className="p-3 rounded-xl bg-blue-950/60 border border-blue-800/50 shrink-0">
+        {/* 4. Trust Badges */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto pt-12 border-t border-[#1e2536]">
+          <div style={{ backgroundColor: '#131620', borderColor: '#1e2536' }} className="p-5.5 rounded-2xl bg-[#131620] border border-[#1e2536] flex items-start gap-4 shadow-md">
+            <div className="p-2.5 rounded-xl bg-blue-950/60 border border-blue-800/50 shrink-0">
               <ShieldCheck className="w-5 h-5 text-blue-400" />
             </div>
             <div>
@@ -382,8 +386,8 @@ export default function PurchaseCreditView() {
             </div>
           </div>
 
-          <div style={{ backgroundColor: '#131722', borderColor: '#1e2638' }} className="p-6 rounded-2xl bg-[#131722] border border-[#1e2638] flex items-start gap-4 shadow-md">
-            <div className="p-3 rounded-xl bg-emerald-950/60 border border-emerald-800/50 shrink-0">
+          <div style={{ backgroundColor: '#131620', borderColor: '#1e2536' }} className="p-5.5 rounded-2xl bg-[#131620] border border-[#1e2536] flex items-start gap-4 shadow-md">
+            <div className="p-2.5 rounded-xl bg-emerald-950/60 border border-emerald-800/50 shrink-0">
               <Zap className="w-5 h-5 text-emerald-400" />
             </div>
             <div>
@@ -394,8 +398,8 @@ export default function PurchaseCreditView() {
             </div>
           </div>
 
-          <div style={{ backgroundColor: '#131722', borderColor: '#1e2638' }} className="p-6 rounded-2xl bg-[#131722] border border-[#1e2638] flex items-start gap-4 shadow-md">
-            <div className="p-3 rounded-xl bg-purple-950/60 border border-purple-800/50 shrink-0">
+          <div style={{ backgroundColor: '#131620', borderColor: '#1e2536' }} className="p-5.5 rounded-2xl bg-[#131620] border border-[#1e2536] flex items-start gap-4 shadow-md">
+            <div className="p-2.5 rounded-xl bg-purple-950/60 border border-purple-800/50 shrink-0">
               <Globe className="w-5 h-5 text-purple-400" />
             </div>
             <div>
@@ -407,10 +411,10 @@ export default function PurchaseCreditView() {
           </div>
         </div>
 
-        {/* 5. FAQ Accordion Section */}
-        <div className="max-w-3xl mx-auto border-t border-[#1e2638] pt-14 pb-8">
+        {/* 5. FAQ Section */}
+        <div className="max-w-3xl mx-auto border-t border-[#1e2536] pt-12">
           <div className="text-center mb-8">
-            <div style={{ backgroundColor: '#131722', borderColor: '#1e2638' }} className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[#131722] border border-[#1e2638] text-zinc-400 mb-3 shadow-sm">
+            <div style={{ backgroundColor: '#131620', borderColor: '#1e2536' }} className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[#131620] border border-[#1e2536] text-zinc-400 mb-3 shadow-sm">
               <HelpCircle className="w-5 h-5" />
             </div>
             <h2 style={{ color: '#ffffff' }} className="text-xl sm:text-2xl font-bold text-white">Frequently Asked Questions</h2>
@@ -423,8 +427,8 @@ export default function PurchaseCreditView() {
               return (
                 <div
                   key={idx}
-                  style={{ backgroundColor: '#131722', borderColor: '#1e2638' }}
-                  className="bg-[#131722] border border-[#1e2638] rounded-2xl overflow-hidden transition-colors duration-200 shadow-sm"
+                  style={{ backgroundColor: '#131620', borderColor: '#1e2536' }}
+                  className="bg-[#131620] border border-[#1e2536] rounded-2xl overflow-hidden transition-colors duration-200 shadow-sm"
                 >
                   <button
                     type="button"
@@ -441,7 +445,7 @@ export default function PurchaseCreditView() {
 
                   <div
                     className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                      isOpen ? 'max-h-40 border-t border-[#1e2638]' : 'max-h-0'
+                      isOpen ? 'max-h-40 border-t border-[#1e2536]' : 'max-h-0'
                     }`}
                   >
                     <div style={{ backgroundColor: '#0b0d14' }} className="p-4 sm:p-5 text-xs text-zinc-400 leading-relaxed bg-[#0b0d14]">
