@@ -222,10 +222,10 @@ export default function PurchaseCreditView() {
 
   return (
     <div className="w-full min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-5xl mx-auto">
 
         {/* Header Title Typography */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
+        <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-500">
             Transparent Pricing
           </span>
@@ -239,7 +239,7 @@ export default function PurchaseCreditView() {
 
         {/* Success Alert Banner */}
         {successMsg && (
-          <div className="max-w-3xl mx-auto mb-8 p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200 text-xs sm:text-sm font-semibold flex items-center justify-between shadow-md animate-in fade-in">
+          <div className="max-w-2xl mx-auto mb-8 p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200 text-xs sm:text-sm font-semibold flex items-center justify-between shadow-md animate-in fade-in">
             <div className="flex items-center gap-3">
               <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
               <span>{successMsg}</span>
@@ -251,7 +251,7 @@ export default function PurchaseCreditView() {
         )}
 
         {/* Switch Segment Control Toggle Grid Wrapper */}
-        <div className="flex justify-center mb-16">
+        <div className="flex justify-center mb-14">
           <div className="p-1.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl flex items-center gap-1 shadow-md">
             <button
               onClick={() => setBillingTarget('seeker')}
@@ -279,11 +279,11 @@ export default function PurchaseCreditView() {
         </div>
 
         {/* 3-Tier Pricing Cards Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-start mb-24 max-w-4xl lg:max-w-5xl mx-auto">
           {activePlans.map((plan, idx) => (
             <div
               key={idx}
-              className={`relative bg-white dark:bg-zinc-900 border rounded-2xl p-6 shadow-xl shadow-slate-200/80 dark:shadow-2xl dark:shadow-black/80 flex flex-col justify-between min-h-[480px] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-blue-500/15 ${
+              className={`relative bg-white dark:bg-zinc-900 border rounded-2xl p-6 shadow-xl shadow-slate-200/80 dark:shadow-2xl dark:shadow-black/80 flex flex-col justify-between min-h-[480px] w-full max-w-sm mx-auto md:max-w-none transition-all duration-300 hover:-translate-y-1.5 hover:shadow-blue-500/15 ${
                 plan.popular
                   ? 'border-blue-500 ring-2 ring-blue-500/20'
                   : 'border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700'
