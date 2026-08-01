@@ -58,7 +58,6 @@ const Footer = () => {
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">Platform</h4>
             <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-400">
               <li><Link href="/explore" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Explore Campaigns</Link></li>
-              <li><Link href="/pricing" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Pricing & Credit Packages</Link></li>
               <li><Link href="/register" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Start a Campaign</Link></li>
               <li><Link href="/explore?category=Technology" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Tech & Innovation</Link></li>
             </ul>

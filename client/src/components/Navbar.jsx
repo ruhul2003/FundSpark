@@ -63,16 +63,6 @@ const Navbar = () => {
               <span>Explore Campaigns</span>
             </Link>
 
-            <Link
-              href="/pricing"
-              className={`flex items-center space-x-2 text-sm font-medium transition-colors ${
-                pathname === '/pricing' ? 'text-indigo-600 dark:text-indigo-400 font-semibold' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
-              }`}
-            >
-              <CreditCard className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
-              <span>Pricing</span>
-            </Link>
-
             {/* Join as Developer button redirects to client repository */}
             <a
               href="https://github.com"
@@ -165,15 +155,6 @@ const Navbar = () => {
           >
             <Compass className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
             <span>Explore Campaigns</span>
-          </Link>
-
-          <Link
-            href="/pricing"
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center space-x-2 py-2 text-slate-700 dark:text-slate-200 text-sm font-medium"
-          >
-            <CreditCard className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
-            <span>Pricing / Purchase Credit</span>
           </Link>
 
           <a
