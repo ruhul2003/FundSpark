@@ -226,12 +226,12 @@ export default function PurchaseCreditView() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-[#070709] text-zinc-100 py-16 px-4 sm:px-6 lg:px-8 font-sans">
+    <div className="w-full min-h-screen bg-[#07090e] dark:bg-[#07090e] text-white py-16 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-6xl mx-auto space-y-10">
 
         {/* Header Section */}
         <div className="text-center max-w-2xl mx-auto space-y-3">
-          <span className="text-[#1a62ff] font-semibold tracking-wider text-[11px] uppercase block">
+          <span className="text-[#2563eb] font-semibold tracking-wider text-xs uppercase block">
             TRANSPARENT PRICING
           </span>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
@@ -257,13 +257,13 @@ export default function PurchaseCreditView() {
 
         {/* Category Toggle Switch */}
         <div className="flex justify-center w-full my-6">
-          <div className="bg-[#121318] border border-zinc-800/90 p-1.5 rounded-2xl flex items-center justify-center w-full max-w-xs mx-auto">
+          <div className="bg-[#131722] border border-[#1e2638] p-1.5 rounded-2xl flex items-center justify-center w-full max-w-xs mx-auto">
             <button
               type="button"
               onClick={() => setCategory('seeker')}
               className={`w-1/2 rounded-xl flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold transition-all cursor-pointer ${
                 category === 'seeker'
-                  ? 'bg-[#22232a] text-white shadow-sm'
+                  ? 'bg-[#222834] text-white shadow-sm'
                   : 'text-zinc-400 hover:text-zinc-200'
               }`}
             >
@@ -276,7 +276,7 @@ export default function PurchaseCreditView() {
               onClick={() => setCategory('recruiter')}
               className={`w-1/2 rounded-xl flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold transition-all cursor-pointer ${
                 category === 'recruiter'
-                  ? 'bg-[#22232a] text-white shadow-sm'
+                  ? 'bg-[#222834] text-white shadow-sm'
                   : 'text-zinc-400 hover:text-zinc-200'
               }`}
             >
@@ -291,15 +291,15 @@ export default function PurchaseCreditView() {
           {activePlans.map((plan, idx) => (
             <div
               key={idx}
-              className={`bg-[#0d0e12] border rounded-2xl p-6 sm:p-7 flex flex-col justify-between relative transition-all ${
+              className={`bg-[#131722] border rounded-2xl p-6 sm:p-7 flex flex-col justify-between relative transition-all ${
                 plan.popular
-                  ? 'border-[#1a62ff] shadow-[0_0_35px_rgba(26,98,255,0.2)] ring-1 ring-[#1a62ff]'
-                  : 'border-zinc-800/80 hover:border-zinc-700'
+                  ? 'border-2 border-[#2563eb] shadow-[0_0_30px_rgba(37,99,235,0.25)]'
+                  : 'border-[#1e2638] hover:border-zinc-700'
               }`}
             >
               {/* Featured Badge */}
               {plan.popular && (
-                <span className="bg-[#1a62ff] text-white text-[10px] font-extrabold tracking-wide uppercase px-3 py-0.5 rounded-full absolute -top-3 left-1/2 -translate-x-1/2 shadow-md">
+                <span className="bg-[#2563eb] text-white text-[10px] font-extrabold tracking-wide uppercase px-3 py-0.5 rounded-full absolute -top-3 left-1/2 -translate-x-1/2 shadow-md">
                   {plan.badgeText || 'MOST POPULAR'}
                 </span>
               )}
@@ -324,13 +324,13 @@ export default function PurchaseCreditView() {
                   <span className="text-xs text-zinc-500 font-normal ml-1">{plan.period}</span>
                 </div>
 
-                <hr className="border-zinc-800/60 mb-5" />
+                <hr className="border-[#1e2638] mb-5" />
 
                 {/* Checklist */}
                 <ul className="space-y-3.5 my-5">
                   {plan.features.map((feature, fIdx) => (
                     <li key={fIdx} className="flex items-center gap-2.5 text-xs text-zinc-300">
-                      <Check className="w-4 h-4 text-[#00a86b] shrink-0" />
+                      <Check className="w-4 h-4 text-[#00c885] shrink-0" />
                       <span>{feature}</span>
                     </li>
                   ))}
