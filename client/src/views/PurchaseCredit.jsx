@@ -1,14 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import {
   Check,
   User,
-  Briefcase,
   Star,
   Sparkles,
   Crown,
@@ -24,13 +22,109 @@ import {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
+const allPackages = [
+  {
+    name: 'Starter',
+    id: 'starter_100',
+    price: '$10',
+    period: '/100 credits',
+    credits: 100,
+    description: 'Essential features for getting started and backing your initial search tracking.',
+    icon: <User className="w-4 h-4 text-slate-300" />,
+    features: [
+      '100 Platform Credits',
+      'Browse & back active campaigns',
+      'Basic supporter profile page',
+      'Protected Stripe escrow guarantee'
+    ],
+    cta: 'Get Starter Pack',
+    popular: false,
+    btnClass: 'bg-[#00b074] hover:bg-[#009663] text-white shadow-lg shadow-emerald-900/20'
+  },
+  {
+    name: 'Pro',
+    id: 'pro_300',
+    price: '$25',
+    period: '/300 credits',
+    credits: 300,
+    description: 'Our most popular option for serious active supporters looking to rapidly back projects.',
+    icon: <Star className="w-4 h-4 text-blue-400" />,
+    features: [
+      '300 Platform Credits',
+      'Save 16% per platform credit',
+      'Advanced application tracking dashboard',
+      'Priority campaign backing status',
+      'Protected Stripe escrow guarantee'
+    ],
+    cta: 'Upgrade to Pro',
+    popular: true,
+    badgeText: 'MOST POPULAR',
+    btnClass: 'bg-[#2563eb] hover:bg-[#1d4ed8] text-white shadow-lg shadow-blue-600/30'
+  },
+  {
+    name: 'Premium',
+    id: 'premium_800',
+    price: '$60',
+    period: '/800 credits',
+    credits: 800,
+    description: 'Uncapped potential and priority visibility tools tailored for elite competitive supporters.',
+    icon: <Sparkles className="w-4 h-4 text-purple-400" />,
+    features: [
+      '800 Platform Credits',
+      'Save 25% per platform credit',
+      'Early access to freshly published projects',
+      '24/7 Priority customer support queue',
+      'Protected Stripe escrow guarantee'
+    ],
+    cta: 'Go Premium',
+    popular: false,
+    btnClass: 'bg-[#222834] hover:bg-[#2c3444] text-slate-200 border border-[#2e3748]'
+  },
+  {
+    name: 'Ultimate',
+    id: 'ultimate_1500',
+    price: '$110',
+    period: '/1500 credits',
+    credits: 1500,
+    description: 'Maximum impact package with maximum credit savings for top visionary backers.',
+    icon: <Crown className="w-4 h-4 text-amber-400" />,
+    features: [
+      '1500 Platform Credits',
+      'Save 27% per platform credit',
+      'Top-tier VIP backer badge',
+      'Direct creator messaging tools',
+      'Protected Stripe escrow guarantee'
+    ],
+    cta: 'Get Ultimate Pack',
+    popular: false,
+    btnClass: 'bg-[#222834] hover:bg-[#2c3444] text-slate-200 border border-[#2e3748]'
+  }
+];
+
+const faqs = [
+  {
+    question: 'Can I cancel or use my credits at any time?',
+    answer: 'Yes, absolutely. Platform credits never expire. You can manage your credit balance and back active campaigns directly through your dashboard at any time.'
+  },
+  {
+    question: 'How does Stripe payment escrow work?',
+    answer: 'When you pledge credits to a campaign, your credits remain safely held in escrow until the creator approves your pledge contribution.'
+  },
+  {
+    question: 'What payment methods do you accept?',
+    answer: 'We support all major international credit/debit networks including Visa, Mastercard, American Express, and Discover via 256-bit encrypted Stripe Payment Gateway.'
+  },
+  {
+    question: 'How quickly are credits added to my account?',
+    answer: 'Purchased credits are immediately credited to your account wallet balance as soon as the Stripe transaction succeeds.'
+  }
+];
+
 export default function PurchaseCreditView() {
   const { user, refreshUserData } = useAuth();
   const router = useRouter();
 
-  const [billingTarget, setBillingTarget] = useState('seeker');
   const [openFaq, setOpenFaq] = useState(null);
-
   const [selectedPkg, setSelectedPkg] = useState(null);
   const [showStripeModal, setShowStripeModal] = useState(false);
   const [purchasing, setPurchasing] = useState(false);
@@ -46,143 +140,6 @@ export default function PurchaseCreditView() {
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index);
   };
-
-  const supporterPlans = [
-    {
-      name: 'Free',
-      id: 'supporter_free',
-      price: '$10',
-      period: '/100 credits',
-      credits: 100,
-      description: 'Essential features for getting started and organizing your initial search tracking.',
-      icon: <User className="w-4 h-4 text-slate-300" />,
-      features: [
-        '100 Platform Credits',
-        'Browse & back active campaigns',
-        'Basic supporter profile page',
-        'Protected Stripe escrow guarantee'
-      ],
-      cta: 'Get Started Free',
-      popular: false,
-      btnClass: 'bg-[#00b074] hover:bg-[#009663] text-white shadow-lg shadow-emerald-900/20'
-    },
-    {
-      name: 'Pro',
-      id: 'supporter_pro',
-      price: '$25',
-      period: '/300 credits',
-      credits: 300,
-      description: 'Our most popular option for serious active candidates looking to rapidly accelerate landing a role.',
-      icon: <Star className="w-4 h-4 text-blue-400" />,
-      features: [
-        '300 Platform Credits',
-        'Save 16% per platform credit',
-        'Advanced application tracking dashboard',
-        'Priority campaign backing status'
-      ],
-      cta: 'Upgrade to Pro',
-      popular: true,
-      badgeText: 'MOST POPULAR',
-      btnClass: 'bg-[#2563eb] hover:bg-[#1d4ed8] text-white shadow-lg shadow-blue-600/30'
-    },
-    {
-      name: 'Premium',
-      id: 'supporter_premium',
-      price: '$60',
-      period: '/800 credits',
-      credits: 800,
-      description: 'Uncapped potential and priority visibility tools tailored for elite competitive talent placement.',
-      icon: <Sparkles className="w-4 h-4 text-purple-400" />,
-      features: [
-        '800 Platform Credits',
-        'Save 25% per platform credit',
-        'Early access to freshly published projects',
-        '24/7 Priority customer support queue'
-      ],
-      cta: 'Go Premium',
-      popular: false,
-      btnClass: 'bg-[#222834] hover:bg-[#2c3444] text-slate-200 border border-[#2e3748]'
-    }
-  ];
-
-  const creatorPlans = [
-    {
-      name: 'Free',
-      id: 'creator_free',
-      price: '$20',
-      period: '/200 credits',
-      credits: 200,
-      description: 'Ideal baseline solution matching startups launching their initial hiring infrastructure pipeline.',
-      icon: <Briefcase className="w-4 h-4 text-slate-300" />,
-      features: [
-        '200 Creator Credits',
-        'Basic applicant management pipeline',
-        'Standard organic listing search visibility',
-        'Verified creator badge'
-      ],
-      cta: 'Start Free Posting',
-      popular: false,
-      btnClass: 'bg-[#00b074] hover:bg-[#009663] text-white shadow-lg shadow-emerald-900/20'
-    },
-    {
-      name: 'Growth',
-      id: 'creator_growth',
-      price: '$50',
-      period: '/600 credits',
-      credits: 600,
-      description: 'Expanded allocation built for expanding companies with active multi-departmental team tracks.',
-      icon: <Star className="w-4 h-4 text-blue-400" />,
-      features: [
-        '600 Creator Credits',
-        'Featured placement on Explore page',
-        'Basic listing performance metrics & analytics',
-        'Save 17% per creator credit'
-      ],
-      cta: 'Scale Your Hiring',
-      popular: true,
-      badgeText: 'MOST POPULAR',
-      btnClass: 'bg-[#2563eb] hover:bg-[#1d4ed8] text-white shadow-lg shadow-blue-600/30'
-    },
-    {
-      name: 'Enterprise',
-      id: 'creator_enterprise',
-      price: '$110',
-      period: '/1500 credits',
-      credits: 1500,
-      description: 'High performance structural operations for organizations with continuous large-scale talent acquisition.',
-      icon: <Crown className="w-4 h-4 text-purple-400" />,
-      features: [
-        '1500 Creator Credits',
-        'Top-banner placement on Home page',
-        'Save 27% per creator credit',
-        '24/7 Priority customer support queue'
-      ],
-      cta: 'Contact Corporate Tier',
-      popular: false,
-      btnClass: 'bg-[#222834] hover:bg-[#2c3444] text-slate-200 border border-[#2e3748]'
-    }
-  ];
-
-  const faqs = [
-    {
-      question: 'Can I cancel my subscription at any time?',
-      answer: 'Yes, absolutely. All our premium tiers operate on flexible, non-binding month-to-month subscription structures. You can easily modify or cancel your renewal configurations through your billing dashboard settings at any time.'
-    },
-    {
-      question: 'How do refunds work if I change my mind?',
-      answer: 'We maintain a 14-day satisfaction policy. When you pledge credits to a campaign, your credits remain safely held in escrow until creator approval.'
-    },
-    {
-      question: 'What payment methods do you accept?',
-      answer: 'We support all major international credit/debit networks including Visa, Mastercard, American Express, and Discover via 256-bit encrypted Stripe Payment Gateway.'
-    },
-    {
-      question: 'What happens if I decide to switch plans mid-month?',
-      answer: 'Purchased credits are immediately added to your wallet balance upon transaction approval, allowing seamless upgrades without downtime.'
-    }
-  ];
-
-  const activePlans = billingTarget === 'seeker' ? supporterPlans : creatorPlans;
 
   const openCheckout = (plan) => {
     if (!user) {
@@ -227,10 +184,10 @@ export default function PurchaseCreditView() {
 
   return (
     <div className="w-full min-h-screen bg-[#07090e] dark:bg-[#07090e] text-white py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-7xl mx-auto">
 
         {/* Header Title Typography */}
-        <div className="text-center max-w-3xl mx-auto mb-10">
+        <div className="text-center max-w-3xl mx-auto mb-14">
           <span className="text-[11px] font-bold uppercase tracking-widest text-[#3b82f6] block">
             TRANSPARENT PRICING
           </span>
@@ -238,7 +195,7 @@ export default function PurchaseCreditView() {
             Flexible plans tailored to your goals
           </h1>
           <p className="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed max-w-2xl mx-auto">
-            Whether you are an ambitious job seeker hunting for your next milestone or an expanding operation tracking down pristine talent, we have got you covered.
+            Whether you are an ambitious supporter backing groundbreaking campaigns or an expanding operation tracking down pristine talent, we have got you covered.
           </p>
         </div>
 
@@ -255,42 +212,14 @@ export default function PurchaseCreditView() {
           </div>
         )}
 
-        {/* Switch Segment Control Toggle Grid Wrapper */}
-        <div className="flex justify-center mb-14">
-          <div className="p-1 bg-[#131722] border border-[#1e2638] rounded-2xl flex items-center gap-1 shadow-md">
-            <button
-              onClick={() => setBillingTarget('seeker')}
-              className={`flex items-center gap-2 px-5 py-2.5 text-xs font-bold rounded-xl transition-all duration-200 cursor-pointer ${
-                billingTarget === 'seeker'
-                  ? 'bg-[#1e2638] text-white shadow-md border border-[#2d384e]'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <User className="w-3.5 h-3.5" />
-              <span>For Job Seekers</span>
-            </button>
-            <button
-              onClick={() => setBillingTarget('recruiter')}
-              className={`flex items-center gap-2 px-5 py-2.5 text-xs font-bold rounded-xl transition-all duration-200 cursor-pointer ${
-                billingTarget === 'recruiter'
-                  ? 'bg-[#1e2638] text-white shadow-md border border-[#2d384e]'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <Briefcase className="w-3.5 h-3.5" />
-              <span>For Recruiters</span>
-            </button>
-          </div>
-        </div>
-
-        {/* 3-Tier Pricing Cards Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mb-20">
-          {activePlans.map((plan, idx) => (
+        {/* Single Unified Grid of All Plans */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch mb-20">
+          {allPackages.map((plan, idx) => (
             <div
               key={idx}
-              className={`relative bg-[#131722] border rounded-3xl p-7 flex flex-col justify-between transition-all duration-300 ${
+              className={`relative bg-[#131722] border rounded-3xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 ${
                 plan.popular
-                  ? 'border-2 border-[#2563eb] shadow-2xl shadow-blue-600/20'
+                  ? 'border-2 border-[#2563eb] shadow-2xl shadow-blue-600/20 lg:-translate-y-1'
                   : 'border-[#1e2638] hover:border-[#2d384e]'
               }`}
             >
@@ -345,7 +274,7 @@ export default function PurchaseCreditView() {
           ))}
         </div>
 
-        {/* FAQ Accordion Section Layout Wrapper */}
+        {/* FAQ Accordion Section */}
         <div className="max-w-3xl mx-auto border-t border-[#1e2638] pt-16">
           <div className="text-center mb-10">
             <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[#131722] border border-[#1e2638] text-slate-400 mb-3 shadow-sm">
