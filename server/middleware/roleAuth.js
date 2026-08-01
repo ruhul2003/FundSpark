@@ -15,10 +15,10 @@ const verifyCreator = (req, res, next) => {
 };
 
 const verifySupporter = (req, res, next) => {
-  if (req.user && (req.user.role === 'Supporter' || req.user.role === 'Admin')) {
+  if (req.user && (req.user.role === 'Supporter' || req.user.role === 'Creator' || req.user.role === 'Admin')) {
     next();
   } else {
-    res.status(403).json({ message: 'Forbidden: Supporter access required' });
+    res.status(403).json({ message: 'Forbidden: Access required' });
   }
 };
 

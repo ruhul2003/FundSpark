@@ -29,6 +29,10 @@ router.post('/', verifyToken, verifySupporter, async (req, res) => {
       return res.status(400).json({ message: 'Insufficient credits available in your account' });
     }
 
+    if (campaign.creatorEmail === supporter.email) {
+      return res.status(400).json({ message: 'Creators cannot pledge credits to their own campaign' });
+    }
+
     // Deduct credits from Supporter provisionally for the pending contribution
     supporter.credits -= contributionAmount;
     await supporter.save();

@@ -137,159 +137,196 @@ export default function CampaignDetailsPage() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 transition-colors duration-300">
-      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-8 transition-colors duration-300">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
         
-        <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl rounded-3xl overflow-hidden mb-12 grid grid-cols-1 lg:grid-cols-12 gap-0 border border-slate-200 dark:border-slate-800 shadow-sm">
-          <div className="lg:col-span-7 relative h-72 lg:h-auto overflow-hidden">
-            <img
-              src={campaign.imageUrl}
-              alt={campaign.title}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute top-4 left-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-indigo-700 dark:text-indigo-300 border border-slate-200 dark:border-slate-700 shadow-sm">
+        {/* Back Link & Header */}
+        <div className="mb-6 space-y-3">
+          <button
+            onClick={() => router.back()}
+            className="text-xs font-medium text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex items-center gap-1.5"
+          >
+            <span>&larr; Back</span>
+          </button>
+
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/60 text-xs font-semibold px-2.5 py-0.5 rounded-full">
               {campaign.category}
-            </div>
+            </span>
+            <span className="text-slate-400 text-xs font-light">•</span>
+            <span className="flex items-center text-xs text-slate-500 dark:text-slate-400 gap-1">
+              <UserCheck className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+              <span>By {campaign.creatorName}</span>
+            </span>
+            <span className="text-slate-400 text-xs font-light">•</span>
+            <span className="flex items-center text-xs text-slate-500 dark:text-slate-400 gap-1">
+              <Clock className="w-3.5 h-3.5 text-slate-400" />
+              <span>Ends {new Date(campaign.deadline).toLocaleDateString()}</span>
+            </span>
           </div>
 
-          <div className="lg:col-span-5 p-8 flex flex-col justify-between space-y-6">
-            <div>
-              <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 mb-2">
-                <span className="flex items-center space-x-1">
-                  <UserCheck className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
-                  <span>By {campaign.creatorName}</span>
-                </span>
-                <span className="flex items-center space-x-1">
-                  <Clock className="w-3.5 h-3.5 text-slate-400" />
-                  <span>Ends {new Date(campaign.deadline).toLocaleDateString()}</span>
-                </span>
-              </div>
-              <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white leading-tight mb-4">{campaign.title}</h1>
-              
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-indigo-700 dark:text-indigo-400 font-bold flex items-center space-x-1">
-                    <Coins className="w-4 h-4 text-amber-500" />
-                    <span>{campaign.amountRaised || 0} Credits Raised</span>
-                  </span>
-                  <span className="text-slate-500 dark:text-slate-400 font-medium">{progressPercentage}%</span>
-                </div>
-                <div className="w-full h-3 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-gradient-to-r from-indigo-600 to-sky-500 rounded-full"
-                    style={{ width: `${progressPercentage}%` }}
-                  />
-                </div>
-                <div className="flex justify-between text-xs text-slate-500 dark:text-slate-400 pt-1">
-                  <span>Goal: {campaign.fundingGoal} Credits</span>
-                  <span>Min Pledge: {campaign.minContribution} Credits</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30 flex items-start space-x-3">
-              <Gift className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 flex-shrink-0" />
-              <div>
-                <h4 className="text-xs font-bold text-indigo-900 dark:text-indigo-200 uppercase tracking-wider">Backer Reward</h4>
-                <p className="text-xs text-slate-600 dark:text-slate-300 mt-1">{campaign.rewardInfo}</p>
-              </div>
-            </div>
-
-            <button
-              onClick={() => setShowReportModal(true)}
-              className="text-xs text-rose-600 dark:text-rose-400 hover:text-rose-700 flex items-center space-x-1 transition-colors self-start font-medium"
-            >
-              <ShieldAlert className="w-3.5 h-3.5" />
-              <span>Report Suspicious Campaign</span>
-            </button>
-          </div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            {campaign.title}
+          </h1>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          <div className="lg:col-span-7 space-y-8">
-            <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-              <h2 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight border-b border-slate-200 dark:border-slate-800 pb-4">
-                Campaign Story & Vision
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* Left Column - Image & Story */}
+          <div className="lg:col-span-7 space-y-6">
+            {/* Compact Image */}
+            <div className="relative w-full h-60 sm:h-72 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800/80 bg-slate-100 dark:bg-slate-900 shadow-sm">
+              <img
+                src={campaign.imageUrl}
+                alt={campaign.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Campaign Story */}
+            <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-sm space-y-3">
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight border-b border-slate-100 dark:border-slate-800 pb-3">
+                About this campaign
               </h2>
-              <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed whitespace-pre-line">
+              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed whitespace-pre-line">
                 {campaign.story}
               </p>
             </div>
+
+            {/* Backer Reward Card */}
+            {campaign.rewardInfo && (
+              <div className="p-4 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/40 flex items-start gap-3">
+                <Gift className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 shrink-0" />
+                <div>
+                  <h4 className="text-xs font-bold text-indigo-900 dark:text-indigo-200 uppercase tracking-wider">Backer Reward</h4>
+                  <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5">{campaign.rewardInfo}</p>
+                </div>
+              </div>
+            )}
           </div>
 
-          <div className="lg:col-span-5">
-            <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm sticky top-28 space-y-6 text-slate-900 dark:text-slate-100">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white">Support This Project</h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                Pledge your available platform credits to back this campaign.
-              </p>
-
-              {user && (
-                <div className="flex items-center justify-between p-3 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs">
-                  <span className="text-slate-600 dark:text-slate-300">Your Balance:</span>
-                  <span className="font-bold text-amber-600 dark:text-amber-400 flex items-center space-x-1">
-                    <Coins className="w-3.5 h-3.5" />
-                    <span>{user.credits ?? 0} Credits</span>
-                  </span>
+          {/* Right Column - Stats & Pledge Form */}
+          <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-24">
+            
+            <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-sm space-y-5 text-slate-900 dark:text-slate-100">
+              
+              {/* Progress Summary */}
+              <div className="space-y-3">
+                <div className="flex justify-between items-baseline">
+                  <div>
+                    <div className="text-2xl font-black text-indigo-600 dark:text-indigo-400 flex items-center gap-1.5">
+                      <Coins className="w-5 h-5 text-amber-500" />
+                      <span>{campaign.amountRaised || 0}</span>
+                      <span className="text-xs font-normal text-slate-500 dark:text-slate-400">Credits Raised</span>
+                    </div>
+                  </div>
+                  <span className="text-sm font-bold text-slate-700 dark:text-slate-300">{progressPercentage}%</span>
                 </div>
-              )}
 
-              {feedback && (
-                <div className={`p-4 rounded-xl text-xs flex items-start space-x-2 ${
-                  feedback.type === 'success' ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800' : 'bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800'
-                }`}>
-                  {feedback.type === 'success' ? <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5 text-emerald-600 dark:text-emerald-400" /> : <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-rose-600 dark:text-rose-400" />}
-                  <span>{feedback.text}</span>
-                </div>
-              )}
-
-              <form onSubmit={handlePledgeSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">
-                    Contribution Amount (Credits)
-                  </label>
-                  <input
-                    type="number"
-                    min={campaign.minContribution || 1}
-                    placeholder={`Min ${campaign.minContribution || 10} credits`}
-                    value={contributionAmount}
-                    onChange={(e) => setContributionAmount(e.target.value)}
-                    required
-                    className="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 transition-colors"
+                <div className="w-full h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-indigo-600 to-sky-500 rounded-full transition-all duration-500"
+                    style={{ width: `${progressPercentage}%` }}
                   />
                 </div>
 
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">
-                    Message to Creator (Optional)
-                  </label>
-                  <textarea
-                    rows={3}
-                    placeholder="Leave words of encouragement..."
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 transition-colors"
-                  />
+                <div className="flex justify-between text-xs text-slate-500 dark:text-slate-400 pt-0.5">
+                  <span>Goal: <strong className="text-slate-700 dark:text-slate-300">{campaign.fundingGoal}</strong> Credits</span>
+                  <span>Min Pledge: <strong className="text-slate-700 dark:text-slate-300">{campaign.minContribution || 1}</strong></span>
                 </div>
+              </div>
 
+              <div className="border-t border-slate-100 dark:border-slate-800 pt-4 space-y-4">
+                <h3 className="text-base font-bold text-slate-900 dark:text-white">Support This Project</h3>
+
+                {user && (
+                  <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-700/60 text-xs">
+                    <span className="text-slate-500 dark:text-slate-400">Your Balance:</span>
+                    <span className="font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1">
+                      <Coins className="w-3.5 h-3.5" />
+                      <span>{user.credits ?? 0} Credits</span>
+                    </span>
+                  </div>
+                )}
+
+                {feedback && (
+                  <div className={`p-3 rounded-xl text-xs flex items-start gap-2 ${
+                    feedback.type === 'success' ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800' : 'bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800'
+                  }`}>
+                    {feedback.type === 'success' ? <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600 dark:text-emerald-400" /> : <AlertCircle className="w-4 h-4 shrink-0 text-rose-600 dark:text-rose-400" />}
+                    <span>{feedback.text}</span>
+                  </div>
+                )}
+
+                {user?.email === campaign?.creatorEmail ? (
+                  <div className="p-3.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 text-amber-800 dark:text-amber-300 text-xs font-medium leading-relaxed">
+                    You are the creator of this campaign and cannot pledge credits to your own project.
+                  </div>
+                ) : (
+                  <form onSubmit={handlePledgeSubmit} className="space-y-3">
+                    <div>
+                      <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+                        Contribution Amount (Credits)
+                      </label>
+                      <input
+                        type="number"
+                        min={campaign.minContribution || 1}
+                        placeholder={`Min ${campaign.minContribution || 1} credits`}
+                        value={contributionAmount}
+                        onChange={(e) => setContributionAmount(e.target.value)}
+                        required
+                        className="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 transition-colors"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+                        Message to Creator (Optional)
+                      </label>
+                      <textarea
+                        rows={2}
+                        placeholder="Leave words of encouragement..."
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        className="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 transition-colors"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-bold text-xs shadow-md shadow-indigo-600/10 transition-all disabled:opacity-50"
+                    >
+                      {submitting ? 'Submitting Pledge...' : 'Pledge Credits Now'}
+                    </button>
+                  </form>
+                )}
+              </div>
+
+              {/* Report Button */}
+              <div className="border-t border-slate-100 dark:border-slate-800 pt-3 flex justify-center">
                 <button
-                  type="submit"
-                  disabled={submitting}
-                  className="w-full py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-bold text-sm shadow-lg shadow-indigo-600/20 transition-all disabled:opacity-50"
+                  onClick={() => setShowReportModal(true)}
+                  className="text-xs text-slate-400 dark:text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 flex items-center gap-1 transition-colors font-medium"
                 >
-                  {submitting ? 'Submitting Pledge...' : 'Pledge Credits Now'}
+                  <ShieldAlert className="w-3.5 h-3.5" />
+                  <span>Report Suspicious Campaign</span>
                 </button>
-              </form>
+              </div>
+
             </div>
           </div>
+
         </div>
       </div>
 
+      {/* Report Modal */}
       {showReportModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
-          <div className="glass-panel max-w-md w-full p-6 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-2xl space-y-4 text-slate-900 dark:text-slate-100">
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center space-x-2">
-              <ShieldAlert className="w-5 h-5 text-rose-600 dark:text-rose-400" />
+          <div className="max-w-md w-full p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-2xl space-y-4 text-slate-900 dark:text-slate-100">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <ShieldAlert className="w-4 h-4 text-rose-600 dark:text-rose-400" />
               <span>Report Campaign</span>
             </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -297,25 +334,25 @@ export default function CampaignDetailsPage() {
             </p>
             <form onSubmit={handleReportSubmit} className="space-y-4">
               <textarea
-                rows={4}
+                rows={3}
                 required
                 placeholder="Provide detailed reason..."
                 value={reportReason}
                 onChange={(e) => setReportReason(e.target.value)}
                 className="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 transition-colors"
               />
-              <div className="flex justify-end space-x-3">
+              <div className="flex justify-end gap-2">
                 <button
                   type="button"
                   onClick={() => setShowReportModal(false)}
-                  className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-semibold hover:bg-slate-200 dark:hover:bg-slate-700"
+                  className="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-semibold hover:bg-slate-200 dark:hover:bg-slate-700"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={reporting}
-                  className="px-4 py-2 rounded-xl bg-rose-600 text-white text-xs font-semibold hover:bg-rose-500 shadow-md"
+                  className="px-3.5 py-2 rounded-xl bg-rose-600 text-white text-xs font-semibold hover:bg-rose-500 shadow-md"
                 >
                   {reporting ? 'Submitting...' : 'Submit Report'}
                 </button>
