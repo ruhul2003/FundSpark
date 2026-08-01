@@ -236,11 +236,11 @@ export default function PurchaseCreditView() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-slate-50 dark:bg-[#08080a] text-slate-900 dark:text-zinc-50 py-16 sm:py-20 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+    <div className="w-full min-h-screen bg-slate-50 dark:bg-[#08080a] text-slate-900 dark:text-zinc-50 pt-20 sm:pt-28 pb-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       <div className="max-w-6xl mx-auto space-y-16 sm:space-y-20">
 
         {/* 1. Header Section */}
-        <div className="text-center max-w-2xl mx-auto space-y-3">
+        <div className="text-center max-w-2xl mx-auto space-y-3 mt-4 sm:mt-6">
           <span className="text-blue-600 dark:text-blue-500 font-semibold tracking-wider text-xs uppercase block">
             TRANSPARENT PRICING
           </span>
@@ -292,8 +292,8 @@ export default function PurchaseCreditView() {
           </button>
         </div>
 
-        {/* 3. Pricing Cards Container - Single Row with justify-around */}
-        <div className="flex flex-col md:flex-row items-stretch justify-around gap-6 lg:gap-8 max-w-5xl mx-auto my-10">
+        {/* 3. Pricing Cards Container - Single Row with justify-around & centered items */}
+        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-center md:justify-around gap-6 lg:gap-8 max-w-5xl mx-auto my-10">
           {activePlans.map((plan, idx) => (
             <div
               key={idx}
