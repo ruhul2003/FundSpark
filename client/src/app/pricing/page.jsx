@@ -1,12 +1,10 @@
-'use client';
-
-import React from 'react';
 import PurchaseCreditView from '../../views/PurchaseCredit';
 
+export const metadata = {
+  title: 'Pricing & Plans | FundSpark',
+  description: 'Flexible credit pricing plans for job seekers, supporters, and creators.'
+};
+
 export default function PricingPage() {
-  return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-16 sm:py-20 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
-      <PurchaseCreditView />
-    </div>
-  );
+  return <PurchaseCreditView />;
 }
