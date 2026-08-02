@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
+import { useTheme } from '../../context/ThemeContext';
+import ThemeToggle from '../../components/ThemeToggle';
 import {
   Heart,
   Rocket,
@@ -29,6 +31,15 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 export default function PricingSection() {
   const { user, refreshUserData } = useAuth();
   const router = useRouter();
+
+  // Theme Context integration
+  let themeContext = null;
+  try {
+    themeContext = useTheme();
+  } catch (e) {
+    themeContext = { theme: 'dark', toggleTheme: () => {}, isDark: true };
+  }
+  const isDark = themeContext?.isDark ?? true;
 
   const [activeTab, setActiveTab] = useState('supporters'); // 'supporters' | 'creators'
   const [openFaq, setOpenFaq] = useState(null);
@@ -57,7 +68,7 @@ export default function PricingSection() {
       description: 'Ideal baseline credit bundle to back innovative campaigns, support creators, and claim rewards.',
       price: '$10',
       period: '/one-time',
-      icon: <Heart className="w-5 h-5 text-emerald-400" />,
+      icon: <Heart className="w-5 h-5 text-emerald-500" />,
       popular: false,
       buttonText: 'Buy 100 Credits',
       buttonVariant: 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-600/20',
@@ -74,7 +85,7 @@ export default function PricingSection() {
       description: 'Our most popular bundle for active backers looking to boost campaigns and gain priority perks.',
       price: '$25',
       period: '/one-time',
-      icon: <Zap className="w-5 h-5 text-blue-400" />,
+      icon: <Zap className="w-5 h-5 text-blue-500" />,
       popular: true,
       buttonText: 'Buy 300 Credits',
       buttonVariant: 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-lg shadow-blue-600/30',
@@ -91,7 +102,7 @@ export default function PricingSection() {
       description: 'Maximum credit volume tailored for major backers, angel supporters, and community champions.',
       price: '$60',
       period: '/one-time',
-      icon: <Sparkles className="w-5 h-5 text-purple-400" />,
+      icon: <Sparkles className="w-5 h-5 text-purple-500" />,
       popular: false,
       buttonText: 'Buy 800 Credits',
       buttonVariant: 'bg-purple-600/90 hover:bg-purple-500 text-white border border-purple-400/30 shadow-md',
@@ -112,7 +123,7 @@ export default function PricingSection() {
       description: 'Essential credit package for launching and featuring your first crowdfunding campaign.',
       price: '$49',
       period: '/one-time',
-      icon: <Rocket className="w-5 h-5 text-emerald-400" />,
+      icon: <Rocket className="w-5 h-5 text-emerald-500" />,
       popular: false,
       buttonText: 'Launch Campaign',
       buttonVariant: 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-600/20',
@@ -129,7 +140,7 @@ export default function PricingSection() {
       description: 'Built for ambitious creators seeking featured homepage placement and backer outreach tools.',
       price: '$149',
       period: '/one-time',
-      icon: <Zap className="w-5 h-5 text-blue-400" />,
+      icon: <Zap className="w-5 h-5 text-blue-500" />,
       popular: true,
       buttonText: 'Promote Campaign',
       buttonVariant: 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-lg shadow-blue-600/30',
@@ -146,7 +157,7 @@ export default function PricingSection() {
       description: 'Unrestricted credit allocation with dedicated promotion management for large-scale campaigns.',
       price: '$299',
       period: '/one-time',
-      icon: <Sparkles className="w-5 h-5 text-purple-400" />,
+      icon: <Sparkles className="w-5 h-5 text-purple-500" />,
       popular: false,
       buttonText: 'Scale Campaign',
       buttonVariant: 'bg-purple-600/90 hover:bg-purple-500 text-white border border-purple-400/30 shadow-md',
@@ -220,22 +231,35 @@ export default function PricingSection() {
   };
 
   return (
-    <section className="bg-[#0b0c0e] min-h-screen text-white py-20 px-4 flex flex-col items-center justify-center font-sans">
-      <div className="max-w-7xl w-full mx-auto text-center space-y-4">
+    <section className={`w-full min-h-screen transition-colors duration-300 py-16 sm:py-20 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center font-sans ${
+      isDark ? 'bg-[#0b0c0e] text-white' : 'bg-slate-50 text-slate-900'
+    }`}>
+      <div className="max-w-7xl w-full mx-auto text-center space-y-4 relative">
+
+        {/* Top Floating Header Controls (Theme Toggle) */}
+        <div className="flex justify-end w-full mb-2">
+          <ThemeToggle className="shadow-md" />
+        </div>
 
         {/* Subtitle Badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold tracking-widest uppercase">
+        <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase transition-colors ${
+          isDark ? 'bg-blue-500/10 border border-blue-500/20 text-blue-400' : 'bg-blue-50 border border-blue-200 text-blue-600'
+        }`}>
           <Coins className="w-3.5 h-3.5" />
           <span>TRANSPARENT CREDIT PRICING</span>
         </div>
 
         {/* Heading */}
-        <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white">
+        <h2 className={`text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight transition-colors ${
+          isDark ? 'text-white' : 'text-slate-900'
+        }`}>
           Flexible credit plans built for your goals
         </h2>
 
         {/* Subtitle Description */}
-        <p className="text-zinc-400 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+        <p className={`max-w-2xl mx-auto text-sm sm:text-base leading-relaxed transition-colors ${
+          isDark ? 'text-zinc-400' : 'text-slate-600'
+        }`}>
           Whether you are a passionate supporter backing groundbreaking ideas or a creator bringing innovations to life, buy credits with zero hidden fees and lifetime validity.
         </p>
 
@@ -253,15 +277,17 @@ export default function PricingSection() {
         )}
 
         {/* Tab Toggle Controls */}
-        <div className="pt-6 pb-10 flex justify-center">
-          <div className="bg-[#16181d] p-1.5 rounded-2xl inline-flex border border-zinc-800/80 shadow-inner">
+        <div className="pt-6 pb-8 flex justify-center">
+          <div className={`p-1.5 rounded-2xl inline-flex border transition-all ${
+            isDark ? 'bg-[#16181d] border-zinc-800/80 shadow-inner' : 'bg-white border-slate-200 shadow-md'
+          }`}>
             <button
               type="button"
               onClick={() => setActiveTab('supporters')}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer ${
                 activeTab === 'supporters'
                   ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'
-                  : 'text-zinc-400 hover:text-zinc-200'
+                  : isDark ? 'text-zinc-400 hover:text-zinc-200' : 'text-slate-500 hover:text-slate-900'
               }`}
             >
               <Heart className="w-4 h-4 text-emerald-400" />
@@ -273,7 +299,7 @@ export default function PricingSection() {
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer ${
                 activeTab === 'creators'
                   ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'
-                  : 'text-zinc-400 hover:text-zinc-200'
+                  : isDark ? 'text-zinc-400 hover:text-zinc-200' : 'text-slate-500 hover:text-slate-900'
               }`}
             >
               <Rocket className="w-4 h-4 text-blue-400" />
@@ -282,15 +308,19 @@ export default function PricingSection() {
           </div>
         </div>
 
-        {/* 3 CARDS IN 1 ROW - FLEX CONTAINER */}
-        <div className="flex flex-col md:flex-row items-stretch justify-center gap-5 lg:gap-6 text-left my-8 max-w-7xl mx-auto px-2 sm:px-4">
+        {/* 3 CARDS IN 1 ROW - FLEX CONTAINER (RESPONSIVE FOR MOBILE TO DESKTOP) */}
+        <div className="flex flex-col md:flex-row items-stretch justify-center gap-5 lg:gap-6 text-left my-8 max-w-7xl mx-auto w-full px-2 sm:px-4">
           {currentPlans.map((plan, index) => (
             <div
               key={index}
-              className={`flex-1 w-full max-w-[400px] relative bg-[#121318] rounded-2xl p-7 flex flex-col justify-between transition-all duration-300 transform hover:-translate-y-1.5 border ${
+              className={`flex-1 w-full max-w-[400px] mx-auto md:mx-0 relative rounded-3xl p-6 sm:p-7 lg:p-8 flex flex-col justify-between transition-all duration-300 transform hover:-translate-y-1.5 border ${
                 plan.popular
-                  ? 'border-blue-600 ring-1 ring-blue-600/50 shadow-2xl shadow-blue-900/20'
-                  : 'border-zinc-800/80 hover:border-zinc-700'
+                  ? isDark
+                    ? 'bg-[#121318] border-blue-600 ring-1 ring-blue-600/50 shadow-2xl shadow-blue-900/20'
+                    : 'bg-white border-blue-600 ring-2 ring-blue-500/30 shadow-2xl shadow-blue-500/15'
+                  : isDark
+                    ? 'bg-[#121318] border-zinc-800/80 hover:border-zinc-700'
+                    : 'bg-white border-slate-200 hover:border-blue-300 shadow-xl hover:shadow-2xl'
               }`}
             >
               {/* Most Popular Badge */}
@@ -306,35 +336,49 @@ export default function PricingSection() {
                 {/* Header: Name + Icon */}
                 <div className="flex items-center justify-between mb-2.5">
                   <div>
-                    <h3 className="text-xl font-bold text-white">{plan.name}</h3>
-                    <span className="text-[11px] font-semibold text-emerald-400 uppercase tracking-wide block mt-0.5">
+                    <h3 className={`text-xl font-bold transition-colors ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                      {plan.name}
+                    </h3>
+                    <span className="text-[11px] font-semibold text-emerald-500 uppercase tracking-wide block mt-0.5">
                       {plan.credits} Credits Package
                     </span>
                   </div>
-                  <div className="p-2.5 rounded-xl bg-zinc-800/60 border border-zinc-700/50">
+                  <div className={`p-2.5 rounded-xl border transition-colors ${
+                    isDark ? 'bg-zinc-800/60 border-zinc-700/50' : 'bg-slate-100 border-slate-200'
+                  }`}>
                     {plan.icon}
                   </div>
                 </div>
 
                 {/* Card Description */}
-                <p className="text-zinc-400 text-xs leading-relaxed min-h-[42px] mb-6">
+                <p className={`text-xs leading-relaxed min-h-[42px] mb-6 transition-colors ${
+                  isDark ? 'text-zinc-400' : 'text-slate-600'
+                }`}>
                   {plan.description}
                 </p>
 
                 {/* Price */}
                 <div className="flex items-baseline gap-1 mb-6">
-                  <span className="text-4xl font-black text-white">{plan.price}</span>
-                  <span className="text-zinc-400 text-xs font-medium">{plan.period}</span>
+                  <span className={`text-3xl sm:text-4xl font-black transition-colors ${
+                    isDark ? 'text-white' : 'text-slate-900'
+                  }`}>{plan.price}</span>
+                  <span className={`text-xs font-medium transition-colors ${
+                    isDark ? 'text-zinc-400' : 'text-slate-500'
+                  }`}>{plan.period}</span>
                 </div>
 
                 {/* Divider Line */}
-                <div className="h-px bg-zinc-800/80 w-full my-6" />
+                <div className={`h-px w-full my-6 transition-colors ${
+                  isDark ? 'bg-zinc-800/80' : 'bg-slate-200'
+                }`} />
 
                 {/* Features List */}
                 <ul className="space-y-3.5 mb-8">
                   {plan.features.map((feature, fIndex) => (
-                    <li key={fIndex} className="flex items-start gap-3 text-xs text-zinc-300 leading-snug">
-                      <div className="p-0.5 rounded-full bg-emerald-500/20 text-emerald-400 shrink-0 mt-0.5">
+                    <li key={fIndex} className={`flex items-start gap-3 text-xs leading-snug transition-colors ${
+                      isDark ? 'text-zinc-300' : 'text-slate-700'
+                    }`}>
+                      <div className="p-0.5 rounded-full bg-emerald-500/20 text-emerald-500 shrink-0 mt-0.5">
                         <Check className="w-3.5 h-3.5" />
                       </div>
                       <span>{feature}</span>
@@ -357,38 +401,58 @@ export default function PricingSection() {
         </div>
 
         {/* Trust Badges */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto pt-14 border-t border-zinc-800/80 text-left">
-          <div className="p-6 rounded-2xl bg-[#121318] border border-zinc-800/80 flex items-start gap-4 shadow-md">
+        <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto pt-14 border-t text-left transition-colors ${
+          isDark ? 'border-zinc-800/80' : 'border-slate-200'
+        }`}>
+          <div className={`p-6 rounded-2xl border flex items-start gap-4 transition-colors ${
+            isDark ? 'bg-[#121318] border-zinc-800/80' : 'bg-white border-slate-200 shadow-md hover:shadow-lg'
+          }`}>
             <div className="p-3 rounded-xl bg-blue-950/70 border border-blue-500/30 shrink-0 text-blue-400">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="text-xs font-extrabold text-white uppercase tracking-wider">256-Bit SSL Encrypted</h4>
-              <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
+              <h4 className={`text-xs font-extrabold uppercase tracking-wider transition-colors ${
+                isDark ? 'text-white' : 'text-slate-900'
+              }`}>256-Bit SSL Encrypted</h4>
+              <p className={`text-xs mt-1 leading-relaxed transition-colors ${
+                isDark ? 'text-zinc-400' : 'text-slate-600'
+              }`}>
                 Transactions processed safely through official Stripe Payment Gateway encryption.
               </p>
             </div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-[#121318] border border-zinc-800/80 flex items-start gap-4 shadow-md">
+          <div className={`p-6 rounded-2xl border flex items-start gap-4 transition-colors ${
+            isDark ? 'bg-[#121318] border-zinc-800/80' : 'bg-white border-slate-200 shadow-md hover:shadow-lg'
+          }`}>
             <div className="p-3 rounded-xl bg-emerald-950/70 border border-emerald-500/30 shrink-0 text-emerald-400">
               <Zap className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="text-xs font-extrabold text-white uppercase tracking-wider">Instant Credit Top-Up</h4>
-              <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
+              <h4 className={`text-xs font-extrabold uppercase tracking-wider transition-colors ${
+                isDark ? 'text-white' : 'text-slate-900'
+              }`}>Instant Credit Top-Up</h4>
+              <p className={`text-xs mt-1 leading-relaxed transition-colors ${
+                isDark ? 'text-zinc-400' : 'text-slate-600'
+              }`}>
                 Credits are added directly to your wallet balance for immediate use right after checkout.
               </p>
             </div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-[#121318] border border-zinc-800/80 flex items-start gap-4 shadow-md">
+          <div className={`p-6 rounded-2xl border flex items-start gap-4 transition-colors ${
+            isDark ? 'bg-[#121318] border-zinc-800/80' : 'bg-white border-slate-200 shadow-md hover:shadow-lg'
+          }`}>
             <div className="p-3 rounded-xl bg-purple-950/70 border border-purple-500/30 shrink-0 text-purple-400">
               <Globe className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="text-xs font-extrabold text-white uppercase tracking-wider">Lifetime Validity</h4>
-              <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
+              <h4 className={`text-xs font-extrabold uppercase tracking-wider transition-colors ${
+                isDark ? 'text-white' : 'text-slate-900'
+              }`}>Lifetime Validity</h4>
+              <p className={`text-xs mt-1 leading-relaxed transition-colors ${
+                isDark ? 'text-zinc-400' : 'text-slate-600'
+              }`}>
                 Purchased credits never expire. Use your credits whenever you need to achieve your goals.
               </p>
             </div>
@@ -396,13 +460,21 @@ export default function PricingSection() {
         </div>
 
         {/* FAQ Accordion Section */}
-        <div className="max-w-3xl mx-auto border-t border-zinc-800/80 pt-14 text-left">
+        <div className={`max-w-3xl mx-auto border-t pt-14 text-left transition-colors ${
+          isDark ? 'border-zinc-800/80' : 'border-slate-200'
+        }`}>
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-[#121318] border border-zinc-800 text-blue-400 mb-3 shadow-md">
+            <div className={`inline-flex items-center justify-center w-12 h-12 rounded-2xl border mb-3 transition-colors ${
+              isDark ? 'bg-[#121318] border-zinc-800 text-blue-400 shadow-md' : 'bg-white border-slate-200 text-blue-600 shadow-sm'
+            }`}>
               <HelpCircle className="w-6 h-6" />
             </div>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white">Frequently Asked Questions</h3>
-            <p className="text-xs sm:text-sm text-zinc-400 mt-1.5">Have questions regarding credit purchases? Here are fast answers.</p>
+            <h3 className={`text-2xl sm:text-3xl font-extrabold transition-colors ${
+              isDark ? 'text-white' : 'text-slate-900'
+            }`}>Frequently Asked Questions</h3>
+            <p className={`text-xs sm:text-sm mt-1.5 transition-colors ${
+              isDark ? 'text-zinc-400' : 'text-slate-600'
+            }`}>Have questions regarding credit purchases? Here are fast answers.</p>
           </div>
 
           <div className="space-y-3.5">
@@ -411,27 +483,33 @@ export default function PricingSection() {
               return (
                 <div
                   key={idx}
-                  className="bg-[#121318] border border-zinc-800/80 rounded-2xl overflow-hidden transition-all duration-200 shadow-sm"
+                  className={`border rounded-2xl overflow-hidden transition-all duration-200 shadow-sm ${
+                    isDark ? 'bg-[#121318] border-zinc-800/80' : 'bg-white border-slate-200'
+                  }`}
                 >
                   <button
                     type="button"
                     onClick={() => toggleFaq(idx)}
-                    className="w-full flex items-center justify-between text-left p-5 gap-4 text-zinc-200 hover:text-white transition cursor-pointer"
+                    className={`w-full flex items-center justify-between text-left p-5 gap-4 transition cursor-pointer ${
+                      isDark ? 'text-zinc-200 hover:text-white' : 'text-slate-800 hover:text-slate-900'
+                    }`}
                   >
                     <span className="text-sm font-bold">{faq.question}</span>
                     <ChevronDown
-                      className={`w-4 h-4 text-zinc-400 shrink-0 transition-transform duration-300 ${
-                        isOpen ? 'rotate-180 text-blue-400' : ''
+                      className={`w-4 h-4 shrink-0 transition-transform duration-300 ${
+                        isOpen ? 'rotate-180 text-blue-500' : 'text-zinc-400'
                       }`}
                     />
                   </button>
 
                   <div
                     className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                      isOpen ? 'max-h-40 border-t border-zinc-800/80' : 'max-h-0'
+                      isOpen ? `max-h-40 border-t ${isDark ? 'border-zinc-800/80' : 'border-slate-200'}` : 'max-h-0'
                     }`}
                   >
-                    <div className="p-5 text-xs sm:text-sm text-zinc-400 leading-relaxed bg-[#0b0c0e]">
+                    <div className={`p-5 text-xs sm:text-sm leading-relaxed transition-colors ${
+                      isDark ? 'bg-[#0b0c0e] text-zinc-400' : 'bg-slate-50 text-slate-600'
+                    }`}>
                       {faq.answer}
                     </div>
                   </div>
@@ -446,23 +524,29 @@ export default function PricingSection() {
       {/* Stripe Payment Modal */}
       {showStripeModal && selectedPkg && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in text-left">
-          <div className="max-w-md w-full p-6 sm:p-8 rounded-3xl border border-zinc-800 bg-[#0f121d] shadow-2xl space-y-6 text-white">
+          <div className={`max-w-md w-full p-6 sm:p-8 rounded-3xl border shadow-2xl space-y-6 transition-colors ${
+            isDark ? 'bg-[#0f121d] border-zinc-800 text-white' : 'bg-white border-slate-200 text-slate-900'
+          }`}>
             
             {/* Modal Header */}
-            <div className="flex items-center justify-between border-b border-zinc-800/80 pb-4">
+            <div className={`flex items-center justify-between border-b pb-4 ${
+              isDark ? 'border-zinc-800/80' : 'border-slate-200'
+            }`}>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white flex items-center justify-center shadow-md">
                   <CreditCard className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-white">Stripe Payment Gateway</h3>
-                  <p className="text-xs text-zinc-400">Checkout for {selectedPkg.name} ({selectedPkg.price})</p>
+                  <h3 className={`text-base font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Stripe Payment Gateway</h3>
+                  <p className={`text-xs ${isDark ? 'text-zinc-400' : 'text-slate-500'}`}>Checkout for {selectedPkg.name} ({selectedPkg.price})</p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => setShowStripeModal(false)}
-                className="p-1.5 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors cursor-pointer"
+                className={`p-1.5 rounded-xl transition-colors cursor-pointer ${
+                  isDark ? 'text-zinc-400 hover:text-white hover:bg-zinc-800' : 'text-slate-400 hover:text-slate-900 hover:bg-slate-100'
+                }`}
               >
                 <X className="w-4 h-4" />
               </button>
@@ -477,22 +561,24 @@ export default function PricingSection() {
             )}
 
             {/* Order Summary */}
-            <div className="p-4 rounded-2xl bg-[#080a12] border border-zinc-800 flex items-center justify-between text-xs">
+            <div className={`p-4 rounded-2xl border flex items-center justify-between text-xs ${
+              isDark ? 'bg-[#080a12] border-zinc-800' : 'bg-slate-50 border-slate-200'
+            }`}>
               <div>
-                <span className="text-zinc-400 block text-[11px]">Selected Package</span>
-                <span className="font-bold text-white text-sm">{selectedPkg.name}</span>
-                <span className="text-emerald-400 text-xs block font-semibold">{selectedPkg.credits} Credits</span>
+                <span className={`block text-[11px] ${isDark ? 'text-zinc-400' : 'text-slate-500'}`}>Selected Package</span>
+                <span className={`font-bold text-sm ${isDark ? 'text-white' : 'text-slate-900'}`}>{selectedPkg.name}</span>
+                <span className="text-emerald-500 text-xs block font-semibold">{selectedPkg.credits} Credits</span>
               </div>
               <div className="text-right">
-                <span className="text-zinc-400 block text-[11px]">Total Charge</span>
-                <span className="font-black text-blue-400 text-base">{selectedPkg.price}.00 USD</span>
+                <span className={`block text-[11px] ${isDark ? 'text-zinc-400' : 'text-slate-500'}`}>Total Charge</span>
+                <span className="font-black text-blue-500 text-base">{selectedPkg.price}.00 USD</span>
               </div>
             </div>
 
             {/* Stripe Card Form */}
             <form onSubmit={handleStripePay} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-zinc-300 mb-1.5">
+                <label className={`block text-xs font-semibold mb-1.5 ${isDark ? 'text-zinc-300' : 'text-slate-700'}`}>
                   Cardholder Name
                 </label>
                 <input
@@ -501,12 +587,14 @@ export default function PricingSection() {
                   value={cardHolder}
                   onChange={(e) => setCardHolder(e.target.value)}
                   placeholder="Full Name"
-                  className="w-full bg-[#121624] border border-zinc-800 rounded-xl px-4 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-blue-500 transition-colors"
+                  className={`w-full rounded-xl px-4 py-2.5 text-xs placeholder-zinc-500 focus:outline-none focus:border-blue-500 transition-colors ${
+                    isDark ? 'bg-[#121624] border border-zinc-800 text-white' : 'bg-slate-100 border border-slate-300 text-slate-900'
+                  }`}
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-zinc-300 mb-1.5">
+                <label className={`block text-xs font-semibold mb-1.5 ${isDark ? 'text-zinc-300' : 'text-slate-700'}`}>
                   Card Number (Stripe Test Card: 4242 4242 4242 4242)
                 </label>
                 <div className="relative">
@@ -516,15 +604,17 @@ export default function PricingSection() {
                     value={cardNumber}
                     onChange={(e) => setCardNumber(e.target.value)}
                     placeholder="4242 4242 4242 4242"
-                    className="w-full bg-[#121624] border border-zinc-800 rounded-xl pl-4 pr-10 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-blue-500 transition-colors font-mono"
+                    className={`w-full rounded-xl pl-4 pr-10 py-2.5 text-xs placeholder-zinc-500 focus:outline-none focus:border-blue-500 transition-colors font-mono ${
+                      isDark ? 'bg-[#121624] border border-zinc-800 text-white' : 'bg-slate-100 border border-slate-300 text-slate-900'
+                    }`}
                   />
-                  <Lock className="w-4 h-4 text-zinc-500 absolute right-3.5 top-3" />
+                  <Lock className="w-4 h-4 text-zinc-400 absolute right-3.5 top-3" />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-300 mb-1.5">
+                  <label className={`block text-xs font-semibold mb-1.5 ${isDark ? 'text-zinc-300' : 'text-slate-700'}`}>
                     Expires (MM/YY)
                   </label>
                   <input
@@ -533,11 +623,13 @@ export default function PricingSection() {
                     value={expDate}
                     onChange={(e) => setExpDate(e.target.value)}
                     placeholder="12/28"
-                    className="w-full bg-[#121624] border border-zinc-800 rounded-xl px-4 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-blue-500 transition-colors font-mono text-center"
+                    className={`w-full rounded-xl px-4 py-2.5 text-xs placeholder-zinc-500 focus:outline-none focus:border-blue-500 transition-colors font-mono text-center ${
+                      isDark ? 'bg-[#121624] border border-zinc-800 text-white' : 'bg-slate-100 border border-slate-300 text-slate-900'
+                    }`}
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-300 mb-1.5">
+                  <label className={`block text-xs font-semibold mb-1.5 ${isDark ? 'text-zinc-300' : 'text-slate-700'}`}>
                     CVC / CVV
                   </label>
                   <input
@@ -547,7 +639,9 @@ export default function PricingSection() {
                     value={cvc}
                     onChange={(e) => setCvc(e.target.value)}
                     placeholder="123"
-                    className="w-full bg-[#121624] border border-zinc-800 rounded-xl px-4 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-blue-500 transition-colors font-mono text-center"
+                    className={`w-full rounded-xl px-4 py-2.5 text-xs placeholder-zinc-500 focus:outline-none focus:border-blue-500 transition-colors font-mono text-center ${
+                      isDark ? 'bg-[#121624] border border-zinc-800 text-white' : 'bg-slate-100 border border-slate-300 text-slate-900'
+                    }`}
                   />
                 </div>
               </div>
@@ -563,8 +657,10 @@ export default function PricingSection() {
                 </button>
               </div>
 
-              <p className="text-[10px] text-zinc-400 text-center flex items-center justify-center gap-1.5 pt-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              <p className={`text-[10px] text-center flex items-center justify-center gap-1.5 pt-1 ${
+                isDark ? 'text-zinc-400' : 'text-slate-500'
+              }`}>
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
                 <span>256-Bit SSL Encrypted via Official Stripe Gateway</span>
               </p>
             </form>
@@ -573,4 +669,5 @@ export default function PricingSection() {
       )}
     </section>
   );
-}
+}
+
