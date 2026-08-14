@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, PlusCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import BannerMarquee from './BannerMarquee';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -124,6 +125,7 @@ const HeroSlider = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+      <BannerMarquee />
     </div>
   );
 };

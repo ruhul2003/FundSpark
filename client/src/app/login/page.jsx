@@ -168,7 +168,6 @@ export default function LoginPage() {
               <GoogleLogin
                 onSuccess={handleGoogleSuccess}
                 onError={() => setError('Google Authentication Popup Failed')}
-                useOneTap
                 shape="circle"
                 theme="outline"
                 size="large"
