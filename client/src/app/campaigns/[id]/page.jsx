@@ -4,7 +4,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useAuth } from '../../../context/AuthContext';
-import { Coins, Clock, Target, Gift, UserCheck, ShieldAlert, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Coins, Clock, Target, Gift, UserCheck, ShieldAlert, CheckCircle2, AlertCircle, BookOpen, Megaphone, MessageSquare } from 'lucide-react';
+import CampaignUpdatesSection from '../../../components/CampaignUpdatesSection';
+import CampaignDiscussionSection from '../../../components/CampaignDiscussionSection';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
@@ -13,6 +15,7 @@ export default function CampaignDetailsPage() {
   const { user, refreshUserData } = useAuth();
   const router = useRouter();
 
+  const [activeTab, setActiveTab] = useState('story');
   const [campaign, setCampaign] = useState(null);
   const [loading, setLoading] = useState(true);
   const [contributionAmount, setContributionAmount] = useState('');
@@ -173,7 +176,7 @@ export default function CampaignDetailsPage() {
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Left Column - Image & Story */}
+          {/* Left Column - Image & Tabs */}
           <div className="lg:col-span-7 space-y-6">
             {/* Compact Image */}
             <div className="relative w-full h-60 sm:h-72 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800/80 bg-slate-100 dark:bg-slate-900 shadow-sm">
@@ -184,25 +187,84 @@ export default function CampaignDetailsPage() {
               />
             </div>
 
-            {/* Campaign Story */}
-            <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-sm space-y-3">
-              <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight border-b border-slate-100 dark:border-slate-800 pb-3">
-                About this campaign
-              </h2>
-              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed whitespace-pre-line">
-                {campaign.story}
-              </p>
+            {/* Navigation Tabs */}
+            <div className="flex border-b border-slate-200 dark:border-slate-800 gap-2 sm:gap-4 overflow-x-auto pb-1">
+              <button
+                onClick={() => setActiveTab('story')}
+                className={`flex items-center gap-1.5 py-2.5 px-3 border-b-2 text-xs font-bold transition-all whitespace-nowrap ${
+                  activeTab === 'story'
+                    ? 'border-indigo-600 text-indigo-600 dark:text-indigo-400'
+                    : 'border-transparent text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
+                }`}
+              >
+                <BookOpen className="w-4 h-4" />
+                <span>Story & About</span>
+              </button>
+
+              <button
+                onClick={() => setActiveTab('updates')}
+                className={`flex items-center gap-1.5 py-2.5 px-3 border-b-2 text-xs font-bold transition-all whitespace-nowrap ${
+                  activeTab === 'updates'
+                    ? 'border-indigo-600 text-indigo-600 dark:text-indigo-400'
+                    : 'border-transparent text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
+                }`}
+              >
+                <Megaphone className="w-4 h-4" />
+                <span>Updates</span>
+              </button>
+
+              <button
+                onClick={() => setActiveTab('discussion')}
+                className={`flex items-center gap-1.5 py-2.5 px-3 border-b-2 text-xs font-bold transition-all whitespace-nowrap ${
+                  activeTab === 'discussion'
+                    ? 'border-indigo-600 text-indigo-600 dark:text-indigo-400'
+                    : 'border-transparent text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
+                }`}
+              >
+                <MessageSquare className="w-4 h-4" />
+                <span>Community & Q&A</span>
+              </button>
             </div>
 
-            {/* Backer Reward Card */}
-            {campaign.rewardInfo && (
-              <div className="p-4 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/40 flex items-start gap-3">
-                <Gift className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 shrink-0" />
-                <div>
-                  <h4 className="text-xs font-bold text-indigo-900 dark:text-indigo-200 uppercase tracking-wider">Backer Reward</h4>
-                  <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5">{campaign.rewardInfo}</p>
+            {/* Tab Contents */}
+            {activeTab === 'story' && (
+              <div className="space-y-6">
+                {/* Campaign Story */}
+                <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-sm space-y-3">
+                  <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight border-b border-slate-100 dark:border-slate-800 pb-3">
+                    About this campaign
+                  </h2>
+                  <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed whitespace-pre-line">
+                    {campaign.story}
+                  </p>
                 </div>
+
+                {/* Backer Reward Card */}
+                {campaign.rewardInfo && (
+                  <div className="p-4 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/40 flex items-start gap-3">
+                    <Gift className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 shrink-0" />
+                    <div>
+                      <h4 className="text-xs font-bold text-indigo-900 dark:text-indigo-200 uppercase tracking-wider">Backer Reward</h4>
+                      <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5">{campaign.rewardInfo}</p>
+                    </div>
+                  </div>
+                )}
               </div>
+            )}
+
+            {activeTab === 'updates' && (
+              <CampaignUpdatesSection
+                campaignId={campaign._id}
+                isCreator={user?.email === campaign.creatorEmail}
+                user={user}
+              />
+            )}
+
+            {activeTab === 'discussion' && (
+              <CampaignDiscussionSection
+                campaignId={campaign._id}
+                user={user}
+              />
             )}
           </div>
 

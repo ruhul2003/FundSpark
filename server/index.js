@@ -24,6 +24,8 @@ app.use('/api/notifications', require('./routes/notifications'));
 app.use('/api/reports', require('./routes/reports'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/stats', require('./routes/stats'));
+app.use('/api/updates', require('./routes/updates'));
+app.use('/api/comments', require('./routes/comments'));
 
 // Root Health Check Route
 app.get('/', (req, res) => {
