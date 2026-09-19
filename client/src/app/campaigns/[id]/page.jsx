@@ -4,11 +4,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useAuth } from '../../../context/AuthContext';
-import { Coins, Clock, Target, Gift, UserCheck, ShieldAlert, CheckCircle2, AlertCircle, BookOpen, Megaphone, MessageSquare, Share2 } from 'lucide-react';
+import { Coins, Clock, Target, Gift, UserCheck, ShieldAlert, CheckCircle2, AlertCircle, BookOpen, Megaphone, MessageSquare, Share2, HelpCircle } from 'lucide-react';
 import CampaignUpdatesSection from '../../../components/CampaignUpdatesSection';
 import CampaignDiscussionSection from '../../../components/CampaignDiscussionSection';
 import BookmarkButton from '../../../components/BookmarkButton';
 import ShareModal from '../../../components/ShareModal';
+import CampaignFAQSection from '../../../components/CampaignFAQSection';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
@@ -240,6 +241,18 @@ export default function CampaignDetailsPage() {
                 <MessageSquare className="w-4 h-4" />
                 <span>Community & Q&A</span>
               </button>
+
+              <button
+                onClick={() => setActiveTab('faq')}
+                className={`flex items-center gap-1.5 py-2.5 px-3 border-b-2 text-xs font-bold transition-all whitespace-nowrap ${
+                  activeTab === 'faq'
+                    ? 'border-indigo-600 text-indigo-600 dark:text-indigo-400'
+                    : 'border-transparent text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
+                }`}
+              >
+                <HelpCircle className="w-4 h-4" />
+                <span>FAQ</span>
+              </button>
             </div>
 
             {/* Tab Contents */}
@@ -281,6 +294,10 @@ export default function CampaignDetailsPage() {
                 campaignId={campaign._id}
                 user={user}
               />
+            )}
+
+            {activeTab === 'faq' && (
+              <CampaignFAQSection campaign={campaign} />
             )}
           </div>
 
