@@ -27,6 +27,19 @@ router.patch('/read-all', verifyToken, async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+// PATCH Mark a specific notification as read
+router.patch('/:id/read', verifyToken, async (req, res) => {
+  try {
+    const notification = await Notification.findOneAndUpdate(
+      { _id: req.params.id, toEmail: req.user.email.toLowerCase() },
+      { $set: { isRead: true } },
+      { new: true }
+    );
+    if (!notification) return res.status(404).json({ message: 'Notification not found' });
+    res.json(notification);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 module.exports = router;
