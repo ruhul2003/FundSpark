@@ -24,7 +24,8 @@ import {
   X,
   CreditCard,
   FileCheck,
-  Heart
+  Heart,
+  User
 } from 'lucide-react';
 
 export default function DashboardLayout({ children }) {
@@ -46,7 +47,8 @@ export default function DashboardLayout({ children }) {
     { label: 'Saved Campaigns', path: '/dashboard/saved-campaigns', icon: Heart },
     { label: 'My Contributions', path: '/dashboard/my-contributions', icon: FileCheck },
     { label: 'Purchase Credit', path: '/dashboard/purchase-credit', icon: CreditCard },
-    { label: 'Payment History', path: '/dashboard/supporter-payments', icon: History }
+    { label: 'Payment History', path: '/dashboard/supporter-payments', icon: History },
+    { label: 'Account Settings', path: '/dashboard/profile', icon: User }
   ];
 
   const creatorNav = [
@@ -55,7 +57,8 @@ export default function DashboardLayout({ children }) {
     { label: 'My Campaigns', path: '/dashboard/my-campaigns', icon: FolderKanban },
     { label: 'Saved Campaigns', path: '/dashboard/saved-campaigns', icon: Heart },
     { label: 'Withdrawals', path: '/dashboard/withdrawals', icon: DollarSign },
-    { label: 'Payment History', path: '/dashboard/creator-payments', icon: History }
+    { label: 'Payment History', path: '/dashboard/creator-payments', icon: History },
+    { label: 'Account Settings', path: '/dashboard/profile', icon: User }
   ];
 
   const adminNav = [
@@ -64,7 +67,8 @@ export default function DashboardLayout({ children }) {
     { label: 'Manage Campaigns', path: '/dashboard/manage-campaigns', icon: FolderKanban },
     { label: 'Campaign Approvals', path: '/dashboard/admin-approvals', icon: CheckSquare },
     { label: 'Withdrawal Requests', path: '/dashboard/admin-withdrawals', icon: DollarSign },
-    { label: 'Reports', path: '/dashboard/admin-reports', icon: ShieldAlert }
+    { label: 'Reports', path: '/dashboard/admin-reports', icon: ShieldAlert },
+    { label: 'Account Settings', path: '/dashboard/profile', icon: User }
   ];
 
   const navItems = role === 'Admin' ? adminNav : role === 'Creator' ? creatorNav : supporterNav;
