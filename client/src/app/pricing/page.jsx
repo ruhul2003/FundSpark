@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 import ThemeToggle from '../../components/ThemeToggle';
+import CreditCalculator from '../../components/CreditCalculator';
 import {
   Heart,
   Rocket,
@@ -398,6 +399,11 @@ export default function PricingSection() {
               </button>
             </div>
           ))}
+        </div>
+
+        {/* Interactive Credit Calculator */}
+        <div className="pt-10 pb-4">
+          <CreditCalculator isDark={isDark} />
         </div>
 
         {/* Trust Badges */}
