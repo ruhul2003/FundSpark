@@ -32,58 +32,58 @@ export default function AdminHomeView() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-extrabold text-white tracking-tight">Admin Operations Center</h1>
-        <p className="text-xs text-slate-400">Platform metrics, user management, and campaign moderation</p>
+        <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">Admin Operations Center</h1>
+        <p className="text-xs text-slate-500 dark:text-slate-400">Platform metrics, user management, and campaign moderation</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center space-x-4">
-          <div className="p-3 rounded-xl bg-indigo-500/10 text-indigo-400">
+        <div className="glass-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm flex items-center space-x-4">
+          <div className="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400">
             <Users className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-xs text-slate-400 font-semibold block">Total Supporters</span>
-            <span className="text-2xl font-extrabold text-white">{stats.totalSupporters}</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold block">Total Supporters</span>
+            <span className="text-2xl font-extrabold text-slate-900 dark:text-white">{stats.totalSupporters}</span>
           </div>
         </div>
 
-        <div className="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center space-x-4">
-          <div className="p-3 rounded-xl bg-sky-500/10 text-sky-400">
+        <div className="glass-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm flex items-center space-x-4">
+          <div className="p-3 rounded-xl bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400">
             <FolderKanban className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-xs text-slate-400 font-semibold block">Total Creators</span>
-            <span className="text-2xl font-extrabold text-white">{stats.totalCreators}</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold block">Total Creators</span>
+            <span className="text-2xl font-extrabold text-slate-900 dark:text-white">{stats.totalCreators}</span>
           </div>
         </div>
 
-        <div className="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center space-x-4">
-          <div className="p-3 rounded-xl bg-amber-500/10 text-amber-400">
+        <div className="glass-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm flex items-center space-x-4">
+          <div className="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400">
             <Coins className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-xs text-slate-400 font-semibold block">Total Platform Credits</span>
-            <span className="text-2xl font-extrabold text-amber-400">{stats.totalAvailableCredits}</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold block">Total Platform Credits</span>
+            <span className="text-2xl font-extrabold text-amber-600 dark:text-amber-400">{stats.totalAvailableCredits}</span>
           </div>
         </div>
 
-        <div className="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center space-x-4">
-          <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-400">
+        <div className="glass-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm flex items-center space-x-4">
+          <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400">
             <DollarSign className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-xs text-slate-400 font-semibold block">Total Volume Paid ($)</span>
-            <span className="text-2xl font-extrabold text-emerald-400">${stats.totalPaymentsProcessed.toFixed(2)}</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold block">Total Volume Paid ($)</span>
+            <span className="text-2xl font-extrabold text-emerald-600 dark:text-emerald-400">${stats.totalPaymentsProcessed.toFixed(2)}</span>
           </div>
         </div>
       </div>
 
-      <div className="glass-panel p-8 rounded-3xl border border-slate-800 space-y-4">
-        <div className="flex items-center space-x-3 text-indigo-400">
+      <div className="glass-panel p-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm space-y-4">
+        <div className="flex items-center space-x-3 text-indigo-600 dark:text-indigo-400">
           <ShieldCheck className="w-6 h-6" />
-          <h2 className="text-lg font-bold text-white">System Health & Escrow Overview</h2>
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white">System Health & Escrow Overview</h2>
         </div>
-        <p className="text-xs text-slate-300 leading-relaxed">
+        <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
           All creator campaign submissions and withdrawal requests are routed through verified platform escrow logic. Admin approval triggers automated supporter/creator notifications and immediate balance synchronization.
         </p>
       </div>
