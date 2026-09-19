@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import axios from 'axios';
 import { Search, Filter, Coins, Clock, Target, ArrowRight } from 'lucide-react';
+import BookmarkButton from '../../components/BookmarkButton';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
@@ -148,6 +149,9 @@ function ExploreContent() {
                     <span className="absolute top-3 left-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-semibold text-indigo-700 dark:text-indigo-300 border border-slate-200 dark:border-slate-700 shadow-sm">
                       {campaign.category}
                     </span>
+                    <div className="absolute top-3 right-3 z-10">
+                      <BookmarkButton campaignId={campaign._id} />
+                    </div>
                   </div>
 
                   <div className="p-6 flex-1 flex flex-col justify-between space-y-4">

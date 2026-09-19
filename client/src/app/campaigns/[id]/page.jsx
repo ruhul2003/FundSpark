@@ -7,6 +7,7 @@ import { useAuth } from '../../../context/AuthContext';
 import { Coins, Clock, Target, Gift, UserCheck, ShieldAlert, CheckCircle2, AlertCircle, BookOpen, Megaphone, MessageSquare } from 'lucide-react';
 import CampaignUpdatesSection from '../../../components/CampaignUpdatesSection';
 import CampaignDiscussionSection from '../../../components/CampaignDiscussionSection';
+import BookmarkButton from '../../../components/BookmarkButton';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
@@ -152,20 +153,23 @@ export default function CampaignDetailsPage() {
             <span>&larr; Back</span>
           </button>
 
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/60 text-xs font-semibold px-2.5 py-0.5 rounded-full">
-              {campaign.category}
-            </span>
-            <span className="text-slate-400 text-xs font-light">•</span>
-            <span className="flex items-center text-xs text-slate-500 dark:text-slate-400 gap-1">
-              <UserCheck className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
-              <span>By {campaign.creatorName}</span>
-            </span>
-            <span className="text-slate-400 text-xs font-light">•</span>
-            <span className="flex items-center text-xs text-slate-500 dark:text-slate-400 gap-1">
-              <Clock className="w-3.5 h-3.5 text-slate-400" />
-              <span>Ends {new Date(campaign.deadline).toLocaleDateString()}</span>
-            </span>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/60 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                {campaign.category}
+              </span>
+              <span className="text-slate-400 text-xs font-light">•</span>
+              <span className="flex items-center text-xs text-slate-500 dark:text-slate-400 gap-1">
+                <UserCheck className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+                <span>By {campaign.creatorName}</span>
+              </span>
+              <span className="text-slate-400 text-xs font-light">•</span>
+              <span className="flex items-center text-xs text-slate-500 dark:text-slate-400 gap-1">
+                <Clock className="w-3.5 h-3.5 text-slate-400" />
+                <span>Ends {new Date(campaign.deadline).toLocaleDateString()}</span>
+              </span>
+            </div>
+            <BookmarkButton campaignId={campaign._id} variant="button" />
           </div>
 
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
