@@ -4,10 +4,11 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useAuth } from '../../../context/AuthContext';
-import { Coins, Clock, Target, Gift, UserCheck, ShieldAlert, CheckCircle2, AlertCircle, BookOpen, Megaphone, MessageSquare } from 'lucide-react';
+import { Coins, Clock, Target, Gift, UserCheck, ShieldAlert, CheckCircle2, AlertCircle, BookOpen, Megaphone, MessageSquare, Share2 } from 'lucide-react';
 import CampaignUpdatesSection from '../../../components/CampaignUpdatesSection';
 import CampaignDiscussionSection from '../../../components/CampaignDiscussionSection';
 import BookmarkButton from '../../../components/BookmarkButton';
+import ShareModal from '../../../components/ShareModal';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
@@ -24,10 +25,11 @@ export default function CampaignDetailsPage() {
   const [submitting, setSubmitting] = useState(false);
   const [feedback, setFeedback] = useState(null);
 
-  // Report Modal
+  // Modals
   const [showReportModal, setShowReportModal] = useState(false);
   const [reportReason, setReportReason] = useState('');
   const [reporting, setReporting] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
 
   const fetchCampaign = async () => {
     try {
@@ -169,7 +171,17 @@ export default function CampaignDetailsPage() {
                 <span>Ends {new Date(campaign.deadline).toLocaleDateString()}</span>
               </span>
             </div>
-            <BookmarkButton campaignId={campaign._id} variant="button" />
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setShowShareModal(true)}
+                type="button"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white/80 dark:bg-slate-900/80 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-200 dark:hover:border-indigo-800 transition-all shadow-sm"
+              >
+                <Share2 className="w-3.5 h-3.5 text-indigo-500" />
+                <span>Share</span>
+              </button>
+              <BookmarkButton campaignId={campaign._id} variant="button" />
+            </div>
           </div>
 
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -427,6 +439,13 @@ export default function CampaignDetailsPage() {
           </div>
         </div>
       )}
+
+      {/* Share Modal */}
+      <ShareModal
+        isOpen={showShareModal}
+        onClose={() => setShowShareModal(false)}
+        campaignTitle={campaign.title}
+      />
     </div>
   );
 }
