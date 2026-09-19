@@ -200,4 +200,39 @@ router.patch('/:id/reject', verifyToken, verifyCreator, async (req, res) => {
   }
 });
 
+// GET Public Backers & Community Showcase for a specific campaign
+router.get('/campaign/:campaignId/backers', async (req, res) => {
+  try {
+    const { campaignId } = req.params;
+
+    const approvedContributions = await Contribution.find({
+      campaignId,
+      status: 'approved'
+    }).sort({ createdAt: -1 });
+
+    const totalBackers = approvedContributions.length;
+    const totalRaised = approvedContributions.reduce((sum, item) => sum + item.amount, 0);
+
+    const backers = approvedContributions.map((item) => ({
+      _id: item._id,
+      supporterName: item.supporterName,
+      amount: item.amount,
+      message: item.message,
+      createdAt: item.createdAt
+    }));
+
+    // Top backers sorted by amount
+    const topBackers = [...backers].sort((a, b) => b.amount - a.amount).slice(0, 5);
+
+    res.json({
+      totalBackers,
+      totalRaised,
+      backers,
+      topBackers
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = router;
