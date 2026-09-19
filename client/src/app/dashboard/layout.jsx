@@ -23,7 +23,8 @@ import {
   Menu,
   X,
   CreditCard,
-  FileCheck
+  FileCheck,
+  Heart
 } from 'lucide-react';
 
 export default function DashboardLayout({ children }) {
@@ -42,6 +43,7 @@ export default function DashboardLayout({ children }) {
   const supporterNav = [
     { label: 'Supporter Home', path: '/dashboard/supporter-home', icon: Home },
     { label: 'Explore Campaigns', path: '/explore', icon: Compass },
+    { label: 'Saved Campaigns', path: '/dashboard/saved-campaigns', icon: Heart },
     { label: 'My Contributions', path: '/dashboard/my-contributions', icon: FileCheck },
     { label: 'Purchase Credit', path: '/dashboard/purchase-credit', icon: CreditCard },
     { label: 'Payment History', path: '/dashboard/supporter-payments', icon: History }
@@ -51,6 +53,7 @@ export default function DashboardLayout({ children }) {
     { label: 'Creator Home', path: '/dashboard/creator-home', icon: Home },
     { label: 'Add New Campaign', path: '/dashboard/add-campaign', icon: PlusCircle },
     { label: 'My Campaigns', path: '/dashboard/my-campaigns', icon: FolderKanban },
+    { label: 'Saved Campaigns', path: '/dashboard/saved-campaigns', icon: Heart },
     { label: 'Withdrawals', path: '/dashboard/withdrawals', icon: DollarSign },
     { label: 'Payment History', path: '/dashboard/creator-payments', icon: History }
   ];
