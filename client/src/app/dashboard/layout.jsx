@@ -25,7 +25,9 @@ import {
   CreditCard,
   FileCheck,
   Heart,
-  User
+  User,
+  Trophy,
+  LifeBuoy
 } from 'lucide-react';
 
 export default function DashboardLayout({ children }) {
@@ -44,10 +46,12 @@ export default function DashboardLayout({ children }) {
   const supporterNav = [
     { label: 'Supporter Home', path: '/dashboard/supporter-home', icon: Home },
     { label: 'Explore Campaigns', path: '/explore', icon: Compass },
+    { label: 'Leaderboard', path: '/leaderboard', icon: Trophy },
     { label: 'Saved Campaigns', path: '/dashboard/saved-campaigns', icon: Heart },
     { label: 'My Contributions', path: '/dashboard/my-contributions', icon: FileCheck },
     { label: 'Purchase Credit', path: '/dashboard/purchase-credit', icon: CreditCard },
     { label: 'Payment History', path: '/dashboard/supporter-payments', icon: History },
+    { label: 'Help & Support', path: '/help', icon: LifeBuoy },
     { label: 'Account Settings', path: '/dashboard/profile', icon: User }
   ];
 
@@ -55,9 +59,11 @@ export default function DashboardLayout({ children }) {
     { label: 'Creator Home', path: '/dashboard/creator-home', icon: Home },
     { label: 'Add New Campaign', path: '/dashboard/add-campaign', icon: PlusCircle },
     { label: 'My Campaigns', path: '/dashboard/my-campaigns', icon: FolderKanban },
+    { label: 'Leaderboard', path: '/leaderboard', icon: Trophy },
     { label: 'Saved Campaigns', path: '/dashboard/saved-campaigns', icon: Heart },
     { label: 'Withdrawals', path: '/dashboard/withdrawals', icon: DollarSign },
     { label: 'Payment History', path: '/dashboard/creator-payments', icon: History },
+    { label: 'Help & Support', path: '/help', icon: LifeBuoy },
     { label: 'Account Settings', path: '/dashboard/profile', icon: User }
   ];
 
@@ -68,6 +74,8 @@ export default function DashboardLayout({ children }) {
     { label: 'Campaign Approvals', path: '/dashboard/admin-approvals', icon: CheckSquare },
     { label: 'Withdrawal Requests', path: '/dashboard/admin-withdrawals', icon: DollarSign },
     { label: 'Reports', path: '/dashboard/admin-reports', icon: ShieldAlert },
+    { label: 'Leaderboard', path: '/leaderboard', icon: Trophy },
+    { label: 'Help & Support', path: '/help', icon: LifeBuoy },
     { label: 'Account Settings', path: '/dashboard/profile', icon: User }
   ];
 
