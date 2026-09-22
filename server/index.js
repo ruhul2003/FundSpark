@@ -28,6 +28,7 @@ app.use('/api/updates', require('./routes/updates'));
 app.use('/api/comments', require('./routes/comments'));
 app.use('/api/bookmarks', require('./routes/bookmarks'));
 app.use('/api/milestones', require('./routes/milestones'));
+app.use('/api/inquiries', require('./routes/inquiries'));
 
 // Root Health Check Route
 app.get('/', (req, res) => {
