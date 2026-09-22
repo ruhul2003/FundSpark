@@ -6,7 +6,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
 import NotificationDropdown from './NotificationDropdown';
 import ThemeToggle from './ThemeToggle';
-import { Sparkles, Coins, Code, LayoutDashboard, LogOut, Menu, X, Compass, CreditCard } from 'lucide-react';
+import { Sparkles, Coins, Code, LayoutDashboard, LogOut, Menu, X, Compass, CreditCard, Trophy } from 'lucide-react';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -61,6 +61,16 @@ const Navbar = () => {
             >
               <Compass className="w-4 h-4" />
               <span>Explore Campaigns</span>
+            </Link>
+
+            <Link
+              href="/leaderboard"
+              className={`flex items-center space-x-2 text-sm font-medium transition-colors ${
+                pathname === '/leaderboard' ? 'text-indigo-600 dark:text-indigo-400 font-semibold' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+              }`}
+            >
+              <Trophy className="w-4 h-4 text-amber-500" />
+              <span>Leaderboard</span>
             </Link>
 
             <Link
@@ -165,6 +175,15 @@ const Navbar = () => {
           >
             <Compass className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
             <span>Explore Campaigns</span>
+          </Link>
+
+          <Link
+            href="/leaderboard"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center space-x-2 py-2 text-slate-700 dark:text-slate-200 text-sm font-medium"
+          >
+            <Trophy className="w-4 h-4 text-amber-500" />
+            <span>Leaderboard</span>
           </Link>
 
           <Link
