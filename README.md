@@ -74,6 +74,21 @@ FundSpark is a full-stack, production-grade crowdfunding platform designed for c
 ### 12. Full Theme Parity
 - High-contrast, responsive dark and light mode across all dashboard homepages, navigation, modals, and tables.
 
+### 13. Campaign Milestones & Stretch Goals Roadmap
+- Creators can define custom funding milestones and stretch goals with target credit unlock thresholds and deliverables.
+- Interactive timeline stepper on Campaign Details (`/campaigns/[id]`) showing live unlock status, remaining credits needed, and progress bars.
+- Dedicated `ManageMilestonesModal` in Creator's `MyCampaigns` dashboard allowing instant creation, deletion, and status toggling.
+
+### 14. Community Hall of Fame & Global Leaderboard (`/leaderboard`)
+- Public showcase celebrating Top Community Backers with tier badges (Grand Patron, Diamond, Platinum, Gold Champion), Most Funded Campaigns, and Top Creators.
+- Live platform impact metrics: Total Credits Pledged, Active Projects, Approved Pledges, and Registered Members.
+- Integrated search and direct navigation from Navbar, Footer, and Dashboard sidebars.
+
+### 15. Platform Help Center & Support Portal (`/help`)
+- Interactive FAQ knowledgebase with real-time keyword search and topic categorization (Credits, Backers, Creators, Security).
+- Expandable accordion answers explaining escrow mechanics, refund policies, and verification timelines.
+- Integrated Support Ticket / Inquiry Submission system (`/api/inquiries`) with ticket reference IDs and admin tracking.
+
 ---
 
 ## API Reference
@@ -96,6 +111,29 @@ FundSpark is a full-stack, production-grade crowdfunding platform designed for c
 | `PUT` | `/api/campaigns/:id` | Update campaign story, title, rewards |
 | `DELETE` | `/api/campaigns/:id` | Delete campaign and refund supporters |
 | `PATCH` | `/api/campaigns/:id/status` | Approve or reject campaign (Admin) |
+
+### Milestones & Stretch Goals (`/api/milestones`)
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/api/milestones/campaign/:campaignId` | List all milestones for a campaign |
+| `POST` | `/api/milestones` | Create a new stretch goal milestone (Creator/Admin) |
+| `PUT` | `/api/milestones/:id` | Update milestone title, target, or completion status |
+| `DELETE` | `/api/milestones/:id` | Delete a milestone (Creator/Admin) |
+
+### Stats & Leaderboard (`/api/stats`)
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/api/stats/leaderboard` | Public community leaderboard (Top Backers, Campaigns, Creators) |
+| `GET` | `/api/stats/supporter` | Supporter dashboard statistics |
+| `GET` | `/api/stats/creator` | Creator dashboard funding metrics |
+| `GET` | `/api/stats/admin` | Platform-wide user, revenue, and credit totals |
+
+### Support Inquiries (`/api/inquiries`)
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/api/inquiries` | Submit support ticket or contact inquiry |
+| `GET` | `/api/inquiries` | List all submitted inquiries with filters (Admin) |
+| `PUT` | `/api/inquiries/:id/status` | Update inquiry resolution status and response notes (Admin) |
 
 ### Bookmarks (`/api/bookmarks`)
 | Method | Endpoint | Description |
