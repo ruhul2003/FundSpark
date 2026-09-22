@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Edit3, Trash2, Coins, Clock, X, Download } from 'lucide-react';
+import { Edit3, Trash2, Coins, Clock, X, Download, Flag } from 'lucide-react';
+import ManageMilestonesModal from '../components/ManageMilestonesModal';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
@@ -16,6 +17,7 @@ export default function MyCampaignsView() {
   const [editRewardInfo, setEditRewardInfo] = useState('');
   const [updating, setUpdating] = useState(false);
   const [exportingId, setExportingId] = useState(null);
+  const [milestoneCampaign, setMilestoneCampaign] = useState(null);
 
   const fetchMyCampaigns = async () => {
     try {
@@ -154,6 +156,14 @@ export default function MyCampaignsView() {
                     </td>
                     <td className="p-3 text-right space-x-2">
                       <button
+                        onClick={() => setMilestoneCampaign(item)}
+                        className="px-2.5 py-1.5 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 hover:bg-amber-100 dark:hover:bg-amber-900/60 border border-amber-200 dark:border-amber-800 text-xs font-semibold inline-flex items-center space-x-1 transition-colors"
+                        title="Manage Stretch Goals & Roadmap"
+                      >
+                        <Flag className="w-3.5 h-3.5" />
+                        <span>Roadmap</span>
+                      </button>
+                      <button
                         onClick={() => handleExportCSV(item)}
                         disabled={exportingId === item._id}
                         className="px-2.5 py-1.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 border border-emerald-200 dark:border-emerald-800 text-xs font-semibold inline-flex items-center space-x-1 transition-colors"
@@ -249,6 +259,14 @@ export default function MyCampaignsView() {
             </form>
           </div>
         </div>
+      )}
+
+      {milestoneCampaign && (
+        <ManageMilestonesModal
+          campaign={milestoneCampaign}
+          onClose={() => setMilestoneCampaign(null)}
+          onUpdated={fetchMyCampaigns}
+        />
       )}
     </div>
   );
